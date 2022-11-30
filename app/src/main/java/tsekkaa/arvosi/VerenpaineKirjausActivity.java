@@ -3,7 +3,10 @@ package tsekkaa.arvosi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -13,6 +16,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
     public final static String EXTRA_SYKE = "com.example.excercise41.SYKE";
     TextView kirjausTextView, alaPaineTextView, ylaPaineTextView, sykeTextView;
     EditText ylaPaineEditText, alaPaineEditText, sykeEditText, pvmEditText, aikaEditText;
+    Button tallennaButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,5 +34,9 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         this.pvmEditText = findViewById(R.id.pvmEditTextDate);
         this.aikaEditText = findViewById(R.id.aikaEditTextTime);
 
+        this.tallennaButton = findViewById(R.id.tallennaButton);
+    }
+    public void vTallennaButton(View v){
+        Intent Arvot = new Intent(this, VerenpaineTarkkailuActivity.class);
     }
 }
