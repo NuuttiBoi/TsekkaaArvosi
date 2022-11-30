@@ -14,7 +14,6 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
     TextView kirjausTextView, alaPaineTextView, ylaPaineTextView, sykeTextView;
     EditText ylaPaineEditText, alaPaineEditText, sykeEditText, pvmEditText, aikaEditText;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
