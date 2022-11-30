@@ -14,6 +14,8 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
     public final static String EXTRA_YLAPAINE = "com.example.excercise41.YLAPAINE";
     public final static String EXTRA_ALAPAINE = "com.example.excercise41.ALAPAINE";
     public final static String EXTRA_SYKE = "com.example.excercise41.SYKE";
+    public final static String EXTRA_PVM = "com.example.excercise41.PVM";
+    public final static String EXTRA_AIKA = "com.example.excercise41.AIKA";
     TextView kirjausTextView, alaPaineTextView, ylaPaineTextView, sykeTextView;
     EditText ylaPaineEditText, alaPaineEditText, sykeEditText, pvmEditText, aikaEditText;
     Button tallennaButton;
