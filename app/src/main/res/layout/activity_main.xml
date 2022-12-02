@@ -31,7 +31,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.278" />
+        app:layout_constraintVertical_bias="0.328" />
 
     <Button
         android:id="@+id/verenHappiPitoisuus"
@@ -44,7 +44,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/verenpaineButton"
-        app:layout_constraintVertical_bias="0.176" />
+        app:layout_constraintVertical_bias="0.05" />
 
     <Button
         android:id="@+id/verenSokeri"
@@ -57,19 +57,19 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/verenHappiPitoisuus"
-        app:layout_constraintVertical_bias="0.269" />
+        app:layout_constraintVertical_bias="0.05" />
 
     <Button
         android:id="@+id/asetukset"
         android:layout_width="0dp"
-        android:layout_height="056dp"
+        android:layout_height="56dp"
         android:onClick="settingsButtonPressed"
         android:text="Asetukset"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.00"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/verenSokeri"
-        app:layout_constraintVertical_bias="0.487" />
+        app:layout_constraintVertical_bias="0.05" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

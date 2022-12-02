@@ -26,10 +26,6 @@ public class MainActivity extends AppCompatActivity {
         Intent vPaine = new Intent(this, VerenpaineKirjausActivity.class);
         startActivity(vPaine);
     }
-    public void settingsButtonPressed(View v){
-        Intent settings = new Intent(this, Asetukset.class);
-        startActivity(settings);
-    }
     public void vhpButtonPressed(View v){
         Intent VHP = new Intent(this, VerenHappipitoisuusActivity.class);
         startActivity(VHP);
@@ -37,5 +33,9 @@ public class MainActivity extends AppCompatActivity {
     public void vsButtonPressed(View v){
         Intent VeSo = new Intent(this, VerenSokeriActivity.class);
         startActivity(VeSo);
+    }
+    public void settingsButtonPressed(View v){
+        Intent settings = new Intent(this, Asetukset.class);
+        startActivity(settings);
     }
 }
