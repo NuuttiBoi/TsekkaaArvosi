@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         this.verenHappipitoisuusButton = findViewById(R.id.verenHappiPitoisuus);
         this.verensokeriButton = findViewById(R.id.verenSokeri);
         this.asetuksetButton = findViewById(R.id.asetukset);
-    }
+}
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void vPaineButtonPressed(View v){
         Intent vPaine = new Intent(this, VerenpaineKirjausActivity.class);
