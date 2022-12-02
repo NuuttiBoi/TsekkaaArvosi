@@ -9,35 +9,33 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button verenpaineButton;
+    private Button verenpaineButton, verenHappipitoisuusButton, verensokeriButton, asetuksetButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.verenpaineButton =findViewById(R.id.verenpaineButton);
+        this.verenpaineButton = findViewById(R.id.verenpaineButton);
+        this.verenHappipitoisuusButton = findViewById(R.id.verenHappiPitoisuus);
+        this.verensokeriButton = findViewById(R.id.verenSokeri);
+        this.asetuksetButton = findViewById(R.id.asetukset);
     }
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void vPaineButtonPressed(View v){
         Intent vPaine = new Intent(this, VerenpaineKirjausActivity.class);
         startActivity(vPaine);
     }
-    public void asetuksetButtonPressed(View v){
-        Intent asetukset = new Intent(this, Asetukset.class);
-        startActivity(asetukset);
+    public void settingsButtonPressed(View v){
+        Intent settings = new Intent(this, Asetukset.class);
+        startActivity(settings);
     }
-    public void VerenHappiPitoisuusButtonPressed(View v){
-        Intent VHPitoisuus = new Intent(this, VerenHappipitoisuus.class);
-        startActivity(VHPitoisuus);
+    public void vhpButtonPressed(View v){
+        Intent VHP = new Intent(this, VerenHappipitoisuusActivity.class);
+        startActivity(VHP);
     }
-    public void VerenSokeriButtonPressed(View v){
-        Intent verensokeri = new Intent(this, VerenSokeri.class);
-        startActivity(verensokeri);
+    public void vsButtonPressed(View v){
+        Intent VeSo = new Intent(this, VerenSokeriActivity.class);
+        startActivity(VeSo);
     }
-    //public void ButtonPressed(View v){
-    //    Intent  = new Intent(this, .class);
-    //    startActivity();
-    //}
-
 }

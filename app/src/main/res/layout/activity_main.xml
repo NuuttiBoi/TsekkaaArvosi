@@ -23,6 +23,7 @@
         android:id="@+id/verenpaineButton"
         android:layout_width="0dp"
         android:layout_height="56dp"
+        android:layout_marginTop="20dp"
         android:onClick="vPaineButtonPressed"
         android:text="Verenpaineen mittaus"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,53 +37,39 @@
         android:id="@+id/verenHappiPitoisuus"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:layout_marginBottom="304dp"
-        android:onClick="VerenHappiPitoisuusButtonPressed"
+        android:onClick="vhpButtonPressed"
         android:text="Veren happipitoisuus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/verenpaineButton"
-        app:layout_constraintVertical_bias="0.228" />
+        app:layout_constraintVertical_bias="0.176" />
 
     <Button
         android:id="@+id/verenSokeri"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:onClick="VerenSokeriButtonPressed"
+        android:onClick="vsButtonPressed"
         android:text="Verensokeri"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/verenHappiPitoisuus"
-        app:layout_constraintVertical_bias="0.094" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="8dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/verenSokeri"
-        app:layout_constraintVertical_bias="0.106" />
+        app:layout_constraintVertical_bias="0.269" />
 
     <Button
         android:id="@+id/asetukset"
         android:layout_width="0dp"
         android:layout_height="056dp"
-        android:onClick="asetuksetButtonPressed"
+        android:onClick="settingsButtonPressed"
         android:text="Asetukset"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4"
-        app:layout_constraintVertical_bias="0.202" />
+        app:layout_constraintTop_toBottomOf="@+id/verenSokeri"
+        app:layout_constraintVertical_bias="0.487" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
