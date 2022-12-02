@@ -12,4 +12,6 @@ public class VerenpaineTarkkailuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_verenpaine_tarkkailu);
 
     }
+
+
 }

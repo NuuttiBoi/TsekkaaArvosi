@@ -16,7 +16,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
     public final static String EXTRA_SYKE = "com.example.excercise41.SYKE";
     public final static String EXTRA_PVM = "com.example.excercise41.PVM";
     public final static String EXTRA_AIKA = "com.example.excercise41.AIKA";
-    TextView kirjausTextView, alaPaineTextView, ylaPaineTextView, sykeTextView;
+    TextView kirjausTextView, alaPaineTextView, ylaPaineTextView, sykeTextView, arvoOhjeTextView, aikaOhjeTextView;
     EditText ylaPaineEditText, alaPaineEditText, sykeEditText, pvmEditText, aikaEditText;
     Button tallennaButton;
 
@@ -29,6 +29,8 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         this.alaPaineTextView = findViewById(R.id.alaPaineTextView);
         this.ylaPaineTextView = findViewById(R.id.ylaPaineTextView);
         this.sykeTextView = findViewById(R.id.sykeTextView);
+        this.arvoOhjeTextView = findViewById(R.id.arvoOhjeTextView);
+        this.aikaOhjeTextView = findViewById(R.id.aikaOhjeTextView);
 
         this.ylaPaineEditText = findViewById(R.id.ylaPaineEditText);
         this.alaPaineEditText = findViewById(R.id.alaPaineEditText);
