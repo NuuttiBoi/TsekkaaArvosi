@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button verenpaineButton, verenHappipitoisuusButton, verensokeriButton, asetuksetButton;
+    private Button verenpaineButton, verenHappipitoisuusButton, verensokeriButton, asetuksetButton, testButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         this.verenHappipitoisuusButton = findViewById(R.id.verenHappiPitoisuus);
         this.verensokeriButton = findViewById(R.id.verenSokeri);
         this.asetuksetButton = findViewById(R.id.asetukset);
+        this.testButton = findViewById(R.id.testiButton);
 }
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void vPaineButtonPressed(View v){
@@ -37,5 +38,10 @@ public class MainActivity extends AppCompatActivity {
     public void settingsButtonPressed(View v){
         Intent settings = new Intent(this, Asetukset.class);
         startActivity(settings);
+    }
+    //muistakaa laittaa class tohon alle huutomerkin tilalle. Menee samallalailla ku noissa muissa
+    public void testButtonPressed(View v){
+        Intent test = new Intent(this, !.class);
+        startActivity(test);
     }
 }
