@@ -15,6 +15,7 @@ public interface MittausDao {
     @Insert
     void lisaaMittaus(Mittaus mittaus);
 
-    @Query("SELECT * FROM mittaus")
+    //Palauttaa mittaukset aikajärjestyksessä
+    @Query("SELECT * FROM mittaus ORDER BY vuosi, kuukausi, paiva, tunnit, minuutit")
     LiveData<List<Mittaus>> haeMittaukset();
 }
