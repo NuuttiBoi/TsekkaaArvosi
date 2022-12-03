@@ -27,20 +27,33 @@ public class Mittaus {
     @ColumnInfo(name = "happipitoisuus")
     private double happipitoisuus;
 
-    @ColumnInfo(name = "pvm")
-    private String pvm;
+    @ColumnInfo(name = "paiva")
+    private int paiva;
 
-    @ColumnInfo(name = "aika")
-    private String aika;
+    @ColumnInfo(name = "kuukausi")
+    private int kuukausi;
 
-    public Mittaus(double ylapaine, double alapaine, double syke, double verensokeri, double happipitoisuus, String pvm, String aika) {
+    @ColumnInfo(name = "vuosi")
+    private int vuosi;
+
+    @ColumnInfo(name = "tunnit")
+    private int tunnit;
+
+    @ColumnInfo(name = "minuutit")
+    private int minuutit;
+
+    public Mittaus(double ylapaine, double alapaine, double syke, double verensokeri, double happipitoisuus, int paiva, int kuukausi,
+                   int vuosi, int tunnit, int minuutit) {
         this.ylapaine = ylapaine;
         this.alapaine = alapaine;
         this.syke = syke;
         this.verensokeri = verensokeri;
         this.happipitoisuus = happipitoisuus;
-        this.pvm = pvm;
-        this.aika = aika;
+        this.paiva = paiva;
+        this.kuukausi = kuukausi;
+        this.vuosi = vuosi;
+        this.tunnit = tunnit;
+        this.minuutit = minuutit;
     }
 
     public int getId() {
@@ -67,11 +80,23 @@ public class Mittaus {
         return happipitoisuus;
     }
 
-    public String getPvm() {
-        return pvm;
+    public int getPaiva() {
+        return paiva;
     }
 
-    public String getAika() {
-        return aika;
+    public int getKuukausi() {
+        return kuukausi;
+    }
+
+    public int getVuosi() {
+        return vuosi;
+    }
+
+    public int getTunnit() {
+        return tunnit;
+    }
+
+    public int getMinuutit() {
+        return minuutit;
     }
 }
