@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import java.text.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
     }
     //muistakaa laittaa class tohon alle huutomerkin tilalle. Menee samallalailla ku noissa muissa
     public void testButtonPressed(View v){
-        Intent test = new Intent(this, !.class);
+        Intent test = new Intent(this, TestiActivity.class);
         startActivity(test);
+
+
     }
 }
