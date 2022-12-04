@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TsekkaaArvosi</string>
+    <string name="omat_tiedot">OMAT TIEDOT</string>
+    <string name="asetukset">Asetukset</string>
+    <string name="kirjaudu_ulos">Kirjaudu ulos</string>
+    <string name="teema">TEEMA</string>
+    <string name="ilmoitukset">ILMOITUKSET</string>
 </resources>
