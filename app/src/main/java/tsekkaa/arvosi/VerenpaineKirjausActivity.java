@@ -2,7 +2,6 @@ package tsekkaa.arvosi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -39,9 +38,11 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         this.aikaEditText = findViewById(R.id.aikaEditTextTime);
 
         this.tallennaButton = findViewById(R.id.tallennaButton);
+
     }
+    // Vie verenpaineen tarkkailu activityyn kun käyttäjä painaa nappia
     public void vTallennaButton(View v){
-        Intent vTarkkailu = new Intent(this, VerenpaineTarkkailuActivity.class);
+        Intent vTarkkailu = new Intent(this, TestiActivity.class);
         startActivity(vTarkkailu);
     }
 }
