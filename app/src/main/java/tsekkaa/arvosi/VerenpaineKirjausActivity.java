@@ -3,7 +3,6 @@ package tsekkaa.arvosi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,8 +16,8 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
     public final static String EXTRA_SYKE = "com.example.excercise41.SYKE";
     public final static String EXTRA_PVM = "com.example.excercise41.PVM";
     public final static String EXTRA_AIKA = "com.example.excercise41.AIKA";
-    TextView kirjausTextView, alaPaineTextView, ylaPaineTextView, sykeTextView, arvoOhjeTextView, aikaOhjeTextView;
-    EditText ylaPaineEditText, alaPaineEditText, sykeEditText, pvmEditText, aikaEditText;
+    TextView kirjausTextView, alaPaineTextView, ylaPaineTextView, sykeTextView, arvoOhjeTextView, aikaOhjeTextView, pisteTextView;
+    EditText ylaPaineEditText, alaPaineEditText, sykeEditText, pvmEditText, kuukausiEditText, tunnitEditText, minuutitEditText;
     Button tallennaButton, lahetaButton;
     private MittausViewModel mittausViewModel;
 
@@ -33,12 +32,16 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         this.sykeTextView = findViewById(R.id.sykeTextView);
         this.arvoOhjeTextView = findViewById(R.id.arvoOhjeTextView);
         this.aikaOhjeTextView = findViewById(R.id.aikaOhjeTextView);
+        this.pisteTextView = findViewById(R.id.pisteTextView);
+
 
         this.ylaPaineEditText = findViewById(R.id.ylaPaineEditText);
         this.alaPaineEditText = findViewById(R.id.alaPaineEditText);
         this.sykeEditText = findViewById(R.id.sykeEditText);
         this.pvmEditText = findViewById(R.id.pvmEditTextDate);
-        this.aikaEditText = findViewById(R.id.aikaEditTextTime);
+        this.kuukausiEditText = findViewById(R.id.kuukausiEditTextDate);
+        this.tunnitEditText = findViewById(R.id.tunnitEditTextTime);
+        this.minuutitEditText = findViewById(R.id.minuutitEditTextTime);
 
         this.tallennaButton = findViewById(R.id.tallennaButton);
         this.lahetaButton = findViewById(R.id.lahetaButton);
@@ -54,9 +57,13 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         double ylaPaine = Double.parseDouble(ylaPaineEditText.getText().toString());
         double alaPaine = Double.parseDouble(alaPaineEditText.getText().toString());
         double syke = Double.parseDouble(sykeEditText.getText().toString());
+        int paiva = Integer.parseInt(pvmEditText.getText().toString());
+        int kuukausi = Integer.parseInt(kuukausiEditText.getText().toString());
+        int tunnit = Integer.parseInt(tunnitEditText.getText().toString());
+        int minuutit = Integer.parseInt(minuutitEditText.getText().toString());
 
         mittausViewModel.lisaaMittaus(new Mittaus(ylaPaine,alaPaine, syke, 100.0,
-                04, 12, 2022, 15, 00,00));
+                04, paiva, kuukausi, 2022, tunnit,minuutit));
         Log.d("", "tallenna");
 
 
