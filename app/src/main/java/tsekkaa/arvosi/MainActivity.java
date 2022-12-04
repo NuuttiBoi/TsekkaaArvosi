@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     }
     //muistakaa laittaa class tohon alle huutomerkin tilalle. Menee samallalailla ku noissa muissa
     public void testButtonPressed(View v){
-        Intent test = new Intent(this, KirjausTesti.class);
+        Intent test = new Intent(this, TestiActivity2.class);
         startActivity(test);
 
 
