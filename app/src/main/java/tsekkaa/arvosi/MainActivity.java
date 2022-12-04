@@ -10,6 +10,7 @@ import java.text.*;
 
 public class MainActivity extends AppCompatActivity {
 
+    //luo buttonin
     private Button verenpaineButton, verenHappipitoisuusButton, verensokeriButton, asetuksetButton, testButton;
 
     @Override
