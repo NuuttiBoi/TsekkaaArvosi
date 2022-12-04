@@ -6,4 +6,68 @@
     android:layout_height="match_parent"
     tools:context=".VerenSokeriActivity">
 
+    <Button
+        android:id="@+id/tallennusButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tallenna"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.926" />
+
+    <TextView
+        android:id="@+id/otsikko"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verensokerin Mittaus"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.125" />
+
+    <TextView
+        android:id="@+id/textOhjeverensokeri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kirjaa verensokerin arvosi alla olevaan laatikkoon"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otsikko"
+        app:layout_constraintVertical_bias="0.07" />
+
+    <TextView
+        android:id="@+id/sivuteksti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verensokeri:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/verensokerinArvo"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.42" />
+
+    <EditText
+        android:id="@+id/verensokerinArvo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Verensokerin arvo"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.701"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textOhjeverensokeri"
+        app:layout_constraintVertical_bias="0.186" />
 </androidx.constraintlayout.widget.ConstraintLayout>
