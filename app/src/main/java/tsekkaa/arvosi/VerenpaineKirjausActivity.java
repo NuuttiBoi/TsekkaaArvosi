@@ -41,6 +41,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         this.tallennaButton = findViewById(R.id.tallennaButton);
     }
     public void vTallennaButton(View v){
-        Intent Arvot = new Intent(this, VerenpaineTarkkailuActivity.class);
+        Intent vTarkkailu = new Intent(this, VerenpaineTarkkailuActivity.class);
+        startActivity(vTarkkailu);
     }
 }

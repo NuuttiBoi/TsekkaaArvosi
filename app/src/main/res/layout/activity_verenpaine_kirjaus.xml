@@ -134,6 +134,7 @@
         android:id="@+id/tallennaButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="vTallennaButton"
         android:text="Tallenna"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
