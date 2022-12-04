@@ -6,6 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".VerenpaineKirjausActivity">
 
+    <EditText
+        android:id="@+id/minuutitEditTextTime"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:ems="10"
+        android:hint="minuutit"
+        android:inputType="time"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.641"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.729" />
+
+    <EditText
+        android:id="@+id/kuukausiEditTextDate"
+        android:layout_width="89dp"
+        android:layout_height="64dp"
+        android:ems="10"
+        android:hint="Kuukausi"
+        android:inputType="date"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.689"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.597" />
+
     <TextView
         android:id="@+id/kirjausTextView"
         android:layout_width="wrap_content"
@@ -102,33 +132,33 @@
 
     <EditText
         android:id="@+id/pvmEditTextDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="87dp"
+        android:layout_height="65dp"
         android:ems="10"
-        android:hint="Päivämäärä"
+        android:hint="Pvm"
         android:inputType="date"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.298"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.594" />
+        app:layout_constraintVertical_bias="0.6" />
 
     <EditText
-        android:id="@+id/aikaEditTextTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/tunnitEditTextTime"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:ems="10"
-        android:hint="Kellonaika"
+        android:hint="tunnit"
         android:inputType="time"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.369"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.708" />
+        app:layout_constraintVertical_bias="0.729" />
 
     <Button
         android:id="@+id/tallennaButton"
@@ -172,9 +202,23 @@
         android:text="send"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.925" />
+
+    <TextView
+        android:id="@+id/pisteTextView"
+        android:layout_width="29dp"
+        android:layout_height="49dp"
+        android:text=":"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/minuutitEditTextTime"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tunnitEditTextTime"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.727" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
