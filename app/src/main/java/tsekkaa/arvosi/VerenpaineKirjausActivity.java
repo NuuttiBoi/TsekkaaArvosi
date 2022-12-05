@@ -3,6 +3,7 @@ package tsekkaa.arvosi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +19,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
     public final static String EXTRA_AIKA = "com.example.excercise41.AIKA";
     TextView kirjausTextView, alaPaineTextView, ylaPaineTextView, sykeTextView, arvoOhjeTextView, aikaOhjeTextView, pisteTextView;
     EditText ylaPaineEditText, alaPaineEditText, sykeEditText, pvmEditText, kuukausiEditText, tunnitEditText, minuutitEditText;
-    Button tallennaButton, lahetaButton;
+    Button tallennaButton, lahetaButton, backbutton;
     private MittausViewModel mittausViewModel;
 
     @Override
@@ -45,6 +46,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
 
         this.tallennaButton = findViewById(R.id.tallennaButton);
         this.lahetaButton = findViewById(R.id.lahetaButton);
+        this.backbutton = findViewById(R.id.backButton);
 
         mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
     }
@@ -96,4 +98,8 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         aLaheta.putExtra(EXTRA_SYKE, syke);
     }
      */
+    public void backButtonPressed(View v){
+        Intent takaisin = new Intent(this, MainActivity.class);
+        startActivity(takaisin);
+    }
 }
