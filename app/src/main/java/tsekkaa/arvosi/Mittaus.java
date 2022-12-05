@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 @Entity
 public class Mittaus {
 
@@ -98,5 +100,10 @@ public class Mittaus {
 
     public int getMinuutit() {
         return minuutit;
+    }
+
+    public Date getDate(int vuosi, int kuukausi, int paiva, int tunnit, int minuutit, int sekunnit) {
+        Date date = new Date(paiva, kuukausi, vuosi, tunnit, minuutit, 0);
+        return date;
     }
 }
