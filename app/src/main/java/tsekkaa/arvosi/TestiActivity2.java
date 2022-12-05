@@ -39,12 +39,12 @@ public class TestiActivity2 extends AppCompatActivity {
         tummaTeema = sharedPref.getBoolean("Tummateema", oletusTeema);
         SharedPreferences.Editor editor = sharedPref.edit();
 
-
         oletusTSwitch.setChecked(oletusTeema);
         tummaTSwitch.setChecked(tummaTeema);
 
         if (oletusTSwitch.isChecked()) {
             tummaTSwitch.setClickable(false);
+            tummaTSwitch.setAlpha(.5f);
         }
 
         oletusTSwitch.setOnClickListener(view -> {
@@ -66,10 +66,12 @@ public class TestiActivity2 extends AppCompatActivity {
             //Asettaa teeman automaattisesti puhelimen asetuksista
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
             tummaTSwitch.setClickable(false);
+            tummaTSwitch.setAlpha(.5f);
             Log.d("", "Oletusteema päällä");
         } else {
             //Teeman pääsee vaihtamaan itse vain jos oletusteema ei ole valittuna
             tummaTSwitch.setClickable(true);
+            tummaTSwitch.setAlpha(1f);
 
             Log.d("", "sharedpreferences: " + tummaTeema);
 
