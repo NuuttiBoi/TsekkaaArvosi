@@ -22,20 +22,64 @@ public class MittausRepository {
         return mittausDao.haeMittaukset();
     }
 
-    void insert(Mittaus mittaus) {
+    LiveData<List<Mittaus>> haeYlapaineMittaukset() {
+        return mittausDao.haeYlapaineMittaukset();
+    }
+
+    LiveData<List<Mittaus>> haeAlapaineMittaukset() {
+        return mittausDao.haeAlapaineMittaukset();
+    }
+
+    LiveData<List<Mittaus>> haeSykeMittaukset() {
+        return mittausDao.haeSykeMittaukset();
+    }
+
+    LiveData<List<Mittaus>> haeYpApMittaukset() {
+        return mittausDao.haeYpApMittaukset();
+    }
+
+    LiveData<List<Mittaus>> haeYpApSykeMittaukset() {return mittausDao.haeYpApSykeMittaukset();}
+
+    LiveData<List<Mittaus>> haeVerensokeriMittaukset() {
+        return mittausDao.haeVerensokeriMittaukset();
+    }
+
+    LiveData<List<Mittaus>> haeHappipitoisuusMittaukset() {
+        return mittausDao.haeHappipitoisuusMittaukset();
+    }
+
+    public void insert(Mittaus mittaus) {
         new InsertAsyncTask(mittausDao).execute(mittaus);
+    }
+
+    public void poistaMittaus(Mittaus mittaus) {
+        new DeleteAsyncTask(mittausDao).execute(mittaus);
     }
 
     private static class InsertAsyncTask extends AsyncTask<Mittaus, Void, Void> {
         private MittausDao taskDao;
 
-        InsertAsyncTask(MittausDao mittausDao) {
+        private InsertAsyncTask(MittausDao mittausDao) {
             taskDao = mittausDao;
         }
 
         @Override
         protected Void doInBackground(Mittaus... mittaukset) {
             taskDao.lisaaMittaus(mittaukset[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAsyncTask extends AsyncTask<Mittaus, Void, Void> {
+        private MittausDao taskDao;
+
+        private DeleteAsyncTask(MittausDao mittausDao) {
+            taskDao = mittausDao;
+        }
+
+        @Override
+        protected Void doInBackground(Mittaus... mittaukset) {
+            taskDao.poistaMittaus(mittaukset[0]);
             return null;
         }
     }
