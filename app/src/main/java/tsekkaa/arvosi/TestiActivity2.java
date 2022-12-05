@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 
 public class TestiActivity2 extends AppCompatActivity {
-    private Button btn2;
-    private MittausViewModel mittausViewModel;
     private Switch oletusTSwitch, tummaTSwitch;
     private boolean oletusTeema, tummaTeema;
 
@@ -25,10 +23,8 @@ public class TestiActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testi2);
-        //mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
+        getSupportActionBar().hide();
 
-
-        btn2 = findViewById(R.id.btn2);
         oletusTSwitch = findViewById(R.id.oletusTSwitch);
         tummaTSwitch = findViewById(R.id.tummaTSwitch);
         SharedPreferences sharedPref = getSharedPreferences("Asetukset", Context.MODE_PRIVATE);
@@ -44,36 +40,33 @@ public class TestiActivity2 extends AppCompatActivity {
             tummaTSwitch.setClickable(false);
         }
 
-        //updateUI();
-
-        //SharedPreferences.Editor editor = sharedPref.edit();
-        //editor.putInt("visibles", counterVisibles.getValue());
-        //editor.putInt("hits", counterHits.getValue());
-        //editor.apply();
-
-        btn2.setOnClickListener(view -> {
-            //mittausViewModel.lisaaMittaus(new Mittaus(yläpaine doublena, alapaine doublena, syke doublena, verensokeri doublena, happipitoisuus doublena, päivä intinä, kuukausi intinä, vuosi intinä, tunnit intinä, minuutit intinä));
-            //Intent intent = new Intent(this, TestiActivity.class);
-            //startActivity(intent);
-
-            Log.d("", "" + oletusTeema);
-        });
-
         oletusTSwitch.setOnClickListener(view -> {
             oletusTeema = !oletusTeema;
             editor.putBoolean("Oletusteema", oletusTeema);
             editor.apply();
             updateUI();
         });
+
+        tummaTSwitch.setOnClickListener(view -> {
+            updateUI();
+        });
+
+        updateUI();
     }
 
     private void updateUI() {
-        if (oletusTSwitch.isChecked() == true) {
+        if (oletusTSwitch.isChecked()) {
+            //Asettaa teeman automaattisesti puhelimen asetuksista
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
             tummaTSwitch.setClickable(false);
-            Log.d("", "=letusteema päällä");
+            Log.d("", "Oletusteema päällä");
         } else {
+            //Teeman pääsee vaihtamaan itse vain jos oletusteema ei ole valittuna
             tummaTSwitch.setClickable(true);
+
+            Log.d("", "sharedpreferences: " + tummaTeema);
+
+            vaihdaTeema(tummaTeema);
 
             tummaTSwitch.setOnClickListener(view -> {
                 tummaTeema = !tummaTeema;
@@ -82,15 +75,21 @@ public class TestiActivity2 extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean("Tummateema", tummaTeema);
                 editor.apply();
+                Log.d("", "sharedpreferences: " + tummaTeema);
 
-                updateUI();
+                vaihdaTeema(tummaTeema);
             });
-
             Log.d("", "Oletusteema pois");
-
         }
-        Log.d("", "Oletus teema: " + oletusTeema);
-        Log.d("", "Tumma teema: " + tummaTeema);
+    }
 
+    private void vaihdaTeema(boolean teema) {
+        if (teema) {
+            //Jos käyttäjällä on valittuna tumma teema
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            //Jos käyttäjällä on valittuna vaalea teema
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 }
