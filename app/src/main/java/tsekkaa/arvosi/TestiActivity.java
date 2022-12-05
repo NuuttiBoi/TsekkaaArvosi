@@ -37,6 +37,7 @@ public class TestiActivity extends AppCompatActivity {
     private MittausViewModel mittausViewModel;
     private DataPoint[] dataPoints;
 
+    //Nää voi poistaa jos ei tarvi
     private LineGraphSeries<DataPoint> lineSeries2;
     private DataPoint[] dataPoints2;
 
@@ -44,8 +45,8 @@ public class TestiActivity extends AppCompatActivity {
     private final static int VIEWPORT_SIZE = 5;
 
     //Korjatkaa jos on väärää tietoa ^^'
-    private final static double ALARAJA = 6.0;
-    private final static double YLARAJA = 7.0;
+    private final static double VERENSOKERIN_ALARAJA = 6.0;
+    private final static double VERENSOKERIN_YLARAJA = 7.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,11 +94,11 @@ public class TestiActivity extends AppCompatActivity {
             pointSeries.setOnDataPointTapListener((series, dataPoint) -> {
                 String teksti = dataPoint.getY() + " mmol/l";
                 String varoitus;
-                if (dataPoint.getY() > YLARAJA) {
-                    varoitus = "\n+" + String.format("%.2f", dataPoint.getY()-YLARAJA) + " mmol/l";
+                if (dataPoint.getY() > VERENSOKERIN_YLARAJA) {
+                    varoitus = "\n+" + String.format("%.2f", dataPoint.getY()-VERENSOKERIN_YLARAJA) + " mmol/l";
                     teksti += varoitus;
-                } else if (dataPoint.getY() < ALARAJA) {
-                    varoitus = "\n-" + String.format("%.2f", ALARAJA-dataPoint.getY()) + " mmol/l";
+                } else if (dataPoint.getY() < VERENSOKERIN_ALARAJA) {
+                    varoitus = "\n-" + String.format("%.2f", VERENSOKERIN_ALARAJA-dataPoint.getY()) + " mmol/l";
                     teksti += varoitus;
                 }
                 Toast toast = Toast.makeText(TestiActivity.this, teksti, Toast.LENGTH_LONG);
