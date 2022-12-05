@@ -7,6 +7,21 @@
     tools:context=".VerenpaineKirjausActivity">
 
     <EditText
+        android:id="@+id/vuosiEditTextDate"
+        android:layout_width="87dp"
+        android:layout_height="65dp"
+        android:ems="10"
+        android:hint="vuosi"
+        android:inputType="date"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.808"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <EditText
         android:id="@+id/minuutitEditTextTime"
         android:layout_width="65dp"
         android:layout_height="65dp"
@@ -31,10 +46,10 @@
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.689"
+        app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.597" />
+        app:layout_constraintVertical_bias="0.599" />
 
     <TextView
         android:id="@+id/kirjausTextView"
@@ -140,7 +155,6 @@
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.298"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.6" />
@@ -186,9 +200,9 @@
 
     <TextView
         android:id="@+id/aikaOhjeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kirjaa mittauksen ajankohta alle:"
+        android:layout_width="220dp"
+        android:layout_height="53dp"
+        android:text="Klikkaa asettaaseksi mittauksen ajankohta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -3,29 +3,70 @@ package tsekkaa.arvosi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+
 public class VerenpaineKirjausActivity extends AppCompatActivity {
+
+    private static final String TAG = "VerenPaineKirjausActivity";
+
     public final static String EXTRA_YLAPAINE = "com.example.excercise41.YLAPAINE";
     public final static String EXTRA_ALAPAINE = "com.example.excercise41.ALAPAINE";
     public final static String EXTRA_SYKE = "com.example.excercise41.SYKE";
     public final static String EXTRA_PVM = "com.example.excercise41.PVM";
     public final static String EXTRA_AIKA = "com.example.excercise41.AIKA";
     TextView kirjausTextView, alaPaineTextView, ylaPaineTextView, sykeTextView, arvoOhjeTextView, aikaOhjeTextView, pisteTextView;
-    EditText ylaPaineEditText, alaPaineEditText, sykeEditText, pvmEditText, kuukausiEditText, tunnitEditText, minuutitEditText;
+    EditText ylaPaineEditText, alaPaineEditText, sykeEditText, pvmEditText, kuukausiEditText, vuosiEditText, tunnitEditText, minuutitEditText;
     Button tallennaButton, lahetaButton, backbutton;
     private MittausViewModel mittausViewModel;
+    private TextView mDisplayDate;
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verenpaine_kirjaus);
+
+        mDisplayDate = (TextView) findViewById(R.id.aikaOhjeTextView);
+
+        mDisplayDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(VerenpaineKirjausActivity.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth, mDateSetListener, year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+            }
+        });
+
+
+
+        /*
+        Calendar calendar = Calendar.getInstance();
+        String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+
+        TextView textViewDate = findViewById(R.id.textViewDate);
+        textViewDate.setText(currentDate);
+
+         */
 
         this.kirjausTextView = findViewById(R.id.kirjausTextView);
         this.alaPaineTextView = findViewById(R.id.alaPaineTextView);
@@ -43,10 +84,22 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         this.kuukausiEditText = findViewById(R.id.kuukausiEditTextDate);
         this.tunnitEditText = findViewById(R.id.tunnitEditTextTime);
         this.minuutitEditText = findViewById(R.id.minuutitEditTextTime);
+        this.vuosiEditText = findViewById(R.id.vuosiEditTextDate);
 
         this.tallennaButton = findViewById(R.id.tallennaButton);
         this.lahetaButton = findViewById(R.id.lahetaButton);
         this.backbutton = findViewById(R.id.backButton);
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+
+                pvmEditText.setText(Integer.toString(i2));
+                kuukausiEditText.setText(Integer.toString(i1));
+                vuosiEditText.setText(Integer.toString(i));
+
+            }
+        };
 
         mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
     }
@@ -68,7 +121,6 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
                 04, paiva, kuukausi, 2022, tunnit,minuutit));
         Log.d("", "tallenna");
 
-
         mittausViewModel.haeMittaukset().observe(this, mittaukset -> {
             for (int i = 0; i < mittaukset.size(); i++) {
                 Log.d("", "yp: " + mittaukset.get(i).getYlapaine()
@@ -83,7 +135,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
     }
 
 
-    /*
+
     public void aLahetaButton(View v){
         Intent aLaheta = new Intent(this, Mittaus.class);
         String ylaPaine = ylaPaineEditText.getText().toString();
@@ -91,13 +143,13 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         String syke = sykeEditText.getText().toString();
 
         String pvm = pvmEditText.getText().toString();
-        String aika = aikaEditText.getText().toString();
+        String kuukausi = kuukausiEditText.getText().toString();
 
         aLaheta.putExtra(EXTRA_YLAPAINE, ylaPaine);
         aLaheta.putExtra(EXTRA_ALAPAINE, alaPaine);
         aLaheta.putExtra(EXTRA_SYKE, syke);
     }
-     */
+
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, MainActivity.class);
         startActivity(takaisin);
