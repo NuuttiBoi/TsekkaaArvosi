@@ -10,7 +10,7 @@ import java.text.*;
 
 public class MainActivity extends AppCompatActivity {
 
-    //luo buttonin
+    //creates button
     private Button verenpaineButton, verenHappipitoisuusButton, verensokeriButton, asetuksetButton, testButton;
 
     @Override
@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //finds a button from layout with findViewById(R.id.(wanted thing)) command and sets the found value to the created button
         this.verenpaineButton = findViewById(R.id.verenpaineButton);
         this.verenHappipitoisuusButton = findViewById(R.id.verenHappiPitoisuus);
         this.verensokeriButton = findViewById(R.id.verenSokeri);
