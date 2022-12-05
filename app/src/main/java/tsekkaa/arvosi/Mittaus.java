@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -101,9 +103,15 @@ public class Mittaus {
     public int getMinuutit() {
         return minuutit;
     }
-
-    public Date getDate(int vuosi, int kuukausi, int paiva, int tunnit, int minuutit, int sekunnit) {
-        Date date = new Date(paiva, kuukausi, vuosi, tunnit, minuutit, 0);
+    public Date getDate() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        String dateInString = "" + paiva + "-" + kuukausi + "-" + vuosi + " " + tunnit + ":" + minuutit;
+        Date date = null;
+        try {
+            date = sdf.parse(dateInString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return date;
     }
 }

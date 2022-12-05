@@ -43,6 +43,7 @@ public class TestiActivity extends AppCompatActivity {
     private PointsGraphSeries<DataPoint> pointSeries;
     private MittausViewModel mittausViewModel;
     private DataPoint[] dataPoints;
+    private SimpleDateFormat sdf;
 
     //Nää voi poistaa jos ei tarvi
     private LineGraphSeries<DataPoint> lineSeries2;
@@ -59,7 +60,7 @@ public class TestiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testi);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd");
+        sdf = new SimpleDateFormat("dd.MM HH:mm");
 
         mCalendar = Calendar.getInstance();
 
@@ -73,7 +74,14 @@ public class TestiActivity extends AppCompatActivity {
             for (int i = 0; i < mittaukset.size(); i++) {
                 //Ton verensokerin tilalle voi vaihtaa sen infon mitä haluu
                 int x = 0;
-                dataPoints[i] = new DataPoint(i, mittaukset.get(i).getVerensokeri());
+                //dataPoints[i] = new DataPoint(i, mittaukset.get(i).getVerensokeri());
+
+                try {
+                    dataPoints[i] = new DataPoint(mittaukset.get(i).getDate().getTime(), mittaukset.get(i).getVerensokeri());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
                 //Jos haluu useemman viivan samaan kaavioon esim.
                 //dataPoints2[i] = new DataPoint(i, mittaukset.get(i).getHappipitoisuus());
             }
@@ -124,7 +132,7 @@ public class TestiActivity extends AppCompatActivity {
                         if (isValueX) {
                             //x-akselin label
                             //En keksiny miten tähän saa näkyviin esim. pvm/ajan -__-
-                            return super.formatLabel(value,true);
+                            return sdf.format(new Date((long) value));
                         } else {
                             //y-akselin label
                             return super.formatLabel(value, isValueX);
