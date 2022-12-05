@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".VerenpaineKirjausActivity">
 
+    <TextView
+        android:id="@+id/kelloOhjeTextView"
+        android:layout_width="220dp"
+        android:layout_height="53dp"
+        android:background="#3F51B5"
+        android:text="Kellonaika"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.693" />
+
     <EditText
         android:id="@+id/vuosiEditTextDate"
         android:layout_width="87dp"
@@ -23,18 +39,18 @@
 
     <EditText
         android:id="@+id/minuutitEditTextTime"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="88dp"
+        android:layout_height="69dp"
         android:ems="10"
         android:hint="minuutit"
         android:inputType="time"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.641"
+        app:layout_constraintHorizontal_bias="0.678"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.729" />
+        app:layout_constraintVertical_bias="0.783" />
 
     <EditText
         android:id="@+id/kuukausiEditTextDate"
@@ -161,18 +177,18 @@
 
     <EditText
         android:id="@+id/tunnitEditTextTime"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="88dp"
+        android:layout_height="69dp"
         android:ems="10"
         android:hint="tunnit"
         android:inputType="time"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.369"
+        app:layout_constraintHorizontal_bias="0.325"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.729" />
+        app:layout_constraintVertical_bias="0.783" />
 
     <Button
         android:id="@+id/tallennaButton"
@@ -182,9 +198,10 @@
         android:text="Tallenna"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.83" />
+        app:layout_constraintVertical_bias="0.925" />
 
     <TextView
         android:id="@+id/arvoOhjeTextView"
@@ -202,7 +219,11 @@
         android:id="@+id/aikaOhjeTextView"
         android:layout_width="220dp"
         android:layout_height="53dp"
-        android:text="Klikkaa asettaaseksi mittauksen ajankohta"
+        android:background="#3F51B5"
+        android:text="Päivämäärä"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -216,7 +237,7 @@
         android:text="send"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.758"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.925" />
@@ -233,7 +254,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tunnitEditTextTime"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.727" />
+        app:layout_constraintVertical_bias="0.766" />
 
     <Button
         android:id="@+id/backButton"
@@ -243,7 +264,7 @@
         android:text="Takaisin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/lahetaButton"
-        app:layout_constraintHorizontal_bias="0.443"
+        app:layout_constraintHorizontal_bias="0.113"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.925" />

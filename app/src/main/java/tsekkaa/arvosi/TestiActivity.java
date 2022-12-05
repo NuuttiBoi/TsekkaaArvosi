@@ -29,6 +29,7 @@ import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -60,7 +61,7 @@ public class TestiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testi);
-        sdf = new SimpleDateFormat("dd.MM HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("hh.mm");
 
         mCalendar = Calendar.getInstance();
 
@@ -68,19 +69,31 @@ public class TestiActivity extends AppCompatActivity {
         mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
 
         mittausViewModel.haeMittaukset().observe(this, mittaukset -> {
+
+            double pvkkArray[] = new double[mittaukset.size()];
+            int paivaArray[] = new int[mittaukset.size()];
+            int kuukausiArray[] = new int[mittaukset.size()];
+
             dataPoints = new DataPoint[mittaukset.size()];
             dataPoints2 = new DataPoint[mittaukset.size()];
 
             for (int i = 0; i < mittaukset.size(); i++) {
+                for(int j = 0; j < mittaukset.size(); j++){
+                        pvkkArray[j]=mittaukset.get(j).getPvmKK();
+                }
+                Arrays.sort(pvkkArray);
+                Log.d("homo","vitun " + pvkkArray[i]);
                 //Ton verensokerin tilalle voi vaihtaa sen infon mitä haluu
-                int x = 0;
-                //dataPoints[i] = new DataPoint(i, mittaukset.get(i).getVerensokeri());
+                dataPoints[i] = new DataPoint(pvkkArray[i], mittaukset.get(i).getSyke());
 
+                /*
                 try {
                     dataPoints[i] = new DataPoint(mittaukset.get(i).getDate().getTime(), mittaukset.get(i).getVerensokeri());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+
+                 */
 
                 //Jos haluu useemman viivan samaan kaavioon esim.
                 //dataPoints2[i] = new DataPoint(i, mittaukset.get(i).getHappipitoisuus());
@@ -125,6 +138,9 @@ public class TestiActivity extends AppCompatActivity {
                 toast.show();
             });
 
+
+            //graph.getGridLabelRenderer().setHumanRounding(false,true);
+
             graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
                 @Override
                 public String formatLabel(double value, boolean isValueX) {
@@ -132,13 +148,16 @@ public class TestiActivity extends AppCompatActivity {
                         if (isValueX) {
                             //x-akselin label
                             //En keksiny miten tähän saa näkyviin esim. pvm/ajan -__-
-                            return sdf.format(new Date((long) value));
+                            return sdf.format((long) value);
+
+                            //return super.formatLabel(value, isValueX);
                         } else {
                             //y-akselin label
                             return super.formatLabel(value, isValueX);
                         }
                     }
             });
+
         });
     }
 }

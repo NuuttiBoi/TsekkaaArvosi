@@ -46,6 +46,8 @@ public class Mittaus {
     @ColumnInfo(name = "minuutit")
     private int minuutit;
 
+
+
     public Mittaus(double ylapaine, double alapaine, double syke, double verensokeri, double happipitoisuus, int paiva, int kuukausi,
                    int vuosi, int tunnit, int minuutit) {
         this.ylapaine = ylapaine;
@@ -84,8 +86,34 @@ public class Mittaus {
         return happipitoisuus;
     }
 
+    public double getPvmKK(){
+
+        // SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        // Date date = new Date();
+        // String dateformatted = dateFormat.format(date);
+        // return Double.valueOf(dateformatted);
+
+        return Double.parseDouble(tunnit + "." + minuutit);
+    }
+
     public int getPaiva() {
         return paiva;
+    }
+
+    public String getPvmKk(){
+        SimpleDateFormat xd = new SimpleDateFormat("HH.MM");
+        String pvm = xd.format(paiva + kuukausi);
+        return pvm;
+    }
+
+    public Date getPvDate(){
+        return new Date();
+    }
+
+
+    public Date getTime(){
+        new Date().getTime();
+        return getTime();
     }
 
     public int getKuukausi() {

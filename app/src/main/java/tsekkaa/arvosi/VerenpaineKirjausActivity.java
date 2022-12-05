@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -14,9 +15,14 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.Date;
 
 public class VerenpaineKirjausActivity extends AppCompatActivity {
 
@@ -25,14 +31,18 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
     public final static String EXTRA_YLAPAINE = "com.example.excercise41.YLAPAINE";
     public final static String EXTRA_ALAPAINE = "com.example.excercise41.ALAPAINE";
     public final static String EXTRA_SYKE = "com.example.excercise41.SYKE";
-    public final static String EXTRA_PVM = "com.example.excercise41.PVM";
+    public final static String EXTRA_DATE = "com.example.excercise41.DATE";
     public final static String EXTRA_AIKA = "com.example.excercise41.AIKA";
-    TextView kirjausTextView, alaPaineTextView, ylaPaineTextView, sykeTextView, arvoOhjeTextView, aikaOhjeTextView, pisteTextView;
-    EditText ylaPaineEditText, alaPaineEditText, sykeEditText, pvmEditText, kuukausiEditText, vuosiEditText, tunnitEditText, minuutitEditText;
+    TextView kirjausTextView, alaPaineTextView, ylaPaineTextView, sykeTextView, arvoOhjeTextView, aikaOhjeTextView,
+            kelloOhjeTextView, pisteTextView;
+    EditText ylaPaineEditText, alaPaineEditText, sykeEditText, pvmEditText, kuukausiEditText, vuosiEditText,
+            tunnitEditText, minuutitEditText;
     Button tallennaButton, lahetaButton, backbutton;
     private MittausViewModel mittausViewModel;
-    private TextView mDisplayDate;
+    private TextView mDisplayDate, mDisplayTime;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private TimePickerDialog.OnTimeSetListener mTimeSetListener;
+    private int paiva;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +50,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         setContentView(R.layout.activity_verenpaine_kirjaus);
 
         mDisplayDate = (TextView) findViewById(R.id.aikaOhjeTextView);
+        mDisplayTime = (TextView) findViewById(R.id.kelloOhjeTextView);
 
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,17 +67,21 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
 
             }
         });
+        mDisplayTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int hour = cal.get(Calendar.HOUR);
+                int minute = cal.get(Calendar.MINUTE);
 
+                TimePickerDialog dialog = new TimePickerDialog(VerenpaineKirjausActivity.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth, mTimeSetListener, hour,minute,true);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
 
+            }
+        });
 
-        /*
-        Calendar calendar = Calendar.getInstance();
-        String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-
-        TextView textViewDate = findViewById(R.id.textViewDate);
-        textViewDate.setText(currentDate);
-
-         */
 
         this.kirjausTextView = findViewById(R.id.kirjausTextView);
         this.alaPaineTextView = findViewById(R.id.alaPaineTextView);
@@ -74,6 +89,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         this.sykeTextView = findViewById(R.id.sykeTextView);
         this.arvoOhjeTextView = findViewById(R.id.arvoOhjeTextView);
         this.aikaOhjeTextView = findViewById(R.id.aikaOhjeTextView);
+        this.kelloOhjeTextView = findViewById(R.id.kelloOhjeTextView);
         this.pisteTextView = findViewById(R.id.pisteTextView);
 
 
@@ -90,13 +106,30 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         this.lahetaButton = findViewById(R.id.lahetaButton);
         this.backbutton = findViewById(R.id.backButton);
 
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
 
+                i1 = i1 + 1;
+
                 pvmEditText.setText(Integer.toString(i2));
                 kuukausiEditText.setText(Integer.toString(i1));
                 vuosiEditText.setText(Integer.toString(i));
+
+                String date = i2 + "/" + i1 + "/" + i;
+            }
+        };
+
+        mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+
+
+            @Override
+            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+
+                tunnitEditText.setText(Integer.toString(i));
+                minuutitEditText.setText(Integer.toString(i1));
 
             }
         };
@@ -104,18 +137,19 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
     }
 
-
-
     // Vie verenpaineen tarkkailu activityyn kun käyttäjä painaa nappia
     public void vTallennaButton(View v){
 
         double ylaPaine = Double.parseDouble(ylaPaineEditText.getText().toString());
         double alaPaine = Double.parseDouble(alaPaineEditText.getText().toString());
         double syke = Double.parseDouble(sykeEditText.getText().toString());
-        int paiva = Integer.parseInt(pvmEditText.getText().toString());
+        this.paiva = Integer.parseInt(pvmEditText.getText().toString());
         int kuukausi = Integer.parseInt(kuukausiEditText.getText().toString());
         int tunnit = Integer.parseInt(tunnitEditText.getText().toString());
         int minuutit = Integer.parseInt(minuutitEditText.getText().toString());
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            LocalDate aika = LocalDate.now();
+        }
 
         mittausViewModel.lisaaMittaus(new Mittaus(ylaPaine,alaPaine, syke, 100.0,
                 04, paiva, kuukausi, 2022, tunnit,minuutit));
@@ -133,8 +167,6 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     public void aLahetaButton(View v){
         Intent aLaheta = new Intent(this, Mittaus.class);

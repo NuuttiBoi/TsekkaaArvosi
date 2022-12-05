@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Date;
+
 public class KirjausTesti extends AppCompatActivity {
     public final static String EXTRA_YLAPAINE = "com.example.excercise41.YLAPAINE";
     public final static String EXTRA_ALAPAINE = "com.example.excercise41.ALAPAINE";

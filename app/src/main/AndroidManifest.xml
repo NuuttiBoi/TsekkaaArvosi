@@ -13,6 +13,13 @@
         android:theme="@style/Theme.TsekkaaArvosi"
         tools:targetApi="31">
         <activity
+            android:name=".GraphTest"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".TestiActivity2"
             android:exported="false">
             <meta-data

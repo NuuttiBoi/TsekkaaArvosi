@@ -46,7 +46,5 @@ public class MainActivity extends AppCompatActivity {
     public void testButtonPressed(View v){
         Intent test = new Intent(this, TestiActivity.class);
         startActivity(test);
-
-
     }
 }
