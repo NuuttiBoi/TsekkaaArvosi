@@ -18,12 +18,19 @@ import com.google.gson.Gson;
 public class TestiActivity2 extends AppCompatActivity {
     private Switch oletusTSwitch, tummaTSwitch;
     private boolean oletusTeema, tummaTeema;
+    private Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testi2);
         getSupportActionBar().hide();
+
+        btn = findViewById(R.id.btn2);
+        btn.setOnClickListener(view -> {
+            Intent settings = new Intent(this, TestiActivity.class);
+            startActivity(settings);
+        });
 
         oletusTSwitch = findViewById(R.id.oletusTSwitch);
         tummaTSwitch = findViewById(R.id.tummaTSwitch);
