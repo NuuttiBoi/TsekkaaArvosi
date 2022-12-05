@@ -48,22 +48,38 @@ public class MittausRepository {
         return mittausDao.haeHappipitoisuusMittaukset();
     }
 
-    void insert(Mittaus mittaus) {
+    public void insert(Mittaus mittaus) {
         new InsertAsyncTask(mittausDao).execute(mittaus);
     }
 
-    void delete() { mittausDao.delete();}
+    public void poistaMittaus(Mittaus mittaus) {
+        new DeleteAsyncTask(mittausDao).execute(mittaus);
+    }
 
     private static class InsertAsyncTask extends AsyncTask<Mittaus, Void, Void> {
         private MittausDao taskDao;
 
-        InsertAsyncTask(MittausDao mittausDao) {
+        private InsertAsyncTask(MittausDao mittausDao) {
             taskDao = mittausDao;
         }
 
         @Override
         protected Void doInBackground(Mittaus... mittaukset) {
             taskDao.lisaaMittaus(mittaukset[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAsyncTask extends AsyncTask<Mittaus, Void, Void> {
+        private MittausDao taskDao;
+
+        private DeleteAsyncTask(MittausDao mittausDao) {
+            taskDao = mittausDao;
+        }
+
+        @Override
+        protected Void doInBackground(Mittaus... mittaukset) {
+            taskDao.poistaMittaus(mittaukset[0]);
             return null;
         }
     }

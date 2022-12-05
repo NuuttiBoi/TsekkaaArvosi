@@ -68,5 +68,7 @@ public class MittausViewModel extends AndroidViewModel {
         mittausRepository.insert(mittaus);
     }
 
-    public void delete() { mittausRepository.delete();}
+    public void poistaMittaus(Mittaus mittaus) {
+        mittausRepository.poistaMittaus(mittaus);
+    }
 }

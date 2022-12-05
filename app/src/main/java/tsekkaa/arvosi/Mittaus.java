@@ -17,19 +17,19 @@ public class Mittaus {
     public int id;
 
     @ColumnInfo(name = "ylapaine")
-    private double ylapaine;
+    private Double ylapaine;
 
     @ColumnInfo(name = "alapaine")
-    private double alapaine;
+    private Double alapaine;
 
     @ColumnInfo(name = "syke")
-    private double syke;
+    private Double syke;
 
     @ColumnInfo(name = "verensokeri")
-    private double verensokeri;
+    private Double verensokeri;
 
     @ColumnInfo(name = "happipitoisuus")
-    private double happipitoisuus;
+    private Double happipitoisuus;
 
     @ColumnInfo(name = "paiva")
     private int paiva;
@@ -46,7 +46,7 @@ public class Mittaus {
     @ColumnInfo(name = "minuutit")
     private int minuutit;
 
-    public Mittaus(double ylapaine, double alapaine, double syke, double verensokeri, double happipitoisuus, int paiva, int kuukausi,
+    public Mittaus(Double ylapaine, Double alapaine, Double syke, Double verensokeri, Double happipitoisuus, int paiva, int kuukausi,
                    int vuosi, int tunnit, int minuutit) {
         this.ylapaine = ylapaine;
         this.alapaine = alapaine;
@@ -64,23 +64,23 @@ public class Mittaus {
         return id;
     }
 
-    public double getYlapaine() {
+    public Double getYlapaine() {
         return ylapaine;
     }
 
-    public double getAlapaine() {
+    public Double getAlapaine() {
         return alapaine;
     }
 
-    public double getSyke() {
+    public Double getSyke() {
         return syke;
     }
 
-    public double getVerensokeri() {
+    public Double getVerensokeri() {
         return verensokeri;
     }
 
-    public double getHappipitoisuus() {
+    public Double getHappipitoisuus() {
         return happipitoisuus;
     }
 

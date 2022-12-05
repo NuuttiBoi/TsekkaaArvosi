@@ -2,6 +2,7 @@ package tsekkaa.arvosi;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -47,6 +48,6 @@ public interface MittausDao {
     @Query("SELECT * FROM mittaus WHERE happipitoisuus IS NOT NULL ORDER BY vuosi, kuukausi, paiva, tunnit, minuutit")
     LiveData<List<Mittaus>> haeHappipitoisuusMittaukset();
 
-    @Query("DELETE FROM mittaus WHERE id < 15")
-    void delete();
+    @Delete
+    void poistaMittaus(Mittaus mittaus);
 }
