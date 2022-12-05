@@ -88,6 +88,10 @@ public class Mittaus {
         return paiva;
     }
 
+    public double getPvmKK(){
+        return Double.valueOf(paiva + "." + kuukausi);
+    }
+
     public int getKuukausi() {
         return kuukausi;
     }

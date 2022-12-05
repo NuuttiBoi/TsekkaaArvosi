@@ -82,7 +82,7 @@ public class TestiActivity extends AppCompatActivity {
                         pvkkArray[j]=mittaukset.get(j).getPvmKK();
                 }
                 Arrays.sort(pvkkArray);
-                Log.d("homo","vitun " + pvkkArray[i]);
+                Log.d("h","v " + pvkkArray[i]);
                 //Ton verensokerin tilalle voi vaihtaa sen infon mitä haluu
                 dataPoints[i] = new DataPoint(pvkkArray[i], mittaukset.get(i).getSyke());
 

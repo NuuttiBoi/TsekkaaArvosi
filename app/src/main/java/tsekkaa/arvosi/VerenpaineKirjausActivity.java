@@ -152,7 +152,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         }
 
         mittausViewModel.lisaaMittaus(new Mittaus(ylaPaine,alaPaine, syke, 100.0,
-                04, paiva, kuukausi, 2022, tunnit,minuutit));
+                04.1, paiva, kuukausi, 2022, tunnit,minuutit));
         Log.d("", "tallenna");
 
         mittausViewModel.haeMittaukset().observe(this, mittaukset -> {
