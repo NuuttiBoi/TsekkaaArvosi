@@ -5,4 +5,6 @@
     <string name="kirjaudu_ulos">Kirjaudu ulos</string>
     <string name="teema">TEEMA</string>
     <string name="ilmoitukset">ILMOITUKSET</string>
+    <string name="anim_duration">250</string>
+    <string name="zoom_duration">300</string>
 </resources>

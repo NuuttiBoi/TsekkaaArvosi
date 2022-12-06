@@ -1,5 +1,6 @@
 package tsekkaa.arvosi;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import com.google.gson.Gson;
@@ -18,7 +20,7 @@ import com.google.gson.Gson;
 public class TestiActivity2 extends AppCompatActivity {
     private Switch oletusTSwitch, tummaTSwitch;
     private boolean oletusTeema, tummaTeema;
-    private Button btn;
+    private Button btn, btn3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,13 @@ public class TestiActivity2 extends AppCompatActivity {
         btn.setOnClickListener(view -> {
             Intent settings = new Intent(this, TestiActivity.class);
             startActivity(settings);
+            overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
+        });
+        btn3 = findViewById(R.id.button3);
+        btn3.setOnClickListener(view -> {
+            Intent settings = new Intent(this, MainActivity.class);
+            startActivity(settings);
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         });
 
         oletusTSwitch = findViewById(R.id.oletusTSwitch);
@@ -68,6 +77,7 @@ public class TestiActivity2 extends AppCompatActivity {
             tummaTSwitch.setClickable(false);
             tummaTSwitch.setAlpha(.5f);
             Log.d("", "Oletusteema päällä");
+
         } else {
             //Teeman pääsee vaihtamaan itse vain jos oletusteema ei ole valittuna
             tummaTSwitch.setClickable(true);
@@ -101,4 +111,21 @@ public class TestiActivity2 extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
     }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+
+        super.onSaveInstanceState(outState);
+    /*
+                NightMode = AppCompatDelegate.getDefaultNightMode();
+
+                sharedPreferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+
+                editor.putInt("NightModeInt", NightMode);
+                editor.apply();
+                */
+
+    }
+
 }

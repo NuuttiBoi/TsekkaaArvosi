@@ -44,7 +44,25 @@ public class MainActivity extends AppCompatActivity {
     }
     //muistakaa laittaa class tohon alle huutomerkin tilalle. Menee samallalailla ku noissa muissa
     public void testButtonPressed(View v){
-        Intent test = new Intent(this, TestiActivity.class);
+        Intent test = new Intent(this, TestiActivity2.class);
         startActivity(test);
+
+        //zoom in
+        //overridePendingTransition(R.anim.zoom_in, R.anim.static_anim);
+
+        //zoom out
+        //overridePendingTransition(R.anim.static_anim, R.anim.zoom_out);
+
+        //slide ylös
+        //overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
+
+        //slide alas
+        //overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_bottom);
+
+        //slide vasemmalle
+        //overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+
+        //slide oikealle
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 }
