@@ -151,8 +151,10 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
             LocalDate aika = LocalDate.now();
         }
 
+        Calendar calendar = Calendar.getInstance();
+
         mittausViewModel.lisaaMittaus(new Mittaus(ylaPaine,alaPaine, syke, 100.0,
-                04.1, paiva, kuukausi, 2022, tunnit,minuutit));
+                04.1, paiva, kuukausi, 2022, tunnit,minuutit, calendar.getTimeInMillis()));
         Log.d("", "tallenna");
 
         mittausViewModel.haeMittaukset().observe(this, mittaukset -> {

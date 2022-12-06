@@ -7,10 +7,12 @@ import androidx.room.PrimaryKey;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
 public class Mittaus {
+
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
@@ -46,8 +48,11 @@ public class Mittaus {
     @ColumnInfo(name = "minuutit")
     private int minuutit;
 
+    @ColumnInfo(name = "aika")
+    private Long aika;
+
     public Mittaus(Double ylapaine, Double alapaine, Double syke, Double verensokeri, Double happipitoisuus, int paiva, int kuukausi,
-                   int vuosi, int tunnit, int minuutit) {
+                   int vuosi, int tunnit, int minuutit, Long aika) {
         this.ylapaine = ylapaine;
         this.alapaine = alapaine;
         this.syke = syke;
@@ -58,6 +63,11 @@ public class Mittaus {
         this.vuosi = vuosi;
         this.tunnit = tunnit;
         this.minuutit = minuutit;
+        this.aika = aika;
+    }
+
+    public Long getAika(){
+        return aika;
     }
 
     public int getId() {
@@ -89,7 +99,14 @@ public class Mittaus {
     }
 
     public double getPvmKK(){
-        return Double.valueOf(paiva + "." + kuukausi);
+        return Double.parseDouble(paiva + "." + kuukausi);
+    }
+
+    public Date getTunnitMinuutit(){
+
+        Calendar calendar = Calendar.getInstance();
+        Date p1 = calendar.getTime();
+        return p1;
     }
 
     public int getKuukausi() {

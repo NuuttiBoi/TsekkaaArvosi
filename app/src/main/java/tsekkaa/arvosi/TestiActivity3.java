@@ -35,7 +35,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class TestiActivity extends AppCompatActivity {
+public class TestiActivity3 extends AppCompatActivity {
 
     private Calendar mCalendar;
 
@@ -69,8 +69,8 @@ public class TestiActivity extends AppCompatActivity {
 
         mittausViewModel.haeMittaukset().observe(this, mittaukset -> {
 
-            double pvkkArray[] = new double[mittaukset.size()];
-            double aikaArray[] = new double[mittaukset.size()];
+            Long aikaArray[] = new Long[mittaukset.size()];
+            //double pvkkArray[] = new double[mittaukset.size()];
             int kuukausiArray[] = new int[mittaukset.size()];
 
             dataPoints = new DataPoint[mittaukset.size()];
@@ -78,12 +78,13 @@ public class TestiActivity extends AppCompatActivity {
 
             for (int i = 0; i < mittaukset.size(); i++) {
                 for(int j = 0; j < mittaukset.size(); j++){
-                        pvkkArray[j]=mittaukset.get(j).getPvmKK();
+                    // pvkkArray[j]=mittaukset.get(j).getPvmKK();
+                    aikaArray[j]=mittaukset.get(j).getAika();
                 }
-                Arrays.sort(pvkkArray);
-                Log.d("h","v " + pvkkArray[i]);
+                Arrays.sort(aikaArray);
+                Log.d("h","v " + aikaArray[i]);
                 //Ton verensokerin tilalle voi vaihtaa sen infon mitä haluu
-                dataPoints[i] = new DataPoint(pvkkArray[i]+aikaArray[i], mittaukset.get(i).getYlapaine());
+                dataPoints[i] = new DataPoint(Double.valueOf(aikaArray[i]), mittaukset.get(i).getSyke());
 
                 /*
                 try {
@@ -108,13 +109,13 @@ public class TestiActivity extends AppCompatActivity {
             graph.addSeries(lineSeries2);
             */
 
-            graph.getViewport().setXAxisBoundsManual(true);
+            // graph.getViewport().setXAxisBoundsManual(true);
 
-            graph.getViewport().setMinX(dataPoints.length-VIEWPORT_SIZE);
-            graph.getViewport().setMaxX(dataPoints.length);
 
-            //graph.getViewport().setMinX(-5000);
-            //graph.getViewport().setMaxX(5000);
+            //graph.getViewport().setMinX(dataPoints.length-VIEWPORT_SIZE);
+            //graph.getViewport().setMaxX(dataPoints.length);
+
+             graph.getGridLabelRenderer().setHorizontalLabelsAngle(20);
 
             //Näit voi laittaa falseks jos haluu, en tiiä mikä ois paras?
             graph.getViewport().setScrollable(true);
@@ -133,26 +134,27 @@ public class TestiActivity extends AppCompatActivity {
                     varoitus = "\n-" + String.format("%.2f", VERENSOKERIN_ALARAJA-dataPoint.getY()) + " mmol/l";
                     teksti += varoitus;
                 }
-                Toast toast = Toast.makeText(TestiActivity.this, teksti, Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(TestiActivity3.this, teksti, Toast.LENGTH_LONG);
                 toast.show();
             });
 
 
-            graph.getGridLabelRenderer().setHumanRounding(false);
+            //graph.getGridLabelRenderer().setHumanRounding(false);
+            //graph.getGridLabelRenderer().setNumHorizontalLabels(2);
             graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
                 @Override
                 public String formatLabel(double value, boolean isValueX) {
-                        if (isValueX) {
-                            //x-akselin label
-                            //En keksiny miten tähän saa näkyviin esim. pvm/ajan -__-
-                            SimpleDateFormat sdf = new SimpleDateFormat("dd.M HH.mm");
-                            return sdf.format(value);
-                            //return super.formatLabel(value, isValueX);
-                        } else {
-                            //y-akselin label
-                            return super.formatLabel(value, isValueX);
-                        }
+                    if (isValueX) {
+                        //x-akselin label
+                        //En keksiny miten tähän saa näkyviin esim. pvm/ajan -__-
+                        Format formatter = new SimpleDateFormat("MM/dd HH:mm:ss");
+                        return formatter.format(value);
+                        //return super.formatLabel(value, isValueX);
+                    } else {
+                        //y-akselin label
+                        return super.formatLabel(value, isValueX);
                     }
+                }
             });
 
         });

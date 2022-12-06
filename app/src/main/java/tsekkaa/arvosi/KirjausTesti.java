@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class KirjausTesti extends AppCompatActivity {
@@ -33,7 +34,12 @@ public class KirjausTesti extends AppCompatActivity {
         this.tallennaButton = findViewById(R.id.tallennaButton);
     }
     public void vTallennaButton(View v){
-        mittausViewModel.lisaaMittaus(new Mittaus(100.0, 100.0, 100.0,  Double.parseDouble(vsEditText.getText().toString()), 100.0, 04, 12, 2022, 15, 00));
+
+        Calendar calendar = Calendar.getInstance();
+
+        mittausViewModel.lisaaMittaus(new Mittaus(100.0, 100.0, 100.0,
+                Double.parseDouble(vsEditText.getText().toString()), 100.0,
+                04, 12, 2022, 15, 00, calendar.getTimeInMillis() ));
         Log.d("", "tallenna");
 
 
