@@ -7,4 +7,32 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <!-- Light mode -->
+    <color name="tausta_light">#e8f1f7</color> <!-- taustaväri -->
+    <color name="teksti_light">#2c2c2c</color> <!-- tekstin väri -->
+    <color name="ylapalkki_light">#000000</color> <!-- puhelimen yläpalkki -->
+
+    <!-- Buttonit -->
+    <color name="buttonien_tausta_light">#28d48d</color>
+    <color name="buttonien_teksti_light">#ffffff</color>
+
+    <!-- Switchit -->
+    <color name="switchien_tausta_light">#7c7c7c</color>
+    <color name="switchien_teksti_light">#000000</color>
+
+
+    <!-- Dark mode -->
+    <color name="tausta_dark">#0c101b</color> <!-- taustaväri -->
+    <color name="teksti_dark">#f4f7f9</color> <!-- tekstin väri -->
+    <color name="ylapalkki_dark">#000000</color>  <!-- puhelimen yläpalkki -->
+
+    <!-- Buttonit -->
+    <color name="buttonien_tausta_dark">#112268</color>
+    <color name="buttonien_teksti_dark">#e5d280</color>
+
+    <!-- Switchit -->
+    <color name="switchien_tausta_dark">#9eb4ef</color>
+    <color name="switchien_teksti_dark">#ffffff</color>
 </resources>
