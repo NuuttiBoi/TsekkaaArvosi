@@ -36,6 +36,13 @@ public class Asetukset extends AppCompatActivity {
         Intent intentKirjauduUlos = new Intent(this, MessageActivity.class);
         startActivity(intentKirjauduUlos); teksti Olet kirjautunut ulos sovelluksesta
     }**/
+
+
+    public void teemaButtonPressed(View v){
+        Intent teema = new Intent(this, TeemaActivity.class);
+        startActivity(teema);
+    }
+
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, MainActivity.class);
         startActivity(takaisin);

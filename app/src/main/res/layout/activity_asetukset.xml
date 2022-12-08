@@ -34,6 +34,7 @@
         android:id="@+id/teemaButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:onClick="teemaButtonPressed"
         android:text="@string/teema"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
