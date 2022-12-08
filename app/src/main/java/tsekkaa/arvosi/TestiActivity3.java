@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -64,13 +65,10 @@ public class TestiActivity3 extends AppCompatActivity {
 
         mCalendar = Calendar.getInstance();
 
-        graph = findViewById(R.id.graph);
         mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
-
         mittausViewModel.haeMittaukset().observe(this, mittaukset -> {
 
             Long aikaArray[] = new Long[mittaukset.size()];
-            //double pvkkArray[] = new double[mittaukset.size()];
             int kuukausiArray[] = new int[mittaukset.size()];
 
             dataPoints = new DataPoint[mittaukset.size()];
@@ -97,41 +95,128 @@ public class TestiActivity3 extends AppCompatActivity {
                 //Jos haluu useemman viivan samaan kaavioon esim.
                 //dataPoints2[i] = new DataPoint(i, mittaukset.get(i).getHappipitoisuus());
             }
+
+
+
+
+        graph = findViewById(R.id.graph);
+
+        //graph.getViewport().setScrollable(true);
+        //graph.getViewport().setScrollableY(true);
+        //graph.getViewport().setScalable(true);
+        //graph.getViewport().setScalableY(true);
+
+
+
+        /*
+        mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
+        mittausViewModel.haeMittaukset().observe(this, mittaukset -> {
+
+            Long aikaArray[] = new Long[mittaukset.size()];
+            int kuukausiArray[] = new int[mittaukset.size()];
+
+            dataPoints = new DataPoint[mittaukset.size()];
+            dataPoints2 = new DataPoint[mittaukset.size()];
+
+            for (int i = 0; i < mittaukset.size(); i++) {
+                for(int j = 0; j < mittaukset.size(); j++){
+                    aikaArray[j]=mittaukset.get(j).getAika();
+                }
+                Arrays.sort(aikaArray);
+                Log.d("h","v " + aikaArray[i]);
+                //Ton verensokerin tilalle voi vaihtaa sen infon mitä haluu
+                dataPoints[i] = new DataPoint(Double.valueOf(aikaArray[i]), mittaukset.get(i).getSyke());
+
+
+                try {
+                    dataPoints[i] = new DataPoint(mittaukset.get(i).getDate().getTime(), mittaukset.get(i).getVerensokeri());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+
+                //Jos haluu useemman viivan samaan kaavioon esim.
+                //dataPoints2[i] = new DataPoint(i, mittaukset.get(i).getHappipitoisuus());
+                }
+         */
+
+
             lineSeries = new LineGraphSeries<>(dataPoints);
             pointSeries = new PointsGraphSeries<>(dataPoints);
 
+            graph.getViewport().setScrollable(true);
+            //graph.getViewport().setScrollableY(true);
+            //graph.getViewport().setScalable(true);
+            // graph.getViewport().setScalableY(true);
+
+
+            //graph.getViewport().setXAxisBoundsManual(true);
+            graph.getGridLabelRenderer().setNumHorizontalLabels(mittaukset.size());
+
+
+            graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
+                @Override
+                public String formatLabel(double value, boolean isValueX) {
+                    if (isValueX) {
+                        //x-akselin label
+                        //En keksiny miten tähän saa näkyviin esim. pvm/ajan -__-
+                        Format formatter = new SimpleDateFormat("MM/dd HH:mm");
+                        return formatter.format(value);
+                        //return super.formatLabel(value, isValueX);
+                    } else {
+                        //y-akselin label
+                        return super.formatLabel(value, isValueX);
+                    }
+                }
+            });
+
             graph.addSeries(lineSeries);
             graph.addSeries(pointSeries);
+
+
 
             /* Voi lisää useemman
             lineSeries2 = new LineGraphSeries<>(dataPoints2);
             graph.addSeries(lineSeries2);
             */
 
-            //graph.getViewport().setXAxisBoundsManual(true);
-
-            //graph.getViewport().setMinX(dataPoints.length-VIEWPORT_SIZE);
+            //graph.getViewport().setMinX(dataPoints.length);
             //graph.getViewport().setMaxX(dataPoints.length);
+
+            /*
+            if (lineSeries instanceof LineGraphSeries ) {
+                // Shunt the viewport, per v3.1.3 to show the full width of the first and last bars.
+                graph.getViewport().setMinX(lineSeries.getLowestValueX() - (xInterval/2.0));
+                graph.getViewport().setMaxX(lineSeries.getHighestValueX() + (xInterval/2.0));
+            } else {
+                graph.getViewport().setMinX(lineSeries.getLowestValueX() );
+                graph.getViewport().setMaxX(lineSeries.getHighestValueX());
+            }
+
+             */
 
 
             // Kääntää x-akselin arvoja, jotta ne mahtuvat paremmin ruudulle
-            graph.getGridLabelRenderer().setHorizontalLabelsAngle(30);
-
+            //graph.getGridLabelRenderer().setHorizontalLabelsAngle(-45);
+            //graph.getGridLabelRenderer().setHorizontalLabelsAngle(90);
 
              // Asettaa otsikot akseleille
             graph.getGridLabelRenderer().setVerticalAxisTitle("Syke");
             graph.getGridLabelRenderer().setHorizontalAxisTitle("Mittauksen ajankohta");
+            graph.getGridLabelRenderer().setLabelsSpace(0);
 
 
 
             //Näit voi laittaa falseks jos haluu, en tiiä mikä ois paras?
 
 
-
+            /*
             graph.getViewport().setScrollable(true);
             graph.getViewport().setScrollableY(true);
             graph.getViewport().setScalable(true);
             graph.getViewport().setScalableY(true);
+             */
 
             //Näyttää arvon, kun data pointista klikkaa ja varoittaa jos se on liian matala/korkea
             pointSeries.setOnDataPointTapListener((series, dataPoint) -> {
@@ -149,9 +234,10 @@ public class TestiActivity3 extends AppCompatActivity {
             });
 
 
-            //graph.getGridLabelRenderer().setHumanRounding(false);
-            //graph.getGridLabelRenderer().setNumHorizontalLabels(2);
+            graph.getGridLabelRenderer().setHumanRounding(false);
+            graph.getGridLabelRenderer().setNumHorizontalLabels(3);
 
+            /*
             // Formatoi x-akselin arvot haluttuun ajan muotoon
             graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
                 @Override
@@ -168,6 +254,8 @@ public class TestiActivity3 extends AppCompatActivity {
                     }
                 }
             });
+
+             */
 
         });
     }

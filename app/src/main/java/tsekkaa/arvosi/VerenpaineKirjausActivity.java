@@ -33,6 +33,8 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
     public final static String EXTRA_SYKE = "com.example.excercise41.SYKE";
     public final static String EXTRA_DATE = "com.example.excercise41.DATE";
     public final static String EXTRA_AIKA = "com.example.excercise41.AIKA";
+    public final static String EXTRA_RESTART = "com.example.tsekkaa.arvosi.RESTART";
+
     TextView kirjausTextView, alaPaineTextView, ylaPaineTextView, sykeTextView, arvoOhjeTextView, aikaOhjeTextView,
             kelloOhjeTextView, pisteTextView;
     EditText ylaPaineEditText, alaPaineEditText, sykeEditText, pvmEditText, kuukausiEditText, vuosiEditText,
@@ -153,6 +155,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
 
+        // Tallentaa mittauksen
         mittausViewModel.lisaaMittaus(new Mittaus(ylaPaine,alaPaine, syke, 100.0,
                 04.1, paiva, kuukausi, 2022, tunnit,minuutit, calendar.getTimeInMillis()));
         Log.d("", "tallenna");
@@ -172,7 +175,14 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
 
     // Vie käyttäjän arvojen seurantaan
     public void aLahetaButton(View v){
-        Intent aLaheta = new Intent(this, TestiActivity3.class);
+        Intent aLaheta = new Intent(this, VerenpaineGraafiActivity.class);
+        /*
+        Intent Vastaanota = getIntent();
+        if(!(Vastaanota.hasExtra("restartti"))){
+            aLaheta.putExtra("restart",true);
+        }
+
+         */
         startActivity(aLaheta);
     }
 

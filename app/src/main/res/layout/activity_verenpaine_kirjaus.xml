@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/kelloOhjeTextView"
-        android:layout_width="147dp"
-        android:layout_height="50dp"
+        android:layout_width="120dp"
+        android:layout_height="37dp"
         android:background="#28D38C"
         android:text="Kellonaika"
         android:textAlignment="center"
@@ -17,9 +17,11 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.694" />
+        app:layout_constraintVertical_bias="0.685"
+        tools:ignore="TextContrastCheck,TextContrastCheck" />
 
     <EditText
         android:id="@+id/vuosiEditTextDate"
@@ -197,7 +199,7 @@
         android:text="Tallenna"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.456"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.925" />
@@ -216,8 +218,8 @@
 
     <TextView
         android:id="@+id/aikaOhjeTextView"
-        android:layout_width="156dp"
-        android:layout_height="48dp"
+        android:layout_width="131dp"
+        android:layout_height="40dp"
         android:background="#28D28B"
         android:text="Päivämäärä"
         android:textAlignment="center"
@@ -233,7 +235,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="aLahetaButton"
-        android:text="kalenteriin"
+        android:text="Seuranta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"

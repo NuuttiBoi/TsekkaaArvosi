@@ -24,27 +24,32 @@ public class MainActivity extends AppCompatActivity {
         this.verensokeriButton = findViewById(R.id.verenSokeri);
         this.asetuksetButton = findViewById(R.id.asetukset);
         this.testButton = findViewById(R.id.testiButton);
-}
+    }
+
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
-    public void vPaineButtonPressed(View v){
+    public void vPaineButtonPressed(View v) {
         Intent vPaine = new Intent(this, VerenpaineKirjausActivity.class);
         startActivity(vPaine);
     }
-    public void vhpButtonPressed(View v){
+
+    public void vhpButtonPressed(View v) {
         Intent VHP = new Intent(this, VerenHappipitoisuusActivity.class);
         startActivity(VHP);
     }
-    public void vsButtonPressed(View v){
+
+    public void vsButtonPressed(View v) {
         Intent VeSo = new Intent(this, VerenSokeriActivity.class);
         startActivity(VeSo);
     }
-    public void settingsButtonPressed(View v){
+
+    public void settingsButtonPressed(View v) {
         Intent settings = new Intent(this, Asetukset.class);
         startActivity(settings);
     }
+
     //muistakaa laittaa class tohon alle huutomerkin tilalle. Menee samallalailla ku noissa muissa
-    public void testButtonPressed(View v){
-        Intent test = new Intent(this, TestiActivity3.class);
+    public void testButtonPressed(View v) {
+        Intent test = new Intent(this, TestiActivity4.class);
         startActivity(test);
 
         //zoom in
@@ -64,5 +69,10 @@ public class MainActivity extends AppCompatActivity {
 
         //slide oikealle
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+    }
+
+    public void kalenteriButtonPressed(View v) {
+        Intent kalenteri = new Intent(this, KalenteriTesti.class);
+        startActivity(kalenteri);
     }
 }

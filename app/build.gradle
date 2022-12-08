@@ -2,14 +2,16 @@ plugins {
     id 'com.android.application'
 }
 
+
+
 android {
     namespace 'tsekkaa.arvosi'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "tsekkaa.arvosi"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -27,6 +29,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+
 android.applicationVariants.all { variant ->
     task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
         title = "${rootProject.name} API Documentation (${project.android.defaultConfig.versionName})"
@@ -71,6 +74,7 @@ android.applicationVariants.all { variant ->
         }
     }
 }
+
 dependencies {
     def room_version = "2.4.3"
 
@@ -85,4 +89,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     implementation 'com.jjoe64:graphview:4.2.2'
     implementation 'com.google.code.gson:gson:2.10'
+
+    //implementation "com.github.prolificinteractive:material-calendarview:${version}"
+
+    //implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
+
+
 }
