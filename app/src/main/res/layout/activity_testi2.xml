@@ -16,30 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Switch
-        android:id="@+id/oletusTSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:text="Käytä järjestelmän oletusteemaa"
-        app:layout_constraintBottom_toTopOf="@+id/tummaTSwitch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <Switch
-        android:id="@+id/tummaTSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:text="Tumma teema"
-        android:textAlignment="viewEnd"
-        app:layout_constraintBottom_toTopOf="@+id/btn2"
-        app:layout_constraintEnd_toEndOf="@+id/oletusTSwitch"
-        app:layout_constraintTop_toBottomOf="@+id/oletusTSwitch"
-        tools:text="Tumma teema" />
-
     <Button
         android:id="@+id/magic"
         android:layout_width="wrap_content"
@@ -55,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn2" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/teemaBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="takaisin"

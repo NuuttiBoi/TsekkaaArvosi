@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+//Riku Nokelainen
 
 public class VerenSokeriActivity extends AppCompatActivity {
     private Button tallennabutton, backbutton, siirrybutton;
@@ -18,7 +19,7 @@ public class VerenSokeriActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_veren_sokerin_kirjaus);
 
-        //finds a button from layout with findViewById(R.id.(wanted thing)) command and sets the found value to the created button
+        //Finds a button from layout with findViewById(R.id.(wanted thing)) command and sets the found value to the created button
         this.tallennabutton = findViewById(R.id.tallennusButton);
         this.backbutton = findViewById(R.id.Backbutton);
         this.siirrybutton = findViewById(R.id.siirryKalenteriinbutton);

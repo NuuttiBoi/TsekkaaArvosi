@@ -37,6 +37,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".TeemaActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".TestiActivity3"
             android:exported="false">
             <meta-data
