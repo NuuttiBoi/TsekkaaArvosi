@@ -8,19 +8,18 @@
 
     <TextView
         android:id="@+id/kelloOhjeTextView"
-        android:layout_width="220dp"
-        android:layout_height="53dp"
-        android:background="#3F51B5"
+        android:layout_width="147dp"
+        android:layout_height="50dp"
+        android:background="#28D38C"
         android:text="Kellonaika"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.693" />
+        app:layout_constraintVertical_bias="0.694" />
 
     <EditText
         android:id="@+id/vuosiEditTextDate"
@@ -50,7 +49,7 @@
         app:layout_constraintHorizontal_bias="0.678"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.783" />
+        app:layout_constraintVertical_bias="0.79" />
 
     <EditText
         android:id="@+id/kuukausiEditTextDate"
@@ -185,10 +184,10 @@
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.325"
+        app:layout_constraintHorizontal_bias="0.315"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.783" />
+        app:layout_constraintVertical_bias="0.79" />
 
     <Button
         android:id="@+id/tallennaButton"
@@ -198,7 +197,7 @@
         android:text="Tallenna"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintHorizontal_bias="0.456"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.925" />
@@ -217,9 +216,9 @@
 
     <TextView
         android:id="@+id/aikaOhjeTextView"
-        android:layout_width="220dp"
-        android:layout_height="53dp"
-        android:background="#3F51B5"
+        android:layout_width="156dp"
+        android:layout_height="48dp"
+        android:background="#28D28B"
         android:text="Päivämäärä"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
@@ -234,7 +233,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="aLahetaButton"
-        android:text="send"
+        android:text="kalenteriin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
@@ -251,10 +250,10 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/minuutitEditTextTime"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tunnitEditTextTime"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.766" />
+        app:layout_constraintVertical_bias="0.78" />
 
     <Button
         android:id="@+id/backButton"

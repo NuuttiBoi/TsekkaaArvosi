@@ -51,7 +51,7 @@ public class TestiActivity3 extends AppCompatActivity {
     private DataPoint[] dataPoints2;
 
     //Viewportin koko mikä siit on kerrallaan näkyvissä, voi muuttaa
-    private final static int VIEWPORT_SIZE = 5;
+    private final static int VIEWPORT_SIZE = 2;
 
     //Korjatkaa jos on väärää tietoa ^^'
     private final static double VERENSOKERIN_ALARAJA = 6.0;
@@ -78,7 +78,6 @@ public class TestiActivity3 extends AppCompatActivity {
 
             for (int i = 0; i < mittaukset.size(); i++) {
                 for(int j = 0; j < mittaukset.size(); j++){
-                    // pvkkArray[j]=mittaukset.get(j).getPvmKK();
                     aikaArray[j]=mittaukset.get(j).getAika();
                 }
                 Arrays.sort(aikaArray);
@@ -109,15 +108,26 @@ public class TestiActivity3 extends AppCompatActivity {
             graph.addSeries(lineSeries2);
             */
 
-            // graph.getViewport().setXAxisBoundsManual(true);
-
+            //graph.getViewport().setXAxisBoundsManual(true);
 
             //graph.getViewport().setMinX(dataPoints.length-VIEWPORT_SIZE);
             //graph.getViewport().setMaxX(dataPoints.length);
 
-             graph.getGridLabelRenderer().setHorizontalLabelsAngle(20);
+
+            // Kääntää x-akselin arvoja, jotta ne mahtuvat paremmin ruudulle
+            graph.getGridLabelRenderer().setHorizontalLabelsAngle(30);
+
+
+             // Asettaa otsikot akseleille
+            graph.getGridLabelRenderer().setVerticalAxisTitle("Syke");
+            graph.getGridLabelRenderer().setHorizontalAxisTitle("Mittauksen ajankohta");
+
+
 
             //Näit voi laittaa falseks jos haluu, en tiiä mikä ois paras?
+
+
+
             graph.getViewport().setScrollable(true);
             graph.getViewport().setScrollableY(true);
             graph.getViewport().setScalable(true);
@@ -141,13 +151,15 @@ public class TestiActivity3 extends AppCompatActivity {
 
             //graph.getGridLabelRenderer().setHumanRounding(false);
             //graph.getGridLabelRenderer().setNumHorizontalLabels(2);
+
+            // Formatoi x-akselin arvot haluttuun ajan muotoon
             graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
                 @Override
                 public String formatLabel(double value, boolean isValueX) {
                     if (isValueX) {
                         //x-akselin label
                         //En keksiny miten tähän saa näkyviin esim. pvm/ajan -__-
-                        Format formatter = new SimpleDateFormat("MM/dd HH:mm:ss");
+                        Format formatter = new SimpleDateFormat("MM/dd HH:mm");
                         return formatter.format(value);
                         //return super.formatLabel(value, isValueX);
                     } else {

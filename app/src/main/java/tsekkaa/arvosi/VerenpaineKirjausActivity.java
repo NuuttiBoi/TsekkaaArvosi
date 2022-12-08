@@ -170,18 +170,10 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         });
     }
 
+    // Vie käyttäjän arvojen seurantaan
     public void aLahetaButton(View v){
-        Intent aLaheta = new Intent(this, Mittaus.class);
-        String ylaPaine = ylaPaineEditText.getText().toString();
-        String alaPaine = alaPaineEditText.getText().toString();
-        String syke = sykeEditText.getText().toString();
-
-        String pvm = pvmEditText.getText().toString();
-        String kuukausi = kuukausiEditText.getText().toString();
-
-        aLaheta.putExtra(EXTRA_YLAPAINE, ylaPaine);
-        aLaheta.putExtra(EXTRA_ALAPAINE, alaPaine);
-        aLaheta.putExtra(EXTRA_SYKE, syke);
+        Intent aLaheta = new Intent(this, TestiActivity3.class);
+        startActivity(aLaheta);
     }
 
     public void backButtonPressed(View v){
