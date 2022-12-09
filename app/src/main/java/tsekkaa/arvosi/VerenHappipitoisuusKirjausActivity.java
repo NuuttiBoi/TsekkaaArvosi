@@ -26,8 +26,8 @@ public class VerenHappipitoisuusKirjausActivity extends AppCompatActivity {
         setContentView(R.layout.activity_veren_happipitoisuus);
 
         this.backbutton = findViewById(R.id.backButton);
-        this.tallennaButton = findViewById(R.id.tallennaButton);
-        this.seurantaButton = findViewById(R.id.seurantaButton);
+        this.tallennaButton = findViewById(R.id.tallennaVerenSaturaatioButton);
+        this.seurantaButton = findViewById(R.id.happiSeurantaButton);
 
         this.kirjausTextView = findViewById(R.id.kirjausTextView);
         this.arvoOhjeTextView = findViewById(R.id.arvoOhjeTextView);
@@ -52,7 +52,7 @@ public class VerenHappipitoisuusKirjausActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
 
         // Tallentaa mittauksen
-        mittausViewModel.lisaaMittaus(new Mittaus(20.1,10.1, 60.7, 30.1,
+        mittausViewModel.lisaaMittaus(new Mittaus(null,null, null, null,
                 happipitoisuus, 1, 1, 2022, 1,1, calendar.getTimeInMillis()));
         Log.d("", "tallenna");
 
@@ -74,4 +74,5 @@ public class VerenHappipitoisuusKirjausActivity extends AppCompatActivity {
         Intent seuranta = new Intent(this, VerenHappipitoisuusGraafiActivity.class);
         startActivity(seuranta);
     }
+
 }

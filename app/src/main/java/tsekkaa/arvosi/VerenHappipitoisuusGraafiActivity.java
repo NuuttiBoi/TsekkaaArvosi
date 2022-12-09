@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.DefaultLabelFormatter;
@@ -24,7 +26,7 @@ import java.util.Date;
 public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
 
     private Calendar mCalendar;
-
+    private Button backButton;
     private GraphView graph;
     private LineGraphSeries<DataPoint> lineSeries;
     private PointsGraphSeries<DataPoint> pointSeries;
@@ -42,9 +44,7 @@ public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
         /*
         boolean recreateRequested = true;
         Intent currentIntent = getIntent();
@@ -59,11 +59,9 @@ public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
         }
 
          */
-
-
-
         setContentView(R.layout.activity_veren_happipitoisuus_graafi);
 
+        this.backButton = findViewById(R.id.backButton);
         mCalendar = Calendar.getInstance();
         graph = findViewById(R.id.graph);
 
@@ -85,10 +83,12 @@ public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
                         new LineGraphSeries<>();
                 for (int i = 0; i < mittaukset.size(); i++) {
                     for (int j = 0; j < mittaukset.size(); j++) {
-                        aikaArray[j] = mittaukset.get(j).getAika();
+                        if((mittaukset.get(j).getHappipitoisuus()) != null) {
+                            aikaArray[j] = mittaukset.get(j).getAika();
+                        }
                     }
                     Arrays.sort(aikaArray);
-                    Log.d("h", "v " + mittaukset.size() + new Date(aikaArray[i]));
+                    Log.d("h", "v " + mittaukset.size() + new Date(aikaArray[i])+mittaukset.get(i).getHappipitoisuus());
                     //Ton verensokerin tilalle voi vaihtaa sen infon mitä haluu
 
                     LineSeries.appendData(new DataPoint(new Date(aikaArray[i]), mittaukset.get(i).getHappipitoisuus()), false,
@@ -160,5 +160,9 @@ public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
                 //graph.getGridLabelRenderer().setNumHorizontalLabels(5);
 
         });
+    }
+    public void backButtonPressed(View v){
+        Intent takaisin = new Intent(this, VerenHappipitoisuusKirjausActivity.class);
+        startActivity(takaisin);
     }
 }

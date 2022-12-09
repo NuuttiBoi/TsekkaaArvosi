@@ -3,16 +3,13 @@ package tsekkaa.arvosi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class KirjausTesti extends AppCompatActivity {
     public final static String EXTRA_YLAPAINE = "com.example.excercise41.YLAPAINE";
@@ -31,7 +28,7 @@ public class KirjausTesti extends AppCompatActivity {
         this.vsEditText = findViewById(R.id.vsEditText);
         mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
 
-        this.tallennaButton = findViewById(R.id.tallennaButton);
+        this.tallennaButton = findViewById(R.id.tallennaVerenPaineButton);
     }
     public void vTallennaButton(View v){
 

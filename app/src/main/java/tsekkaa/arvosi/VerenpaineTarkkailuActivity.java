@@ -21,7 +21,7 @@ public class VerenpaineTarkkailuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testi);
 
-        btn = findViewById(R.id.btn);
+        btn = findViewById(R.id.backButton);
         graph = (GraphView) findViewById(R.id.graph);
 
         series = new LineGraphSeries<DataPoint>(new DataPoint[] {

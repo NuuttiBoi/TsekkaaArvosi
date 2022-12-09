@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.DefaultLabelFormatter;
@@ -24,7 +26,7 @@ import java.util.Date;
 public class VerenpaineGraafiActivity extends AppCompatActivity {
 
     private Calendar mCalendar;
-
+    private Button backButton;
     private GraphView graph;
     private LineGraphSeries<DataPoint> lineSeries;
     private PointsGraphSeries<DataPoint> pointSeries;
@@ -58,8 +60,9 @@ public class VerenpaineGraafiActivity extends AppCompatActivity {
         }
 
          */
-        setContentView(R.layout.activity_testi);
+        setContentView(R.layout.activity_verenpaine_graafi);
 
+        this.backButton = findViewById(R.id.verenPaineGraafiBackButton);
         mCalendar = Calendar.getInstance();
         graph = findViewById(R.id.graph);
 
@@ -85,9 +88,8 @@ public class VerenpaineGraafiActivity extends AppCompatActivity {
                         aikaArray[j] = mittaukset.get(j).getAika();
                     }
                     Arrays.sort(aikaArray);
-                    Log.d("h", "v " + mittaukset.size() + new Date(aikaArray[i]));
+                    Log.d("h", "v " + mittaukset.size() + new Date(aikaArray[i])+mittaukset.get(i).getYlapaine());
                     //Ton verensokerin tilalle voi vaihtaa sen infon mitä haluu
-
                     LineSeries.appendData(new DataPoint(new Date(aikaArray[i]), mittaukset.get(i).getYlapaine()), false,
                             mittaukset.size());
                     dataPoints[i] = new DataPoint(new Date(aikaArray[i]), mittaukset.get(i).getYlapaine());
@@ -157,5 +159,10 @@ public class VerenpaineGraafiActivity extends AppCompatActivity {
                 //graph.getGridLabelRenderer().setNumHorizontalLabels(5);
 
         });
+    }
+    public void backButtonPressed(View v){
+        Intent takaisin = new Intent(this, VerenpaineKirjausActivity.class);
+        startActivity(takaisin);
+        Log.d("","haista vittu");
     }
 }

@@ -101,7 +101,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         this.minuutitEditText = findViewById(R.id.minuutitEditTextTime);
         this.vuosiEditText = findViewById(R.id.vuosiEditTextDate);
 
-        this.tallennaButton = findViewById(R.id.tallennaButton);
+        this.tallennaButton = findViewById(R.id.tallennaVerenPaineButton);
         this.lahetaButton = findViewById(R.id.seurantaButton);
         this.backbutton = findViewById(R.id.backButton);
 
@@ -173,13 +173,6 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
     // Vie käyttäjän arvojen seurantaan
     public void aLahetaButton(View v){
         Intent aLaheta = new Intent(this, VerenpaineGraafiActivity.class);
-        /*
-        Intent Vastaanota = getIntent();
-        if(!(Vastaanota.hasExtra("restartti"))){
-            aLaheta.putExtra("restart",true);
-        }
-
-         */
         startActivity(aLaheta);
     }
 

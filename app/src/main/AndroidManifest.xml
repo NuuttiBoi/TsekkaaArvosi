@@ -100,7 +100,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".VerenSokeriActivity"
+            android:name=".VerenSokeriKirjausActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
