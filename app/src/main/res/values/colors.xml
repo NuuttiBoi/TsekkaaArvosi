@@ -35,4 +35,6 @@
     <!-- Switchit -->
     <color name="switchien_tausta_dark">#9eb4ef</color>
     <color name="switchien_teksti_dark">#ffffff</color>
+
+    <color name="custom_red">#AF000F</color>
 </resources>
