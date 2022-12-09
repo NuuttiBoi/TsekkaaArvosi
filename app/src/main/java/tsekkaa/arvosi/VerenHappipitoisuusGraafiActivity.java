@@ -3,41 +3,25 @@ package tsekkaa.arvosi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
-import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.PointsGraphSeries;
-import com.jjoe64.graphview.series.Series;
 
 import java.text.Format;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 
-public class TestiActivity4 extends AppCompatActivity {
+public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
 
     private Calendar mCalendar;
 
@@ -47,21 +31,38 @@ public class TestiActivity4 extends AppCompatActivity {
     private MittausViewModel mittausViewModel;
     private DataPoint[] dataPoints;
     private SimpleDateFormat sdf;
-
-    //Nää voi poistaa jos ei tarvi
-    private LineGraphSeries<DataPoint> lineSeries2;
-    private DataPoint[] dataPoints2;
+    private boolean start = true;
 
     //Viewportin koko mikä siit on kerrallaan näkyvissä, voi muuttaa
     private final static int VIEWPORT_SIZE = 2;
 
     //Korjatkaa jos on väärää tietoa ^^'
-    private final static double VERENSOKERIN_ALARAJA = 6.0;
-    private final static double VERENSOKERIN_YLARAJA = 7.0;
+    private final static double YLAPAINEEN_ALARAJA = 100.0;
+    private final static double YLAPAINEEN_YLARAJA = 130.0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_testi);
+
+        /*
+        boolean recreateRequested = true;
+        Intent currentIntent = getIntent();
+        if (currentIntent.hasExtra("restart")){
+            recreateRequested = currentIntent.getBooleanExtra("restart", true);
+        }
+        if (recreateRequested) {
+            Intent intent = new Intent(this, VerenpaineKirjausActivity.class);
+            intent.putExtra("restartti", false);
+            startActivity(intent);
+            finish();
+        }
+
+         */
+
+
+
+        setContentView(R.layout.activity_veren_happipitoisuus_graafi);
 
         mCalendar = Calendar.getInstance();
         graph = findViewById(R.id.graph);
@@ -79,7 +80,6 @@ public class TestiActivity4 extends AppCompatActivity {
                 Long aikaArray[] = new Long[mittaukset.size()];
 
                 dataPoints = new DataPoint[mittaukset.size()];
-                dataPoints2 = new DataPoint[mittaukset.size()];
 
                 LineGraphSeries<DataPoint> LineSeries =
                         new LineGraphSeries<>();
@@ -91,9 +91,9 @@ public class TestiActivity4 extends AppCompatActivity {
                     Log.d("h", "v " + mittaukset.size() + new Date(aikaArray[i]));
                     //Ton verensokerin tilalle voi vaihtaa sen infon mitä haluu
 
-                    LineSeries.appendData(new DataPoint(new Date(aikaArray[i]), mittaukset.get(i).getSyke()), false,
+                    LineSeries.appendData(new DataPoint(new Date(aikaArray[i]), mittaukset.get(i).getHappipitoisuus()), false,
                             mittaukset.size());
-                    dataPoints[i] = new DataPoint(new Date(aikaArray[i]), mittaukset.get(i).getSyke());
+                    dataPoints[i] = new DataPoint(new Date(aikaArray[i]), mittaukset.get(i).getHappipitoisuus());
                 }
 
                 //lineSeries = new LineGraphSeries<>(dataPoints);
@@ -125,7 +125,7 @@ public class TestiActivity4 extends AppCompatActivity {
                 //graph.addSeries(lineSeries);
                 graph.addSeries(pointSeries);
 
-
+                graph.setTitle("Yläpaineen viimeaikaiset mittaustuloksesi:");
                 graph.getViewport().setScrollable(true);
                 graph.getViewport().setScrollableY(true);
                 //graph.getViewport().setScalable(true);
@@ -136,23 +136,23 @@ public class TestiActivity4 extends AppCompatActivity {
                 graph.getGridLabelRenderer().setHorizontalLabelsAngle(50);
 
                 // Asettaa otsikot akseleille
-                graph.getGridLabelRenderer().setVerticalAxisTitle("Syke");
-                //graph.getGridLabelRenderer().setPadding(20);
+                graph.getGridLabelRenderer().setVerticalAxisTitle("Yläpaina (mmHg)");
+                graph.getGridLabelRenderer().setPadding(20);
                 graph.getGridLabelRenderer().setHorizontalAxisTitle("Mittauksen ajankohta");
 
                 //Näyttää arvon, kun data pointista klikkaa ja varoittaa jos se on liian matala/korkea
 
                 pointSeries.setOnDataPointTapListener((series, dataPoint) -> {
-                    String teksti = dataPoint.getY() + " mmol/l";
+                    String teksti = dataPoint.getY() + " %";
                     String varoitus;
-                    if (dataPoint.getY() > VERENSOKERIN_YLARAJA) {
-                        varoitus = "\n+" + String.format("%.2f", dataPoint.getY() - VERENSOKERIN_YLARAJA) + " mmol/l";
+                    if (dataPoint.getY() > YLAPAINEEN_YLARAJA) {
+                        varoitus = "\n+" + String.format("%.2f", dataPoint.getY() - YLAPAINEEN_YLARAJA) + " %";
                         teksti += varoitus;
-                    } else if (dataPoint.getY() < VERENSOKERIN_ALARAJA) {
-                        varoitus = "\n-" + String.format("%.2f", VERENSOKERIN_ALARAJA - dataPoint.getY()) + " mmol/l";
+                    } else if (dataPoint.getY() < YLAPAINEEN_ALARAJA) {
+                        varoitus = "\n-" + String.format("%.2f", YLAPAINEEN_ALARAJA - dataPoint.getY()) + " %";
                         teksti += varoitus;
                     }
-                    Toast toast = Toast.makeText(TestiActivity4.this, teksti, Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(VerenHappipitoisuusGraafiActivity.this, teksti, Toast.LENGTH_LONG);
                     toast.show();
                 });
 

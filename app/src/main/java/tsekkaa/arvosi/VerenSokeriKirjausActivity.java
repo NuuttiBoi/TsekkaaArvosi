@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 //Riku Nokelainen
 
-public class VerenSokeriActivity extends AppCompatActivity {
+public class VerenSokeriKirjausActivity extends AppCompatActivity {
     private Button tallennabutton, backbutton, siirrybutton;
     public static final String EXTRA_VERENSOKERIARVO = "verensokeriArvo";
     private EditText verensokeri;

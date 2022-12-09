@@ -82,7 +82,7 @@
         app:layout_constraintVertical_bias="0.125" />
 
     <TextView
-        android:id="@+id/ylaPaineTextView"
+        android:id="@+id/happisaturaatioTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Yläpaine:"
@@ -118,7 +118,7 @@
         app:layout_constraintVertical_bias="0.401" />
 
     <EditText
-        android:id="@+id/ylaPaineEditText"
+        android:id="@+id/happisaturaatioEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -231,7 +231,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/lahetaButton"
+        android:id="@+id/seurantaButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="aLahetaButton"
@@ -264,7 +264,7 @@
         android:onClick="backButtonPressed"
         android:text="Takaisin"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/lahetaButton"
+        app:layout_constraintEnd_toStartOf="@+id/seurantaButton"
         app:layout_constraintHorizontal_bias="0.113"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

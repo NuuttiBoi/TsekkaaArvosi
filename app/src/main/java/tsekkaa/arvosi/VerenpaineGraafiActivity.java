@@ -42,7 +42,6 @@ public class VerenpaineGraafiActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
         /*
@@ -59,9 +58,6 @@ public class VerenpaineGraafiActivity extends AppCompatActivity {
         }
 
          */
-
-
-
         setContentView(R.layout.activity_testi);
 
         mCalendar = Calendar.getInstance();
@@ -70,9 +66,12 @@ public class VerenpaineGraafiActivity extends AppCompatActivity {
         mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
         mittausViewModel.haeMittaukset().observe(this, mittaukset -> {
 
+            /*
             if(mittaukset.size()>10){
                 mittaukset.remove(0);
             } else {
+
+             */
 
                 Long aikaArray[] = new Long[mittaukset.size()];
                 int kuukausiArray[] = new int[mittaukset.size()];
@@ -157,8 +156,6 @@ public class VerenpaineGraafiActivity extends AppCompatActivity {
 
                 //graph.getGridLabelRenderer().setNumHorizontalLabels(5);
 
-
-            }
         });
     }
 }

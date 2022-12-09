@@ -78,7 +78,7 @@ public class TestiActivity extends AppCompatActivity {
 
             for (int i = 0; i < mittaukset.size(); i++) {
                 for(int j = 0; j < mittaukset.size(); j++){
-                        pvkkArray[j]=mittaukset.get(j).getPvmKK();
+                        pvkkArray[j]=mittaukset.get(j).getAika();
                 }
                 Arrays.sort(pvkkArray);
                 Log.d("h","v " + pvkkArray[i]);

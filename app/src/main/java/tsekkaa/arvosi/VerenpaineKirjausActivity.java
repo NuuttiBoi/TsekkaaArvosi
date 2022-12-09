@@ -17,12 +17,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.Date;
 
 public class VerenpaineKirjausActivity extends AppCompatActivity {
 
@@ -87,7 +84,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
 
         this.kirjausTextView = findViewById(R.id.kirjausTextView);
         this.alaPaineTextView = findViewById(R.id.alaPaineTextView);
-        this.ylaPaineTextView = findViewById(R.id.ylaPaineTextView);
+        this.ylaPaineTextView = findViewById(R.id.happisaturaatioTextView);
         this.sykeTextView = findViewById(R.id.sykeTextView);
         this.arvoOhjeTextView = findViewById(R.id.arvoOhjeTextView);
         this.aikaOhjeTextView = findViewById(R.id.aikaOhjeTextView);
@@ -95,7 +92,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         this.pisteTextView = findViewById(R.id.pisteTextView);
 
 
-        this.ylaPaineEditText = findViewById(R.id.ylaPaineEditText);
+        this.ylaPaineEditText = findViewById(R.id.happisaturaatioEditText);
         this.alaPaineEditText = findViewById(R.id.alaPaineEditText);
         this.sykeEditText = findViewById(R.id.sykeEditText);
         this.pvmEditText = findViewById(R.id.pvmEditTextDate);
@@ -105,7 +102,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         this.vuosiEditText = findViewById(R.id.vuosiEditTextDate);
 
         this.tallennaButton = findViewById(R.id.tallennaButton);
-        this.lahetaButton = findViewById(R.id.lahetaButton);
+        this.lahetaButton = findViewById(R.id.seurantaButton);
         this.backbutton = findViewById(R.id.backButton);
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -156,8 +153,8 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
 
         // Tallentaa mittauksen
-        mittausViewModel.lisaaMittaus(new Mittaus(ylaPaine,alaPaine, syke, 100.0,
-                04.1, paiva, kuukausi, 2022, tunnit,minuutit, calendar.getTimeInMillis()));
+        mittausViewModel.lisaaMittaus(new Mittaus(ylaPaine,alaPaine, syke, null,
+                null, paiva, kuukausi, 2022, tunnit,minuutit, calendar.getTimeInMillis()));
         Log.d("", "tallenna");
 
         mittausViewModel.haeMittaukset().observe(this, mittaukset -> {

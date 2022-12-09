@@ -4,14 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
-import java.text.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,10 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //finds a button from layout with findViewById(R.id.(wanted thing)) command and sets the found value to the created button
-        this.verenpaineButton = findViewById(R.id.verenpaineButton);
-        this.verenHappipitoisuusButton = findViewById(R.id.verenHappiPitoisuus);
-        this.verensokeriButton = findViewById(R.id.verenSokeri);
-        this.asetuksetButton = findViewById(R.id.asetukset);
+
         this.testButton = findViewById(R.id.testiButton);
         ListView lv = findViewById(R.id.activitySelection);
 
@@ -40,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent verenpaine = new Intent(MainActivity.this, VerenpaineKirjausActivity.class);
-                Intent verenhappipitoisuus = new Intent(MainActivity.this, VerenHappipitoisuusActivity.class);
-                Intent verensokeri = new Intent(MainActivity.this, VerenSokeriActivity.class);
+                Intent verenhappipitoisuus = new Intent(MainActivity.this, VerenHappipitoisuusKirjausActivity.class);
+                Intent verensokeri = new Intent(MainActivity.this, VerenSokeriKirjausActivity.class);
                 Intent asetukset = new Intent(MainActivity.this, Asetukset.class);
                 Intent testi = new Intent(MainActivity.this, TestiActivity.class);
                 if(i == 0){
@@ -65,11 +59,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(vPaine);
     }
     public void vhpButtonPressed(View v){
-        Intent VHP = new Intent(this, VerenHappipitoisuusActivity.class);
+        Intent VHP = new Intent(this, VerenHappipitoisuusKirjausActivity.class);
         startActivity(VHP);
     }
     public void vsButtonPressed(View v){
-        Intent VeSo = new Intent(this, VerenSokeriActivity.class);
+        Intent VeSo = new Intent(this, VerenSokeriKirjausActivity.class);
         startActivity(VeSo);
     }
     public void settingsButtonPressed(View v){
@@ -78,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     }
     //muistakaa laittaa class tohon alle huutomerkin tilalle. Menee samallalailla ku noissa muissa
     public void testButtonPressed(View v){
-        Intent test = new Intent(this, TestiActivity3.class);
+        Intent test = new Intent(this, TestiActivity4.class);
         startActivity(test);
 
         //zoom in

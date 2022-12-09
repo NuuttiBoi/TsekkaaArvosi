@@ -98,16 +98,6 @@ public class Mittaus {
         return paiva;
     }
 
-    public double getPvmKK(){
-        return Double.parseDouble(paiva + "." + kuukausi);
-    }
-
-    public Date getTunnitMinuutit(){
-
-        Calendar calendar = Calendar.getInstance();
-        Date p1 = calendar.getTime();
-        return p1;
-    }
 
     public int getKuukausi() {
         return kuukausi;
