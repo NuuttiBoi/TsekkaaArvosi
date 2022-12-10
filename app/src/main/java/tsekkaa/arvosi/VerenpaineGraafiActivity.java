@@ -160,6 +160,7 @@ public class VerenpaineGraafiActivity extends AppCompatActivity {
 
         });
     }
+    //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, VerenpaineKirjausActivity.class);
         startActivity(takaisin);

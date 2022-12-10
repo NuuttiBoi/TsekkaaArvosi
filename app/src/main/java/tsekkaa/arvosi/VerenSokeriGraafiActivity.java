@@ -36,6 +36,7 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
     private boolean start = true;
 
     //Viewportin koko mikä siit on kerrallaan näkyvissä, voi muuttaa
+    //Viewports size it is the size that can be seen at once
     private final static int VIEWPORT_SIZE = 2;
 
     //Korjatkaa jos on väärää tietoa ^^'
@@ -109,7 +110,7 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
                 @Override
                 public String formatLabel(double value, boolean isValueX) {
                     if (isValueX) {
-                        //x-akselin label
+                        //x-axel label
                         //En keksiny miten tähän saa näkyviin esim. pvm/ajan -__-
                         Format formatter = new SimpleDateFormat("MM/dd HH:mm");
                         return formatter.format(value);
@@ -135,12 +136,12 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
             graph.getGridLabelRenderer().setHumanRounding(false);
             graph.getGridLabelRenderer().setHorizontalLabelsAngle(50);
 
-            // Asettaa otsikot akseleille
+            // Sets headers for axels
             graph.getGridLabelRenderer().setVerticalAxisTitle("Yläpaina (mmHg)");
             graph.getGridLabelRenderer().setPadding(20);
             graph.getGridLabelRenderer().setHorizontalAxisTitle("Mittauksen ajankohta");
 
-            //Näyttää arvon, kun data pointista klikkaa ja varoittaa jos se on liian matala/korkea
+            //Shows the value when datapoint is clicked and warns the user if it is too high/low
 
             pointSeries.setOnDataPointTapListener((series, dataPoint) -> {
                 String teksti = dataPoint.getY() + " %";
@@ -161,6 +162,7 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
 
         });
     }
+    //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, VerenSokeriKirjausActivity.class);
         startActivity(takaisin);

@@ -170,12 +170,12 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         });
     }
 
-    // Vie käyttäjän arvojen seurantaan
+    //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void aLahetaButton(View v){
         Intent aLaheta = new Intent(this, VerenpaineGraafiActivity.class);
         startActivity(aLaheta);
     }
-
+    //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, MainActivity.class);
         startActivity(takaisin);

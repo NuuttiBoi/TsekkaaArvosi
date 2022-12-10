@@ -47,9 +47,10 @@ public class KalenteriActivity extends AppCompatActivity {
             }
         });
     }
-
+    //Checks if the selected button is pressed and sends the user to the selected page/ activity also sends values to the next activity
     public void setMuistutusPressed(View view) {
         Intent muistutus = new Intent(KalenteriActivity.this, LisaaMuistutusActivity.class);
+        //adds values to pvmLista
         pvmLista.add(paiva);
         pvmLista.add(kuukausi);
         pvmLista.add(vuosi);
@@ -57,13 +58,13 @@ public class KalenteriActivity extends AppCompatActivity {
         startActivity(muistutus);
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
-
+    //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void muistutuksetPressed(View view) {
         Intent lkm = new Intent(KalenteriActivity.this, MuistutuksetActivity.class);
         startActivity(lkm);
         overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_bottom);
     }
-
+    //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v) {
         Intent takaisin = new Intent(this, MainActivity.class);
         startActivity(takaisin);

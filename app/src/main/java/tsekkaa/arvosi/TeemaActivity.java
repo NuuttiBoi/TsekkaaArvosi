@@ -14,8 +14,11 @@ import android.widget.Button;
 import android.widget.Switch;
 
 public class TeemaActivity extends AppCompatActivity {
+    //Creates switches
     private Switch oletusTSwitch, tummaTSwitch;
+    //Creates booleans
     private boolean oletusTeema, tummaTeema;
+    //Creates a button
     private Button backButton;
 
     @Override
@@ -96,7 +99,7 @@ public class TeemaActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
     }
-
+    //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void siirryTakaisin(View view) {
         Intent takaisin = new Intent(this, Asetukset.class);
         startActivity(takaisin);

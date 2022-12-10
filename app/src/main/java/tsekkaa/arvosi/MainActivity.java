@@ -4,32 +4,37 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.text.*;
+//Riku Nokelainen
+//Frontpage
 public class MainActivity extends AppCompatActivity {
 
-    //creates button
-    private Button verenpaineButton, verenHappipitoisuusButton, verensokeriButton, asetuksetButton, testButton;
+    //Creates buttons
+    private Button testButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //finds a button from layout with findViewById(R.id.(wanted thing)) command and sets the found value to the created button
-
+        //Finds a button from layout with findViewById(R.id.(name of the button)) command and sets the found value to the created button
         this.testButton = findViewById(R.id.testiButton);
+        //Finds listview component from layout with findViewById(R.id.(name of the listview)
         ListView lv = findViewById(R.id.activitySelection);
-
+        //Uses Singleton and NextActivity classes to create the list to the listview component
         lv.setAdapter(new ArrayAdapter<NextActivity>(
                 this,  //context (activity instance)
                 android.R.layout.simple_list_item_1,
                 ActivitySelectionSingleton.getInstance().getActivity()) //array of data
         );
+        //Checks if one of the lists tag is clicked and after clicking one of them it takes you to the selected activity
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -54,25 +59,9 @@ public class MainActivity extends AppCompatActivity {
 }
 
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
-    public void vPaineButtonPressed(View v){
-        Intent vPaine = new Intent(this, VerenpaineKirjausActivity.class);
-        startActivity(vPaine);
-    }
-    public void vhpButtonPressed(View v){
-        Intent VHP = new Intent(this, VerenHappipitoisuusKirjausActivity.class);
-        startActivity(VHP);
-    }
-    public void vsButtonPressed(View v){
-        Intent VeSo = new Intent(this, VerenSokeriKirjausActivity.class);
-        startActivity(VeSo);
-    }
-    public void settingsButtonPressed(View v){
-        Intent settings = new Intent(this, Asetukset.class);
-        startActivity(settings);
-    }
     //muistakaa laittaa class tohon alle huutomerkin tilalle. Menee samallalailla ku noissa muissa
     public void testButtonPressed(View v){
-        Intent test = new Intent(this, KalenteriActivity.class);
+        Intent test = new Intent(this, TestiActivity3.class);
         startActivity(test);
 
         //zoom in

@@ -257,7 +257,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
             notificationManager.createNotificationChannel(muistutusKanava);
         }
     }
-
+    //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, KalenteriActivity.class);
         startActivity(takaisin);
