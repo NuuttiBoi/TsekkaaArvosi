@@ -2,6 +2,7 @@ package tsekkaa.arvosi;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
@@ -49,6 +50,8 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
     private Instant muistutusAika, nyt;
     private Duration kesto;
     private String aikaString;
+    private MuistutusViewModel muistutusViewModel;
+    private String mitattavatString, lisatiedotString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         Intent intent = getIntent();
         pvmLista = intent.getIntegerArrayListExtra(KalenteriActivity.EXTRA_PVMLISTA);
 
+        muistutusViewModel = new ViewModelProvider(this).get(MuistutusViewModel.class);
         pvmContainer = (LinearLayout) findViewById(R.id.pvmContainer);
         kelloContainer = (LinearLayout) findViewById(R.id.kelloContainer);
         pvEdit = (TextView) findViewById(R.id.pvEdit);
@@ -172,6 +176,8 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         valittu_kk++;
 
         if (tarkistaKentat()) {
+            mitattavatString = haeMitattavat();
+            lisatiedotString = lisatiedot.getText().toString().trim();
             aikaString = haeAikaString(valittu_vv, valittu_kk, valittu_pv, valittu_hh, valittu_min);
             muistutusAika = Instant.parse(aikaString);
             nyt = Instant.now();
@@ -181,6 +187,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
             if (aikaMilliSek < 0) {
                 Toast.makeText(LisaaMuistutusActivity.this, "Ajankohta on mennyt", Toast.LENGTH_SHORT).show();
             } else {
+                tallennaMuistutus(valittu_vv, valittu_kk, valittu_pv, valittu_hh, valittu_min, mitattavatString, lisatiedotString);
                 asetaMuistutus(aikaMilliSek);
             }
         } else {
@@ -237,7 +244,6 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         return teksti;
     }
 
-
     private boolean tarkistaKentat() {
         if (!verenpaineCheck.isChecked() && !sykeCheck.isChecked() &&
                 !verensokeriCheck.isChecked() && !happisaturaatioCheck.isChecked() && lisatiedot.getText().toString().trim().isEmpty()) {
@@ -257,6 +263,15 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
             notificationManager.createNotificationChannel(muistutusKanava);
         }
     }
+
+    private void tallennaMuistutus(int v, int kk, int pv, int h, int min, String mitattavat, String lisatiedot)  {
+        muistutusViewModel.lisaaMuistutus(new Muistutus(pv, kk, v, h, min, mitattavat, lisatiedot));
+    }
+
+    private String haeMitattavat() {
+        return "Mittaa verenpaine, verensokeri ja syke";
+    }
+
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, KalenteriActivity.class);

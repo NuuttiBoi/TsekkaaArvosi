@@ -10,9 +10,8 @@ import java.util.List;
 import kotlin.annotation.MustBeDocumented;
 
 public class MuistutusViewModel extends AndroidViewModel {
-    MuistutusRepository muistutusRepository;
-
-    LiveData<List<Muistutus>> muistutukset;
+    private MuistutusRepository muistutusRepository;
+    private LiveData<List<Muistutus>> muistutukset;
 
     public MuistutusViewModel(Application application) {
         super(application);
@@ -20,7 +19,7 @@ public class MuistutusViewModel extends AndroidViewModel {
         muistutukset = muistutusRepository.haeMuistutukset();
     }
 
-    LiveData<List<Muistutus>> haeMuistutukset() {
+    public LiveData<List<Muistutus>> haeMuistutukset() {
         return muistutukset;
     }
 

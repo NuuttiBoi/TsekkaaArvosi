@@ -10,15 +10,17 @@ import java.util.List;
 
 public class MuistutusRepository {
 
-    MuistutusDao muistutusDao;
+    private MuistutusDao muistutusDao;
+    private LiveData<List<Muistutus>> muistutukset;
 
-    MuistutusRepository(Application application) {
+    public MuistutusRepository(Application application) {
         MittausTietokanta mittausTietokanta = MittausTietokanta.getInstance(application);
         muistutusDao = mittausTietokanta.muistutusDao();
+        muistutukset = muistutusDao.haeMuistutukset();
     }
 
-    LiveData<List<Muistutus>> haeMuistutukset() {
-        return muistutusDao.haeMuistutukset();
+    public LiveData<List<Muistutus>> haeMuistutukset() {
+        return muistutukset;
     }
 
     public void lisaaMuistutus(Muistutus muistutus) {
@@ -33,7 +35,7 @@ public class MuistutusRepository {
         private MuistutusDao taskDao;
 
         private InsertAsyncTask(MuistutusDao muistutusDao) {
-            taskDao = muistutusDao;
+            this.taskDao = muistutusDao;
         }
 
         @Override

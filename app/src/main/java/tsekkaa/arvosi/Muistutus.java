@@ -105,4 +105,8 @@ public class Muistutus {
     public void setLisatiedot(String lisatiedot) {
         this.lisatiedot = lisatiedot;
     }
+
+    public String getPvm() {
+        return "" + this.paiva + "/" + this.kuukausi + " " + this.tunnit + ":" + this.minuutit;
+    }
 }

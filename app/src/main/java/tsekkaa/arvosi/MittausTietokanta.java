@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Mittaus.class, Muistutus.class}, version = 5)
+@Database(entities = {Mittaus.class, Muistutus.class}, version = 6)
 public abstract class MittausTietokanta extends RoomDatabase {
 
     public abstract MittausDao mittausDao();
