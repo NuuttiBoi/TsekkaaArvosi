@@ -44,48 +44,48 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/verenpaineCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Verenpaine"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox2"
+            app:layout_constraintBottom_toTopOf="@+id/sykeCheck"
             app:layout_constraintTop_toBottomOf="@+id/muistutusOtsikko"
             app:layout_constraintVertical_chainStyle="packed"
             tools:layout_editor_absoluteX="127dp" />
 
         <CheckBox
-            android:id="@+id/checkBox2"
+            android:id="@+id/sykeCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Syke"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox3"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox"
+            app:layout_constraintBottom_toTopOf="@+id/verensokeriCheck"
+            app:layout_constraintTop_toBottomOf="@+id/verenpaineCheck"
             tools:layout_editor_absoluteX="127dp" />
 
         <CheckBox
-            android:id="@+id/checkBox3"
+            android:id="@+id/verensokeriCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Verensokeri"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox4"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox2"
+            app:layout_constraintBottom_toTopOf="@+id/happisaturaatioCheck"
+            app:layout_constraintTop_toBottomOf="@+id/sykeCheck"
             tools:layout_editor_absoluteX="141dp" />
 
         <CheckBox
-            android:id="@+id/checkBox4"
+            android:id="@+id/happisaturaatioCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Happisaturaatio"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox3"
+            app:layout_constraintTop_toBottomOf="@+id/verensokeriCheck"
             tools:layout_editor_absoluteX="144dp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/lisatiedotEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -142,7 +142,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text=" / "
+            android:text="   "
             android:textSize="24sp" />
 
         <TextView
@@ -157,7 +157,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text=" / "
+            android:text="   "
             android:textSize="24sp" />
 
         <TextView

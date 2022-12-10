@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     }
     //muistakaa laittaa class tohon alle huutomerkin tilalle. Menee samallalailla ku noissa muissa
     public void testButtonPressed(View v){
-        Intent test = new Intent(this, TestiActivity4.class);
+        Intent test = new Intent(this, KalenteriActivity.class);
         startActivity(test);
 
         //zoom in

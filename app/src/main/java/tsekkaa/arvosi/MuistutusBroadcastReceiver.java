@@ -11,7 +11,6 @@ import androidx.core.app.NotificationManagerCompat;
 public class MuistutusBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-
         Intent notifIntent = new Intent(context, MainActivity.class);
         notifIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notifIntent, 0);
