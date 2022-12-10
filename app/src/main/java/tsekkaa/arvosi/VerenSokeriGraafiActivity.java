@@ -68,7 +68,7 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
         graph = findViewById(R.id.graph);
 
         mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
-        mittausViewModel.haeMittaukset().observe(this, mittaukset -> {
+        mittausViewModel.haeVerensokeriMittaukset().observe(this, mittaukset -> {
 
             /*
             if(mittaukset.size()>10){

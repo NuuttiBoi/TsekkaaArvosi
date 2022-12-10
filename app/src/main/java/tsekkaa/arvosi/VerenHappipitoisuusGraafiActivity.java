@@ -66,7 +66,7 @@ public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
         graph = findViewById(R.id.graph);
 
         mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
-        mittausViewModel.haeMittaukset().observe(this, mittaukset -> {
+        mittausViewModel.haeHappipitoisuusMittaukset().observe(this, mittaukset -> {
 
             /*
             if(mittaukset.size()>10){
@@ -83,17 +83,15 @@ public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
                         new LineGraphSeries<>();
                 for (int i = 0; i < mittaukset.size(); i++) {
                     for (int j = 0; j < mittaukset.size(); j++) {
-                        if((mittaukset.get(j).getHappipitoisuus()) != null) {
                             aikaArray[j] = mittaukset.get(j).getAika();
-                        }
                     }
                     Arrays.sort(aikaArray);
                     Log.d("h", "v " + mittaukset.size() + new Date(aikaArray[i])+mittaukset.get(i).getHappipitoisuus());
                     //Ton verensokerin tilalle voi vaihtaa sen infon mitä haluu
-
                     LineSeries.appendData(new DataPoint(new Date(aikaArray[i]), mittaukset.get(i).getHappipitoisuus()), false,
                             mittaukset.size());
                     dataPoints[i] = new DataPoint(new Date(aikaArray[i]), mittaukset.get(i).getHappipitoisuus());
+
                 }
 
                 //lineSeries = new LineGraphSeries<>(dataPoints);
@@ -136,7 +134,7 @@ public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
                 graph.getGridLabelRenderer().setHorizontalLabelsAngle(50);
 
                 // Asettaa otsikot akseleille
-                graph.getGridLabelRenderer().setVerticalAxisTitle("Yläpaina (mmHg)");
+                graph.getGridLabelRenderer().setVerticalAxisTitle("Yläpaine (mmHg)");
                 graph.getGridLabelRenderer().setPadding(20);
                 graph.getGridLabelRenderer().setHorizontalAxisTitle("Mittauksen ajankohta");
 

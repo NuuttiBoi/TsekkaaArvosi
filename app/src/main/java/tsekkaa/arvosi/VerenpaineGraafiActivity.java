@@ -67,7 +67,7 @@ public class VerenpaineGraafiActivity extends AppCompatActivity {
         graph = findViewById(R.id.graph);
 
         mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
-        mittausViewModel.haeMittaukset().observe(this, mittaukset -> {
+        mittausViewModel.haeYpApSykeMittaukset().observe(this, mittaukset -> {
 
             /*
             if(mittaukset.size()>10){

@@ -96,9 +96,6 @@ public class TestiActivity3 extends AppCompatActivity {
                 //dataPoints2[i] = new DataPoint(i, mittaukset.get(i).getHappipitoisuus());
             }
 
-
-
-
         graph = findViewById(R.id.graph);
 
         //graph.getViewport().setScrollable(true);

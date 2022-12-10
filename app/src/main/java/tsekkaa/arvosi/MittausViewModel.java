@@ -68,6 +68,8 @@ public class MittausViewModel extends AndroidViewModel {
         mittausRepository.insert(mittaus);
     }
 
+    //public void lisaaypApMittaus(YlapaineMittaus ylapaineMittaus){mittausRepository.insert(ylapaineMittaus);}
+
     public void poistaMittaus(Mittaus mittaus) {
         mittausRepository.poistaMittaus(mittaus);
     }
