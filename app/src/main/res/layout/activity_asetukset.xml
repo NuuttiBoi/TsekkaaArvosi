@@ -5,18 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/kirjauduUlosButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/kirjaudu_ulos"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.83" />
-
     <TextView
         android:id="@+id/asetuksetText"
         android:layout_width="wrap_content"
@@ -24,47 +12,24 @@
         android:scaleX="2"
         android:scaleY="2"
         android:text="@string/asetukset"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.16000003" />
+        app:layout_constraintVertical_bias="0.106" />
 
-    <Button
-        android:id="@+id/teemaButton"
+    <EditText
+        android:id="@+id/nimesiEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:hint="Vaihda käyttäjän nimi"
         android:onClick="teemaButtonPressed"
-        android:text="@string/teema"
+        android:onClick="omatTiedotButtonPresed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.42000002" />
-
-    <Button
-        android:id="@+id/ilmoituksetButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/ilmoitukset"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32" />
-
-    <Button
-        android:id="@+id/omatTiedotButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/omat_tiedot"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.53" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/BackButton"
@@ -72,11 +37,77 @@
         android:layout_height="wrap_content"
         android:onClick="backButtonPressed"
         android:text="Takaisin"
-        app:layout_constraintBottom_toTopOf="@+id/kirjauduUlosButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.913" />
+
+    <Button
+        android:id="@+id/ilmoituksetButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#28D38C"
+        android:onClick="ilmoituksetButtonPressed"
+        android:text="ILMOITUKSET"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#616161"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.26" />
+
+    <Button
+        android:id="@+id/teemaButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#28D38C"
+        android:elegantTextHeight="false"
+        android:onClick="teemaButtonPressed"
+        android:text="TEEMA"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#616161"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <Button
+        android:id="@+id/omatTiedotButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#28D38C"
+        android:onClick="omatTiedotButtonPressed"
+        android:text="OMAT TIEDOT"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#616161"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.54" />
+
+    <TextView
+        android:id="@+id/nimesiTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/omatTiedotButton"
-        app:layout_constraintVertical_bias="0.247" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
