@@ -58,6 +58,12 @@ public class KalenteriActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
+    public void muistutuksetPressed(View view) {
+        Intent lkm = new Intent(KalenteriActivity.this, MuistutuksetActivity.class);
+        startActivity(lkm);
+        overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_bottom);
+    }
+
     public void backButtonPressed(View v) {
         Intent takaisin = new Intent(this, MainActivity.class);
         startActivity(takaisin);

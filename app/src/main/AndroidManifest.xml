@@ -16,6 +16,13 @@
         android:theme="@style/Theme.TsekkaaArvosi"
         tools:targetApi="31">
         <activity
+            android:name=".MuistutuksetActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".LisaaMuistutusActivity"
             android:exported="false">
             <meta-data
@@ -148,8 +155,7 @@
                 android:value="" />
         </activity>
 
-        <receiver android:name=".MuistutusBroadcastReceiver"/>
-
+        <receiver android:name=".MuistutusBroadcastReceiver" />
     </application>
 
 </manifest>
