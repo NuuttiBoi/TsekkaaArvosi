@@ -21,11 +21,12 @@ public class OmatTiedot extends AppCompatActivity {
         this.ika = findViewById(R.id.ikaEditText);
         this.tallenna = findViewById(R.id.otTallennaButton);
 
+        }
+
         public void otTallennaButtonPressed(View v){
             Intent tallenna = new Intent(this, Asetukset.class);
             String message = "Käyttäjä: " + nimi;
             tallenna.putExtra(tallenna.EXTRA_TEXT, message);
             startActivity(tallenna);
-        }
     }
 }
