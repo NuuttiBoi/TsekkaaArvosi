@@ -25,6 +25,7 @@
         android:id="@+id/tallennaVerenSokeriButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="tallennaButtonPressed"
         android:text="Tallenna"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,10 +68,11 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/verenSokeriTextEdit"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.42" />
+        app:layout_constraintVertical_bias="0.377" />
+
 
     <EditText
         android:id="@+id/verenSokeriTextEdit"
@@ -83,13 +85,10 @@
         android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.701"
+        app:layout_constraintHorizontal_bias="0.731"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ohjeTextView"
-        app:layout_constraintVertical_bias="0.186" />
-
-
-
+        app:layout_constraintVertical_bias="0.128" />
 
     <TextView
         android:id="@+id/kelloOhjeTextView"

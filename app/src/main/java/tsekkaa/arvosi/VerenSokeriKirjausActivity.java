@@ -143,8 +143,8 @@ public class VerenSokeriKirjausActivity extends AppCompatActivity {
 
 
         // Tallentaa mittauksen
-        mittausViewModel.lisaaMittaus(new Mittaus(20.1,10.1, 60.7,verensokeri ,
-                1.1, 1, 1, 2022, 1,1, calendar.getTimeInMillis()));
+        mittausViewModel.lisaaMittaus(new Mittaus(null,null, null,verensokeri ,
+                null, paiva, kuukausi, vuosi, tunnit,minuutit, calendar.getTimeInMillis()));
         Log.d("", "tallenna");
 
 
