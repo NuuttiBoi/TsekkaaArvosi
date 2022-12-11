@@ -16,9 +16,13 @@ public interface MuistutusDao {
     @Insert
     void lisaaMuistutus(Muistutus muistutus);
 
+    //Palauttaa muistutukset lisäämisjärjestyksessä
+    @Query("SELECT * FROM muistutus")
+    LiveData<List<Muistutus>> haeMuistutukset();
+
     //Palauttaa muistutukset aikajärjestyksessä
     @Query("SELECT * FROM muistutus ORDER BY vuosi, kuukausi, paiva, tunnit, minuutit")
-    LiveData<List<Muistutus>> haeMuistutukset();
+    LiveData<List<Muistutus>> haeMuistutuksetKrono();
 
     @Delete
     void poistaMuistutus(Muistutus muistutus);
