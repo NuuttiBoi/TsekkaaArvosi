@@ -32,7 +32,7 @@ public class MuistutusBroadcastReceiver extends BroadcastReceiver {
          * they're passed to the Broadcast Receiver in the intent
          */
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "tsekkaa_arvosi")
-                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setSmallIcon(R.drawable.popup)
                 .setContentTitle(mitattavat)
                 .setContentText(lisatiedot)
                 .setAutoCancel(true)

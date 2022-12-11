@@ -256,7 +256,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         muistutus.putExtra(EXTRA_MITATTAVAT, mitattavatString);
         muistutus.putExtra(EXTRA_LISATIEDOT, lisatiedotString);
         pendingIntent = PendingIntent.getBroadcast(this, 0, muistutus, 0);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, 30000000, pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, 1000, pendingIntent);
 
         //alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+aikaMilliSek, pendingIntent);
 
