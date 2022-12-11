@@ -17,15 +17,18 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintVertical_chainStyle="spread" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:text="Muistuta minua mittaamaan..."
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintBottom_toTopOf="@+id/valinnatView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +36,7 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/valinnatView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -43,42 +46,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
-        <CheckBox
+        <ToggleButton
             android:id="@+id/verenpaineCheck"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Verenpaine"
+            android:textAllCaps="false"
+            android:textOff="Verenpaine"
+            android:textOn="Verenpaine"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/sykeCheck"
             app:layout_constraintTop_toBottomOf="@+id/muistutusOtsikko"
             app:layout_constraintVertical_chainStyle="packed"
             tools:layout_editor_absoluteX="127dp" />
 
-        <CheckBox
+        <ToggleButton
             android:id="@+id/sykeCheck"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Syke"
+            android:textAllCaps="false"
+            android:textOff="Syke"
+            android:textOn="Syke"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/verensokeriCheck"
             app:layout_constraintTop_toBottomOf="@+id/verenpaineCheck"
             tools:layout_editor_absoluteX="127dp" />
 
-        <CheckBox
+        <ToggleButton
             android:id="@+id/verensokeriCheck"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Verensokeri"
+            android:textAllCaps="false"
+            android:textOff="Verensokeri"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/happisaturaatioCheck"
             app:layout_constraintTop_toBottomOf="@+id/sykeCheck"
             tools:layout_editor_absoluteX="141dp" />
 
-        <CheckBox
+        <ToggleButton
             android:id="@+id/happisaturaatioCheck"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Happisaturaatio"
+            android:textAllCaps="false"
+            android:textOff="Happisaturaatio"
+            android:textOn="Happisaturaatio"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/verensokeriCheck"
@@ -89,9 +103,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Lisätietoa"
-            android:inputType="textPersonName"
+            android:hint="Lisätietoja"
+            android:inputType="none"
             android:minHeight="48dp" />
+
+        <CheckBox
+            android:id="@+id/toistuvaCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:checked="false"
+            android:gravity="center"
+            android:text="Toistuva" />
     </LinearLayout>
 
     <Button
@@ -103,7 +126,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/takaisinButton"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        app:layout_constraintTop_toBottomOf="@+id/valinnatView" />
 
     <Button
         android:id="@+id/takaisinButton"
@@ -115,7 +138,7 @@
         app:layout_constraintEnd_toStartOf="@+id/lisaaButton"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        app:layout_constraintTop_toBottomOf="@+id/valinnatView" />
 
     <LinearLayout
         android:id="@+id/pvmContainer"
@@ -127,7 +150,7 @@
         app:layout_constraintBottom_toTopOf="@+id/kelloContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/muistutusOtsikko"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed">
 
         <TextView
@@ -135,6 +158,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/rounded_corner"
+            android:paddingLeft="@dimen/rounded_corner_padding"
+            android:paddingRight="@dimen/rounded_corner_padding"
+            android:textColor="@color/tausta_dark"
             android:textSize="24sp" />
 
         <TextView
@@ -142,7 +169,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="   "
+            android:text="  "
             android:textSize="24sp" />
 
         <TextView
@@ -150,6 +177,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/rounded_corner"
+            android:paddingLeft="@dimen/rounded_corner_padding"
+            android:paddingRight="@dimen/rounded_corner_padding"
+            android:textColor="@color/tausta_dark"
             android:textSize="24sp" />
 
         <TextView
@@ -157,7 +188,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="   "
+            android:text="  "
+            android:textColor="@color/tausta_dark"
             android:textSize="24sp" />
 
         <TextView
@@ -165,6 +197,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/rounded_corner"
+            android:paddingLeft="@dimen/rounded_corner_padding"
+            android:paddingRight="@dimen/rounded_corner_padding"
+            android:textColor="@color/tausta_dark"
             android:textSize="24sp" />
     </LinearLayout>
 
@@ -184,6 +220,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/rounded_corner"
+            android:paddingLeft="@dimen/rounded_corner_padding"
+            android:paddingRight="@dimen/rounded_corner_padding"
+            android:textColor="@color/tausta_dark"
             android:textSize="24sp" />
 
         <TextView
@@ -199,6 +239,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/rounded_corner"
+            android:paddingLeft="@dimen/rounded_corner_padding"
+            android:paddingRight="@dimen/rounded_corner_padding"
+            android:textColor="@color/tausta_dark"
             android:textSize="24sp" />
     </LinearLayout>
 

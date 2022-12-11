@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -46,7 +47,8 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
     private PendingIntent pendingIntent;
     private LinearLayout pvmContainer, kelloContainer;
     private ArrayList<String> kuukaudet;
-    private CheckBox verenpaineCheck, sykeCheck, verensokeriCheck, happisaturaatioCheck;
+    private ToggleButton verenpaineCheck, sykeCheck, verensokeriCheck, happisaturaatioCheck;
+    private CheckBox toistuvaCheck;
     private EditText lisatiedot;
     private long aikaMilliSek;
     private Instant muistutusAika, nyt;
@@ -110,11 +112,12 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
             minEdit.setText(Integer.toString(min));
         }
 
-        verenpaineCheck = (CheckBox) findViewById(R.id.verenpaineCheck);
+        verenpaineCheck = findViewById(R.id.verenpaineCheck);
         sykeCheck = findViewById(R.id.sykeCheck);
         verensokeriCheck = findViewById(R.id.verensokeriCheck);
         happisaturaatioCheck = findViewById(R.id.happisaturaatioCheck);
         lisatiedot = findViewById(R.id.lisatiedotEdit);
+        toistuvaCheck = findViewById(R.id.toistuvaCheck);
 
         //OnClickListener set for the whole container which contains the date fields
         //Clicking anywhere within the container opens the date picker
@@ -193,9 +196,14 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
             if (aikaMilliSek < 0) {
                 Toast.makeText(LisaaMuistutusActivity.this, "Ajankohta on mennyt", Toast.LENGTH_SHORT).show();
             } else {
-                //If the date is valid and no fields are empty, an alarm is set and saved to the database
-                tallennaMuistutus(valittu_vv, valittu_kk, valittu_pv, valittu_hh, valittu_min, mitattavatString, lisatiedotString);
-                asetaMuistutus(aikaMilliSek);
+
+                if (toistuvaCheck.isChecked()) {
+                    //intent
+                } else {
+                    //If the date is valid and no fields are empty, an alarm is set and saved to the database
+                    tallennaMuistutus(valittu_vv, valittu_kk, valittu_pv, valittu_hh, valittu_min, mitattavatString, lisatiedotString);
+                    asetaMuistutus(aikaMilliSek);
+                }
             }
         } else {
             Toast.makeText(LisaaMuistutusActivity.this, "Kenttä ei voi olla tyhjä", Toast.LENGTH_SHORT).show();
