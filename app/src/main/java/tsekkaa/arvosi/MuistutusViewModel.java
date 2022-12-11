@@ -9,6 +9,13 @@ import java.util.List;
 
 import kotlin.annotation.MustBeDocumented;
 
+
+/**
+ * Database transactions aren't carried out in the main thread as to not disrupt the UI
+ * The ViewModel creates an abstraction layer between the activity and the database
+ * @author Matleena Kankaanpää
+ */
+
 public class MuistutusViewModel extends AndroidViewModel {
     private MuistutusRepository muistutusRepository;
     private LiveData<List<Muistutus>> muistutukset;

@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     public void testButtonPressed(View v){
         Intent test = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            test = new Intent(this, TestiActivity.class);
+            test = new Intent(this, KalenteriActivity.class);
         }
         startActivity(test);
 

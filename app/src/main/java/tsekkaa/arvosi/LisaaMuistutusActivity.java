@@ -12,6 +12,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -37,6 +38,7 @@ import java.util.Calendar;
 public class LisaaMuistutusActivity extends AppCompatActivity {
     public static final String EXTRA_MITATTAVAT = "LisaaMuistutusActivity.mitattavatLista";
     public static final String EXTRA_LISATIEDOT = "LisaaMuistutusActivity.lisatiedot";
+    public static final String EXTRA_ID = "LisaaMuistutusActivity.id";
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private TimePickerDialog.OnTimeSetListener timeSetListener;
     private static LocalDateTime now = LocalDateTime.now();
@@ -63,6 +65,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
     private MuistutusViewModel muistutusViewModel;
     //Creates strings
     private String mitattavatString, lisatiedotString;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,10 +203,15 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
             Log.d("", "" + (aikaMilliSek/1000)/60 + " min");
             Log.d("", "" + ((aikaMilliSek/1000)/60)/60 + " h");
 
-
             if (aikaMilliSek < 0) {
                 Toast.makeText(LisaaMuistutusActivity.this, "Ajankohta on mennyt", Toast.LENGTH_SHORT).show();
             } else {
+                /**
+                 * Get the running id number from memory
+                 */
+
+                SharedPreferences sharedPref = getSharedPreferences("MuistutusID", Context.MODE_PRIVATE);
+                id = sharedPref.getInt("id", 1);
 
                 if (toistuvaCheck.isChecked()) {
                     //intent
@@ -212,13 +220,22 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
                     tallennaMuistutus(valittu_vv, valittu_kk, valittu_pv, valittu_hh, valittu_min, mitattavatString, lisatiedotString);
                     asetaMuistutus(aikaMilliSek);
                 }
+
+                /**
+                 * Increment id every time a new notification is set to it will be unique for each one
+                 */
+
+                id++;
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putInt("id", id);
+                editor.apply();
             }
         } else {
             Toast.makeText(LisaaMuistutusActivity.this, "Kenttä ei voi olla tyhjä", Toast.LENGTH_SHORT).show();
         }
     }
 
-    //Creates a notification channel
+    //A notification channel is created
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence kanava = "TsekkaaArvosiMuistutusKanava";
@@ -231,19 +248,24 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         }
     }
 
-    //Sets an alarm and returns the user to the previous page
+    //The alarm time and contents are sent to the Broadcast Receiver in an intent
+    //After that the user is returned to the previous page
     private void asetaMuistutus(long aika) {
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent muistutus = new Intent(this, MuistutusBroadcastReceiver.class);
         muistutus.putExtra(EXTRA_MITATTAVAT, mitattavatString);
         muistutus.putExtra(EXTRA_LISATIEDOT, lisatiedotString);
         pendingIntent = PendingIntent.getBroadcast(this, 0, muistutus, 0);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+aikaMilliSek, pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, 30000000, pendingIntent);
+
+        //alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+aikaMilliSek, pendingIntent);
 
         /* toistuva
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
               AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
         */
+        Log.d("", "alarm id: " + id);
+
 
         Toast.makeText(this, "Muistutus asetettu", Toast.LENGTH_SHORT).show();
         Intent takaisin = new Intent(this, KalenteriActivity.class);

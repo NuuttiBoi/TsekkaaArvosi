@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 /**
- * Database transactions aren't carried out in the main thread to not disrupt the UI
+ * Database transactions aren't carried out in the main thread as to not disrupt the UI
  * The ViewModel creates an abstraction layer between the activity and the database
  * @author Matleena Kankaanpää
  */

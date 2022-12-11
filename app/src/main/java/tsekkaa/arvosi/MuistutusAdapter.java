@@ -11,9 +11,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The adapter generates notifications with a specified layout and populates the Recycler View with them
+ *
+ * @author Matleena Kankaanpää
+ */
+
 public class MuistutusAdapter extends RecyclerView.Adapter<MuistutusAdapter.MuistutusHolder> {
+    /* An empty array list must be created here, otherwise if the array is referenced and it returns
+    null, it will cause an error */
     private List<Muistutus> muistutukset = new ArrayList<>();
 
+    /**
+     * Defines the layout for each notification item
+     */
     @NonNull
     @Override
     public MuistutusHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -22,7 +33,7 @@ public class MuistutusAdapter extends RecyclerView.Adapter<MuistutusAdapter.Muis
     }
 
     /**
-     * Populates the recycler view, hides empty text views
+     * If either text view is empty, it's hidden to not take up space
      * @param holder An item in the recycler view
      * @param position A counter variable
      */
@@ -44,16 +55,28 @@ public class MuistutusAdapter extends RecyclerView.Adapter<MuistutusAdapter.Muis
         }
     }
 
+    /**
+     *
+     * @return The size of the notifications list
+     */
     @Override
     public int getItemCount() {
         return muistutukset.size();
     }
 
+    /**
+     * @param muistutukset
+     */
     public void naytaMuistutukset(List<Muistutus> muistutukset) {
         this.muistutukset = muistutukset;
         notifyDataSetChanged();
     }
 
+    /**
+     *
+     * @param paikka A counter variable received from the Recycler View
+     * @return The notification item at the given position
+     */
     public Muistutus haePaikka(int paikka) {
         return muistutukset.get(paikka);
     }
@@ -63,6 +86,9 @@ public class MuistutusAdapter extends RecyclerView.Adapter<MuistutusAdapter.Muis
         private TextView mitattavatTextView;
         private TextView lisatiedotTextView;
 
+        /**
+         * Finds the views from the layout
+         */
         public MuistutusHolder(@NonNull View itemView) {
             super(itemView);
             pvmTextView = itemView.findViewById(R.id.pvmTextView);
