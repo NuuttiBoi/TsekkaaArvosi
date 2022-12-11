@@ -17,12 +17,9 @@ public class Asetukset extends AppCompatActivity {
     private Button teema;
     private Button omatTiedot;
     private Button backbutton;
+    private TextView kayttaja;
+    public final static String EXTRA_TEXT = "message";
 
-
-    public Asetukset() {
-    }
-
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +29,16 @@ public class Asetukset extends AppCompatActivity {
         this.teema = findViewById(R.id.teemaButton);
         this.omatTiedot = findViewById(R.id.omatTiedotButton);
         this.backbutton = findViewById(R.id.BackButton);
+        this.kayttaja = findViewById(R.id.kayttajaTextView);
+
+        Intent tallenna = getIntent();
+        String message = tallenna.getStringExtra(tallenna.EXTRA_TEXT);
+        kayttaja.setText(message);
     }
 
     public void ilmoituksetButtonPressed(View v){
-
+        Intent ilmoitukset = new Intent(this, MuistutuksetActivity.class);
+        startActivity(ilmoitukset);
     }
 
     public void teemaButtonPressed(View v){
@@ -44,8 +47,10 @@ public class Asetukset extends AppCompatActivity {
     }
 
     public void omatTiedotButtonPressed(View v){
-
+        Intent omatTiedot = new Intent(this, OmatTiedot.class);
+        startActivity(omatTiedot);
     }
+
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, MainActivity.class);
