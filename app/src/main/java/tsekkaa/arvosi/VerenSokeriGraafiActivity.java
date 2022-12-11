@@ -3,168 +3,159 @@ package tsekkaa.arvosi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.LimitLine;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.PointsGraphSeries;
+import com.jjoe64.graphview.series.Series;
 
 import java.text.Format;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 public class VerenSokeriGraafiActivity extends AppCompatActivity {
 
-    private Calendar mCalendar;
-    private Button backButton;
-    private GraphView graph;
+    private static final String TAG = "TestiActivity";
+
+    private LineChart mChart;
     private LineGraphSeries<DataPoint> lineSeries;
     private PointsGraphSeries<DataPoint> pointSeries;
     private MittausViewModel mittausViewModel;
-    private DataPoint[] dataPoints;
-    private SimpleDateFormat sdf;
-    private boolean start = true;
-
-    //Viewportin koko mikä siit on kerrallaan näkyvissä, voi muuttaa
-    //Viewports size it is the size that can be seen at once
-    private final static int VIEWPORT_SIZE = 2;
+    private Button backButton;
 
     //Korjatkaa jos on väärää tietoa ^^'
-    private final static double YLAPAINEEN_ALARAJA = 100.0;
-    private final static double YLAPAINEEN_YLARAJA = 130.0;
+    private final static double VERENSOKERIN_ALARAJA = 6.0;
+    private final static double VERENSOKERIN_YLARAJA = 7.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
-        /*
-        boolean recreateRequested = true;
-        Intent currentIntent = getIntent();
-        if (currentIntent.hasExtra("restart")){
-            recreateRequested = currentIntent.getBooleanExtra("restart", true);
-        }
-        if (recreateRequested) {
-            Intent intent = new Intent(this, VerenpaineKirjausActivity.class);
-            intent.putExtra("restartti", false);
-            startActivity(intent);
-            finish();
-        }
-
-         */
-        setContentView(R.layout.activity_veren_happipitoisuus_graafi);
+        setContentView(R.layout.activity_veren_sokeri_graafi);
 
         this.backButton = findViewById(R.id.backButton);
-        mCalendar = Calendar.getInstance();
-        graph = findViewById(R.id.graph);
+        mChart = (LineChart) findViewById(R.id.verensokeriLinechart);
+
+        //mChart.setOnChartGestureListener(TestiActivity.this);
+        //mChart.setOnChartValueSelectedListener(TestiActivity.this);
+
+        mChart.setDragEnabled(true);
+        mChart.setScaleEnabled(false);
+
+        LimitLine upper_limit = new LimitLine(7, "Liian korkea");
+        upper_limit.setLineWidth(4f);
+        upper_limit.enableDashedLine(10f, 10f, 0f);
+        upper_limit.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
+        upper_limit.setTextSize(15f);
+
+
+        LimitLine lower_limit = new LimitLine(6, "Liian matala");
+        upper_limit.setLineWidth(4f);
+        upper_limit.enableDashedLine(10f, 10f, 0f);
+        upper_limit.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
+        upper_limit.setTextSize(15f);
+
+        YAxis leftAxis = mChart.getAxisLeft();
+        leftAxis.removeAllLimitLines();
+        leftAxis.addLimitLine(upper_limit);
+        leftAxis.addLimitLine(lower_limit);
+        leftAxis.setAxisMaximum(15f);
+        leftAxis.setAxisMinimum(0f);
+        leftAxis.enableGridDashedLine(10f, 10f, 0);
+        leftAxis.setDrawLimitLinesBehindData(true);
+
+        mChart.getAxisRight().setEnabled(false);
 
         mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
         mittausViewModel.haeVerensokeriMittaukset().observe(this, mittaukset -> {
 
-            /*
-            if(mittaukset.size()>10){
-                mittaukset.remove(0);
-            } else {
+            String pvm[] = new String[mittaukset.size()];
 
-             */
-
-            Long aikaArray[] = new Long[mittaukset.size()];
-
-            dataPoints = new DataPoint[mittaukset.size()];
-
-            LineGraphSeries<DataPoint> LineSeries =
-                    new LineGraphSeries<>();
+            ArrayList<Entry> yValues = new ArrayList<>();
+            ArrayList xValues = new ArrayList<>();
             for (int i = 0; i < mittaukset.size(); i++) {
-                for (int j = 0; j < mittaukset.size(); j++) {
-                    aikaArray[j] = mittaukset.get(j).getAika();
-                }
-                Arrays.sort(aikaArray);
-                Log.d("h", "v " + mittaukset.size() + new Date(aikaArray[i]));
-                //Ton verensokerin tilalle voi vaihtaa sen infon mitä haluu
-
-                LineSeries.appendData(new DataPoint(new Date(aikaArray[i]), mittaukset.get(i).getVerensokeri()), false,
-                        mittaukset.size());
-                dataPoints[i] = new DataPoint(new Date(aikaArray[i]), mittaukset.get(i).getVerensokeri());
+                pvm[i] = mittaukset.get(i).getAjankohta();
+                xValues.add(pvm[i]);
             }
 
-            //lineSeries = new LineGraphSeries<>(dataPoints);
-            pointSeries = new PointsGraphSeries<>(dataPoints);
+            for (int i = 0; i < mittaukset.size(); i++) {
 
+                yValues.add(new Entry(i, mittaukset.get(i).getVerensokeri().floatValue()));
 
-            //graph.getViewport().setXAxisBoundsManual(true);
-            //graph.getViewport().setMinX(0);
-            //graph.getViewport().setMaxX(mittaukset.get(9).getSyke());
-            graph.getGridLabelRenderer().setNumHorizontalLabels(10);
+            }
 
-            graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
-                @Override
-                public String formatLabel(double value, boolean isValueX) {
-                    if (isValueX) {
-                        //x-axel label
-                        //En keksiny miten tähän saa näkyviin esim. pvm/ajan -__-
-                        Format formatter = new SimpleDateFormat("MM/dd HH:mm");
-                        return formatter.format(value);
-                        //return super.formatLabel(value, isValueX);
-                    } else {
-                        //y-akselin label
-                        return super.formatLabel(value, isValueX);
-                    }
-                }
-            });
+            LineDataSet set1 = new LineDataSet(yValues, "Verensokeri");
+            set1.setFillAlpha(110);
+            set1.setColor(Color.BLUE);
+            set1.setLineWidth(2f);
+            set1.setValueTextColor(Color.RED);
 
-            graph.addSeries(LineSeries);
-            //graph.addSeries(lineSeries);
-            graph.addSeries(pointSeries);
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets.add(set1);
 
-            graph.setTitle("Yläpaineen viimeaikaiset mittaustuloksesi:");
-            graph.getViewport().setScrollable(true);
-            graph.getViewport().setScrollableY(true);
-            //graph.getViewport().setScalable(true);
-            //graph.getViewport().setScalableY(true);
+            LineData data = new LineData(dataSets);
+            mChart.setData(data);
 
-            LineSeries.setDrawBackground(true);
-            graph.getGridLabelRenderer().setHumanRounding(false);
-            graph.getGridLabelRenderer().setHorizontalLabelsAngle(50);
+            String[] values = new String[mittaukset.size()];
+            for (int i = 0; i < mittaukset.size(); i++) {
+                values[i] = mittaukset.get(i).getAjankohta();
+            }
 
-            // Sets headers for axels
-            graph.getGridLabelRenderer().setVerticalAxisTitle("Yläpaina (mmHg)");
-            graph.getGridLabelRenderer().setPadding(20);
-            graph.getGridLabelRenderer().setHorizontalAxisTitle("Mittauksen ajankohta");
+            XAxis xAxis = mChart.getXAxis();
+            xAxis.setValueFormatter(new IndexAxisValueFormatter(xValues));
+            xAxis.setGranularity(1f);
+            xAxis.setCenterAxisLabels(true);
+            xAxis.setEnabled(true);
+            xAxis.setDrawGridLines(false);
+            //xAxis.setLabelCount(xValues.size(),true);
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+            xAxis.setAxisMaximum(xValues.size() + 0.1f);
 
-            //Shows the value when datapoint is clicked and warns the user if it is too high/low
+            mChart.getDescription().setText("Mittauksen ajankohta");
 
-            pointSeries.setOnDataPointTapListener((series, dataPoint) -> {
-                String teksti = dataPoint.getY() + " %";
-                String varoitus;
-                if (dataPoint.getY() > YLAPAINEEN_YLARAJA) {
-                    varoitus = "\n+" + String.format("%.2f", dataPoint.getY() - YLAPAINEEN_YLARAJA) + " %";
-                    teksti += varoitus;
-                } else if (dataPoint.getY() < YLAPAINEEN_ALARAJA) {
-                    varoitus = "\n-" + String.format("%.2f", YLAPAINEEN_ALARAJA - dataPoint.getY()) + " %";
-                    teksti += varoitus;
-                }
-                Toast toast = Toast.makeText(VerenSokeriGraafiActivity.this, teksti, Toast.LENGTH_LONG);
-                toast.show();
-            });
+            mChart.invalidate(); // Refreshes the graph
 
-
-            //graph.getGridLabelRenderer().setNumHorizontalLabels(5);
 
         });
     }
-    //Checks if the selected button is pressed and sends the user to the selected page/ activity
+
     public void backButtonPressed(View v){
-        Intent takaisin = new Intent(this, VerenSokeriKirjausActivity.class);
+        Intent takaisin = new Intent(this, MainActivity.class);
         startActivity(takaisin);
     }
+
 }

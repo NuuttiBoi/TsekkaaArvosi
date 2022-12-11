@@ -30,6 +30,7 @@ android {
     }
 }
 
+
 android.applicationVariants.all { variant ->
     task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
         title = "${rootProject.name} API Documentation (${project.android.defaultConfig.versionName})"
@@ -90,6 +91,9 @@ dependencies {
     implementation 'com.jjoe64:graphview:4.2.2'
     implementation 'com.google.code.gson:gson:2.10'
     implementation 'io.github.muddz:styleabletoast:2.4.0'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 
     //implementation "com.github.prolificinteractive:material-calendarview:${version}"
 

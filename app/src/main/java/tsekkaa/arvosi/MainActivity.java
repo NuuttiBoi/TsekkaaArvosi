@@ -61,7 +61,10 @@ public class MainActivity extends AppCompatActivity {
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     //muistakaa laittaa class tohon alle huutomerkin tilalle. Menee samallalailla ku noissa muissa
     public void testButtonPressed(View v){
-        Intent test = new Intent(this, KalenteriActivity.class);
+        Intent test = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            test = new Intent(this, TestiActivity.class);
+        }
         startActivity(test);
 
         //zoom in

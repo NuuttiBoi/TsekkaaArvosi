@@ -70,6 +70,17 @@ public class Mittaus {
         return aika;
     }
 
+    public String getAjankohta(){
+
+        String vuosi = String.valueOf(this.vuosi);
+        String kuukausi = String.valueOf(this.kuukausi);
+        String paiva = String.valueOf(this.paiva);
+        String tunnit = String.valueOf(this.tunnit);
+        String minuutit = String.valueOf(this.minuutit);
+        return  String.valueOf(paiva + "." + kuukausi);
+
+    }
+
     public int getId() {
         return id;
     }

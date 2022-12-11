@@ -15,6 +15,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jjoe64.graphview.DefaultLabelFormatter;
@@ -68,7 +72,7 @@ public class TestiActivity4 extends AppCompatActivity {
         graph = findViewById(R.id.graph);
 
         mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
-        mittausViewModel.haeMittaukset().observe(this, mittaukset -> {
+        mittausViewModel.haeYpApSykeMittaukset().observe(this, mittaukset -> {
 
             /*
             if(mittaukset.size()>10){
@@ -78,24 +82,41 @@ public class TestiActivity4 extends AppCompatActivity {
              */
 
                 Long aikaArray[] = new Long[mittaukset.size()];
+                ArrayList<Entry> yValues = new ArrayList<>();
 
                 dataPoints = new DataPoint[mittaukset.size()];
                 dataPoints2 = new DataPoint[mittaukset.size()];
+
+                //dataPoints[0] = new DataPoint(0,0);
 
                 LineGraphSeries<DataPoint> LineSeries =
                         new LineGraphSeries<>();
                 for (int i = 0; i < mittaukset.size(); i++) {
                     for (int j = 0; j < mittaukset.size(); j++) {
                         aikaArray[j] = mittaukset.get(j).getAika();
+                        Log.d("prkr","ok " + mittaukset.get(j).getSyke() + "/" + mittaukset.size());
+
                     }
                     Arrays.sort(aikaArray);
-                    Log.d("h", "v " + mittaukset.size() + new Date(aikaArray[i]));
+                    Log.d("h", "v " + mittaukset.size() + new Date(aikaArray[i])+mittaukset.get(i).getSyke());
                     //Ton verensokerin tilalle voi vaihtaa sen infon mitä haluu
 
-                    LineSeries.appendData(new DataPoint(new Date(aikaArray[i]), mittaukset.get(i).getSyke()), false,
+                    LineSeries.appendData(new DataPoint(aikaArray[i], mittaukset.get(i).getSyke()), false,
                             mittaukset.size());
-                    dataPoints[i] = new DataPoint(new Date(aikaArray[i]), mittaukset.get(i).getSyke());
+                    dataPoints[i] = new DataPoint(aikaArray[i], mittaukset.get(i).getSyke());
+
+                    yValues.add(new Entry(aikaArray[i], mittaukset.get(i).getSyke().floatValue()));
                 }
+
+            LineDataSet set1 = new LineDataSet(yValues,"Set 1");
+            set1.setFillAlpha(110);
+
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets.add(set1);
+
+            LineData data = new LineData(dataSets);
+
+
 
                 //lineSeries = new LineGraphSeries<>(dataPoints);
                 pointSeries = new PointsGraphSeries<>(dataPoints);
@@ -104,7 +125,7 @@ public class TestiActivity4 extends AppCompatActivity {
                 //graph.getViewport().setXAxisBoundsManual(true);
                 //graph.getViewport().setMinX(0);
                 //graph.getViewport().setMaxX(mittaukset.get(9).getSyke());
-                graph.getGridLabelRenderer().setNumHorizontalLabels(10);
+                graph.getGridLabelRenderer().setNumHorizontalLabels(3);
 
                 graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
                     @Override
@@ -113,7 +134,7 @@ public class TestiActivity4 extends AppCompatActivity {
                             //x-akselin label
                             //En keksiny miten tähän saa näkyviin esim. pvm/ajan -__-
                             Format formatter = new SimpleDateFormat("MM/dd HH:mm");
-                            return formatter.format(value);
+                            return formatter.format(new Date((long)value));
                             //return super.formatLabel(value, isValueX);
                         } else {
                             //y-akselin label
@@ -126,14 +147,17 @@ public class TestiActivity4 extends AppCompatActivity {
                 //graph.addSeries(lineSeries);
                 graph.addSeries(pointSeries);
 
-
-                graph.getViewport().setScrollable(true);
-                graph.getViewport().setScrollableY(true);
+                //graph.getViewport().setScrollable(true);
+                //graph.getViewport().setScrollableY(true);
                 //graph.getViewport().setScalable(true);
                 //graph.getViewport().setScalableY(true);
 
+            graph.getViewport().setXAxisBoundsManual(true);
+            graph.getViewport().setMinX(Double.valueOf(mittaukset.get(0).getAika()));
+            graph.getViewport().setMaxX(Double.valueOf(mittaukset.get(2).getAika()+mittaukset.get(2).getAika()));
+
                 LineSeries.setDrawBackground(true);
-                graph.getGridLabelRenderer().setHumanRounding(false);
+                //graph.getGridLabelRenderer().setHumanRounding(false);
                 graph.getGridLabelRenderer().setHorizontalLabelsAngle(50);
 
                 // Asettaa otsikot akseleille
@@ -157,8 +181,7 @@ public class TestiActivity4 extends AppCompatActivity {
                     toast.show();
                 });
 
-
-                //graph.getGridLabelRenderer().setNumHorizontalLabels(5);
+                //graph.getGridLabelRenderer().setNumHorizontalLabels(20);
 
         });
     }
