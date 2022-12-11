@@ -40,21 +40,28 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private TimePickerDialog.OnTimeSetListener timeSetListener;
     private static LocalDateTime now = LocalDateTime.now();
+    //Creates a list
     private ArrayList<Integer> pvmLista;
+    //Creates textviews
     private TextView pvEdit, kkEdit, vvEdit, hhEdit, minEdit;
+    //Creates integer variable
     private int paiva, kuukausi, vuosi, tunnit, min, valittu_pv, valittu_kk, valittu_vv, valittu_hh, valittu_min;
     private AlarmManager alarmManager;
     private PendingIntent pendingIntent;
     private LinearLayout pvmContainer, kelloContainer;
+    //Creates a list
     private ArrayList<String> kuukaudet;
     private ToggleButton verenpaineCheck, sykeCheck, verensokeriCheck, happisaturaatioCheck;
     private CheckBox toistuvaCheck;
+    //Creates edittext
     private EditText lisatiedot;
     private long aikaMilliSek;
     private Instant muistutusAika, nyt;
     private Duration kesto;
+    //Creates a string
     private String aikaString;
     private MuistutusViewModel muistutusViewModel;
+    //Creates strings
     private String mitattavatString, lisatiedotString;
 
     @Override
@@ -78,12 +85,13 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         minEdit = (TextView) findViewById(R.id.minEdit);
 
         //Numerokenttien alkuarvoiksi intentistä saatu päivämäärä ja tämänhetkinen aika
+        //The initial value for number fields comes from the intent that has date and current time
         paiva = pvmLista.get(0);
         kuukausi = pvmLista.get(1); //int 1-12
         vuosi = pvmLista.get(2);
         tunnit = now.getHour();
         min = now.getMinute();
-
+        //Adds all the months to a list
         kuukaudet = new ArrayList<>();
         kuukaudet.add("tammi");
         kuukaudet.add("helmi");

@@ -37,7 +37,7 @@ public class MuistutuksetActivity extends AppCompatActivity {
         muistutusViewModel.haeMuistutukset().observe(this, new Observer<List<Muistutus>>() {
             @Override
             public void onChanged(List<Muistutus> muistutukset) {
-                //päivittää näkymän
+                //Updates the view
                 adapter.naytaMuistutukset(muistutukset);
             }
         });

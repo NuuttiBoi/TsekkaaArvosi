@@ -22,11 +22,11 @@ public class MuistutusViewModel extends AndroidViewModel {
     public LiveData<List<Muistutus>> haeMuistutukset() {
         return muistutukset;
     }
-
+    //Method that adds a reminder to the repository
     public void lisaaMuistutus(Muistutus muistutus) {
         muistutusRepository.lisaaMuistutus(muistutus);
     }
-
+    //Method that deletes a reminder from the repository
     public void poistaMuistutus(Muistutus muistutus) {
         muistutusRepository.poistaMuistutus(muistutus);
     }
