@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
         android:text="Omat muistutukseni"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/muistutusRecView"
@@ -22,7 +22,7 @@
         android:id="@+id/muistutuksetTakaisinButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="40dp"
         android:onClick="suljeButtonPressed"
         android:text="Sulje"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,13 +32,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/muistutusRecView"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="609dp"
+        android:padding="8dp"
         app:layout_constraintBottom_toTopOf="@+id/muistutuksetTakaisinButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        tools:listitem="@layout/muistutus_item"/>
+        tools:listitem="@layout/muistutus_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

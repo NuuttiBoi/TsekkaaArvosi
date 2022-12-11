@@ -8,46 +8,71 @@ import androidx.room.Query;
 
 import java.util.List;
 
-//Data access object
+/**
+ * The database isn't referenced directly from the activity
+ * Instead, a data access object serves as a handle to access it
+ * The DAO contains methods for querying, inserting and deleting entries from/into the database
+ */
 
 @Dao
 public interface MittausDao {
 
+    /**
+     * Insert a new entry
+     */
     @Insert
     void lisaaMittaus(Mittaus mittaus);
 
-    //Palauttaa mittaukset aikajärjestyksessä
+    /**
+     * @return all entries sorted by date and time
+     */
     @Query("SELECT * FROM mittaus ORDER BY vuosi, kuukausi, paiva, tunnit, minuutit")
     LiveData<List<Mittaus>> haeMittaukset();
 
-    //Palauttaa mittaukset joissa yläpaine ei ole null
+    /**
+     * @return all entries where systolic blood pressure isn't null
+     */
     @Query("SELECT * FROM mittaus WHERE ylapaine IS NOT NULL ORDER BY vuosi, kuukausi, paiva, tunnit, minuutit")
     LiveData<List<Mittaus>> haeYlapaineMittaukset();
 
-    //Palauttaa mittaukset joissa alapaine ei ole null
-    @Query("SELECT * FROM mittaus WHERE alapaine IS NOT NULL ORDER BY vuosi, kuukausi, paiva, tunnit, minuutit")
+    /**
+     * @return all entries where diastolic blood pressure isn't null
+     */    @Query("SELECT * FROM mittaus WHERE alapaine IS NOT NULL ORDER BY vuosi, kuukausi, paiva, tunnit, minuutit")
     LiveData<List<Mittaus>> haeAlapaineMittaukset();
 
-    //Palauttaa mittaukset joissa syke ei ole null
+    /**
+     * @return all entries where heartbeat isn't null
+     */
     @Query("SELECT * FROM mittaus WHERE syke IS NOT NULL ORDER BY vuosi, kuukausi, paiva, tunnit, minuutit")
     LiveData<List<Mittaus>> haeSykeMittaukset();
 
-    //Palauttaa mittaukset joissa yläpaine ja alapaine ei ole null
+    /**
+     * @return all entries where neither systolic nor diastolic blood pressure is null
+     */
     @Query("SELECT * FROM mittaus WHERE ylapaine IS NOT NULL AND alapaine IS NOT NULL ORDER BY vuosi, kuukausi, paiva, tunnit, minuutit")
     LiveData<List<Mittaus>> haeYpApMittaukset();
 
-    //Palauttaa mittaukset joissa yläpaine, alapaine ja syke ei ole null
+    /**
+     * @return all entries where systolic and diastolic blood pressure and heartbeat aren't null
+     */
     @Query("SELECT * FROM mittaus WHERE ylapaine IS NOT NULL AND alapaine IS NOT NULL AND syke IS NOT NULL ORDER BY vuosi, kuukausi, paiva, tunnit, minuutit")
     LiveData<List<Mittaus>> haeYpApSykeMittaukset();
 
-    //Palauttaa mittaukset joissa verensokeri ei ole null
+    /**
+     * @return all entries where blood sugar isn't null
+     */
     @Query("SELECT * FROM mittaus WHERE verensokeri IS NOT NULL ORDER BY vuosi, kuukausi, paiva, tunnit, minuutit")
     LiveData<List<Mittaus>> haeVerensokeriMittaukset();
 
-    //Palauttaa mittaukset joissa happipitoisuus ei ole null
+    /**
+     * @return all entries where blood oxygen level isn't null
+     */
     @Query("SELECT * FROM mittaus WHERE happipitoisuus IS NOT NULL ORDER BY vuosi, kuukausi, paiva, tunnit, minuutit")
     LiveData<List<Mittaus>> haeHappipitoisuusMittaukset();
 
+    /**
+     * Deletes the selected entry
+     */
     @Delete
     void poistaMittaus(Mittaus mittaus);
 }

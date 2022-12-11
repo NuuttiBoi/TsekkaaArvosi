@@ -107,6 +107,17 @@ public class Muistutus {
     }
 
     public String getPvm() {
-        return "" + this.paiva + "/" + this.kuukausi + " " + this.tunnit + ":" + this.minuutit;
+        String pvm = "" + this.paiva + "/";
+
+        if (this.kuukausi < 10) {
+            pvm += "0";
+        }
+
+        pvm += this.kuukausi + " " + this.tunnit + ":";
+
+        if (this.minuutit < 10) {
+            pvm += "0";
+        }
+        return pvm + this.minuutit;
     }
 }

@@ -21,12 +21,27 @@ public class MuistutusAdapter extends RecyclerView.Adapter<MuistutusAdapter.Muis
         return new MuistutusHolder(itemView);
     }
 
+    /**
+     * Populates the recycler view, hides empty text views
+     * @param holder An item in the recycler view
+     * @param position A counter variable
+     */
     @Override
     public void onBindViewHolder(@NonNull MuistutusHolder holder, int position) {
         Muistutus valittuMuistutus = muistutukset.get(position);
         holder.pvmTextView.setText(valittuMuistutus.getPvm());
-        holder.mitattavatTextView.setText(valittuMuistutus.getMitattavat());
-        holder.lisatiedotTextView.setText(valittuMuistutus.getLisatiedot());
+
+        if (valittuMuistutus.getMitattavat().isEmpty()) {
+            holder.mitattavatTextView.setVisibility(View.GONE);
+        } else {
+            holder.mitattavatTextView.setText(valittuMuistutus.getMitattavat());
+        }
+
+        if (valittuMuistutus.getLisatiedot().isEmpty()) {
+            holder.lisatiedotTextView.setVisibility(View.GONE);
+        } else {
+            holder.lisatiedotTextView.setText(valittuMuistutus.getLisatiedot());
+        }
     }
 
     @Override

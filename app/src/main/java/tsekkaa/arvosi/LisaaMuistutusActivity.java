@@ -34,6 +34,8 @@ import java.util.Calendar;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class LisaaMuistutusActivity extends AppCompatActivity {
+    public static final String EXTRA_MITATTAVAT = "LisaaMuistutusActivity.mitattavatLista";
+    public static final String EXTRA_LISATIEDOT = "LisaaMuistutusActivity.lisatiedot";
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private TimePickerDialog.OnTimeSetListener timeSetListener;
     private static LocalDateTime now = LocalDateTime.now();
@@ -101,7 +103,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         vvEdit.setText(Integer.toString(vuosi));
         hhEdit.setText(Integer.toString(tunnit));
 
-        //Lisää alkuun nollan, jos minuutit < 10
+        //If minutes < 10, add a leading 0
         if (min < 10) {
             minEdit.setText("0" + Integer.toString(min));
         } else {
@@ -114,8 +116,8 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         happisaturaatioCheck = findViewById(R.id.happisaturaatioCheck);
         lisatiedot = findViewById(R.id.lisatiedotEdit);
 
-        //Numerokentät ovat linear layouteissa, joiden klikkaaminen avaa valikon
-        //Kun valikko suljetaan, jokaiseen kenttään jää arvo, joka oli silloin valittuna
+        //OnClickListener set for the whole container which contains the date fields
+        //Clicking anywhere within the container opens the date picker
         pvmContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,7 +131,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
             }
         });
 
-        //OnClickListener linear layoutille, joka näyttää kellonajat
+        //OnClickListener set for the container which contains the time fields
         kelloContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -165,14 +167,12 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
 
     public void lisaaMuistutus(View v) {
 
-        //Ottaa tekstikentistä arvot sillä hetkellä, kun "Lisää muistutus" -nappia painetaan
+        //Gets the current values from the text fields at the time when the button is pressed
         valittu_pv = Integer.parseInt((String) pvEdit.getText());
         valittu_kk = kuukaudet.indexOf(kkEdit.getText());
         valittu_vv = Integer.parseInt((String) vvEdit.getText());
         valittu_hh = Integer.parseInt((String) hhEdit.getText());
         valittu_min = Integer.parseInt((String) minEdit.getText());
-
-        valittu_hh -= 2;
         valittu_kk++;
 
         if (tarkistaKentat()) {
@@ -184,9 +184,16 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
             kesto = Duration.between(nyt, muistutusAika);
             aikaMilliSek = kesto.toMillis();
 
+            Log.d("", "" + aikaMilliSek + " ms");
+            Log.d("", "" + (aikaMilliSek/1000) + " s");
+            Log.d("", "" + (aikaMilliSek/1000)/60 + " min");
+            Log.d("", "" + ((aikaMilliSek/1000)/60)/60 + " h");
+
+
             if (aikaMilliSek < 0) {
                 Toast.makeText(LisaaMuistutusActivity.this, "Ajankohta on mennyt", Toast.LENGTH_SHORT).show();
             } else {
+                //If the date is valid and no fields are empty, an alarm is set and saved to the database
                 tallennaMuistutus(valittu_vv, valittu_kk, valittu_pv, valittu_hh, valittu_min, mitattavatString, lisatiedotString);
                 asetaMuistutus(aikaMilliSek);
             }
@@ -195,11 +202,27 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         }
     }
 
+    //Creates a notification channel
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence kanava = "TsekkaaArvosiMuistutusKanava";
+            String kuvaus = "Tsekkaa Arvosi muistutukset";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel muistutusKanava = new NotificationChannel("tsekkaa_arvosi", kanava, importance);
+            muistutusKanava.setDescription(kuvaus);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(muistutusKanava);
+        }
+    }
+
+    //Sets an alarm and returns the user to the previous page
     private void asetaMuistutus(long aika) {
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent muistutus = new Intent(this, MuistutusBroadcastReceiver.class);
+        muistutus.putExtra(EXTRA_MITATTAVAT, mitattavatString);
+        muistutus.putExtra(EXTRA_LISATIEDOT, lisatiedotString);
         pendingIntent = PendingIntent.getBroadcast(this, 0, muistutus, 0);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, aika, pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+aikaMilliSek, pendingIntent);
 
         /* toistuva
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
@@ -212,7 +235,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
-    //Palauttaa stringin formaatissa, jonka Instant tulkitsee päivämääräksi
+    //Returns the selected date in a string format parseable by the Instant
     private String haeAikaString(int v, int kk, int pv, int h, int min) {
         String teksti = "" + v + "-";
 
@@ -244,6 +267,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         return teksti;
     }
 
+    //Checks if any fields are empty
     private boolean tarkistaKentat() {
         if (!verenpaineCheck.isChecked() && !sykeCheck.isChecked() &&
                 !verensokeriCheck.isChecked() && !happisaturaatioCheck.isChecked() && lisatiedot.getText().toString().trim().isEmpty()) {
@@ -252,25 +276,55 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         return true;
     }
 
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence kanava = "TsekkaaArvosiMuistutusKanava";
-            String kuvaus = "Tsekkaa Arvosi muistutukset";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel muistutusKanava = new NotificationChannel("tsekkaaarvosi", kanava, importance);
-            muistutusKanava.setDescription(kuvaus);
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(muistutusKanava);
-        }
-    }
-
+    //Saves the reminder to the database
     private void tallennaMuistutus(int v, int kk, int pv, int h, int min, String mitattavat, String lisatiedot)  {
         muistutusViewModel.lisaaMuistutus(new Muistutus(pv, kk, v, h, min, mitattavat, lisatiedot));
     }
 
+    //Returns a list of the selected things in string format
     private String haeMitattavat() {
-        return "Mittaa verenpaine, verensokeri ja syke";
+        boolean vp = verenpaineCheck.isChecked();
+        boolean s = sykeCheck.isChecked();
+        boolean vs = verensokeriCheck.isChecked();
+        boolean vh = happisaturaatioCheck.isChecked();
+
+        String str = "Mittaa ";
+
+        // :--------)
+        if (vp && s && vs && vh) {
+            str += "verenpaine, syke, verensokeri ja happisaturaatio";
+        } else if (vp && s && vs && !vh) {
+            str += "verenpaine, syke ja verensokeri";
+        } else if (vp && s && !vs && vh) {
+            str += "verenpaine, syke ja happisaturaatio";
+        } else if (vp && s && !vs && !vh) {
+            str += "verenpaine ja syke";
+        } else if (vp && !s && vs && vh) {
+            str += "verenpaine, verensokeri ja happisaturaatio";
+        } else if (vp && !s && vs && !vh) {
+            str += "verenpaine ja verensokeri";
+        } else if (vp && !s && !vs && vh) {
+            str += "verenpaine ja happisaturaatio";
+        } else if (vp && !s && !vs && !vh) {
+            str += "verenpaine";
+        } else if (!vp && s && vs && vh) {
+            str += "syke, verensokeri ja happisaturaatio";
+        } else if (!vp && s && vs && !vh) {
+            str += "syke ja verensokeri";
+        } else if (!vp && s && !vs && vh) {
+            str += "syke ja happisaturaatio";
+        } else if (!vp && s && !vs && !vh) {
+            str += "syke";
+        } else if (!vp && !s && vs && vh) {
+            str += "verensokeri ja happisaturaatio";
+        } else if (!vp && !s && vs && !vh) {
+            str += "verensokeri";
+        } else if (!vp && !s && !vs && vh) {
+            str += "happisaturaatio";
+        }
+        return str;
     }
+
 
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v){

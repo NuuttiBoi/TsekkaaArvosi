@@ -52,7 +52,6 @@ public class MuistutuksetActivity extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 muistutusViewModel.poistaMuistutus(adapter.haePaikka(viewHolder.getAdapterPosition()));
 
-
                 muistutusViewModel.haeMuistutukset().observe(MuistutuksetActivity.this, muistutukset -> {
                     Log.d("", "muistutusten lkm: " + muistutukset.size());
                     //poista hälytys

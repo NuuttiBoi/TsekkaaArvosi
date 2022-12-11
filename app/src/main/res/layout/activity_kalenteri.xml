@@ -18,15 +18,18 @@
 
         <Button
             android:id="@+id/muistutuksetLkm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_weight="1"
             android:backgroundTint="@color/custom_red"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             android:onClick="muistutuksetPressed"
-            android:text="0
-"
-            android:textColor="#ffffff" />
+            android:padding="0dp"
+            android:text="23"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            app:cornerRadius="25dp" />
 
         <CalendarView
             android:id="@+id/calendarView"

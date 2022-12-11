@@ -11,14 +11,16 @@ import androidx.core.app.NotificationManagerCompat;
 public class MuistutusBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+        String mitattavat = intent.getStringExtra(LisaaMuistutusActivity.EXTRA_MITATTAVAT);
+        String lisatiedot = intent.getStringExtra(LisaaMuistutusActivity.EXTRA_LISATIEDOT);
         Intent notifIntent = new Intent(context, MainActivity.class);
         notifIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notifIntent, 0);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "tsekkaaarvosi")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "tsekkaa_arvosi")
                 .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentTitle("muistutus")
-                .setContentText("wip")
+                .setContentTitle(mitattavat)
+                .setContentText(lisatiedot)
                 .setAutoCancel(true)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -26,7 +28,7 @@ public class MuistutusBroadcastReceiver extends BroadcastReceiver {
 
         NotificationManagerCompat notifManager = NotificationManagerCompat.from(context);
 
-        notifManager.notify(1000, builder.build());
+        notifManager.notify(11, builder.build());
     }
 }
 

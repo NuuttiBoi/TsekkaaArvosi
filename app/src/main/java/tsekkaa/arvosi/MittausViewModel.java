@@ -7,6 +7,10 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+/**
+ * Database transactions aren't carried out in the main thread to not disrupt the UI
+ */
+
 public class MittausViewModel extends AndroidViewModel {
     MittausRepository mittausRepository;
 

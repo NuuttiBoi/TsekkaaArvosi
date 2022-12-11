@@ -8,6 +8,14 @@ import androidx.loader.content.AsyncTaskLoader;
 
 import java.util.List;
 
+/**
+ * Inserting and deleting data asynchronously is handled by the repository by creating a subclass
+ * which extends AsyncTask and overriding doInBackground()
+ * Query results are wrapped in a LiveData object which is observed in the main thread in the activity
+ * This way data from the database can be inserted or deleted in the background in another thread
+ * while the app is running and will be updated onto the screen in real time
+ */
+
 public class MittausRepository {
 
     MittausDao mittausDao;
