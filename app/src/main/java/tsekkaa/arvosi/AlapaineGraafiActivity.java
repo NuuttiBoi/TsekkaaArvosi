@@ -108,10 +108,13 @@ public class AlapaineGraafiActivity extends AppCompatActivity {
 
             LineDataSet set1 = new LineDataSet(yValues,"Alapaine");
             set1.setFillAlpha(110);
-            set1.setColor(Color.BLUE);
+            set1.setCircleColor(Color.WHITE);
+            set1.setColor(Color.rgb(50, 205, 50));
             set1.setLineWidth(3f);
-            set1.setValueTextSize(10f);
+            set1.setValueTextSize(15f);
             set1.setValueTextColor(Color.BLUE);
+            set1.setDrawFilled(true);
+            set1.setFillColor(Color.rgb(50, 205, 50));
 
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
             dataSets.add(set1);

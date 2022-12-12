@@ -57,6 +57,7 @@ public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
     private PointsGraphSeries<DataPoint> pointSeries;
     private MittausViewModel mittausViewModel;
     private Button backButton;
+    private TextView yksikkoHsTextView;
 
     //Korjatkaa jos on väärää tietoa ^^'
     private final static double VERENSOKERIN_ALARAJA = 6.0;
@@ -65,9 +66,10 @@ public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_veren_sokeri_graafi);
+        setContentView(R.layout.activity_veren_happipitoisuus_graafi);
 
         this.backButton = findViewById(R.id.backButton);
+        this.yksikkoHsTextView = findViewById(R.id.yksikkoHsTextView);
         mChart = (LineChart) findViewById(R.id.verensokeriLinechart);
 
         //mChart.setOnChartGestureListener(TestiActivity.this);
@@ -121,10 +123,13 @@ public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
 
             LineDataSet set1 = new LineDataSet(yValues, "Veren happipitoisuus");
             set1.setFillAlpha(110);
-            set1.setColor(Color.BLUE);
+            set1.setCircleColor(Color.WHITE);
+            set1.setColor(Color.rgb(50, 205, 50));
             set1.setLineWidth(3f);
-            set1.setValueTextSize(10f);
+            set1.setValueTextSize(15f);
             set1.setValueTextColor(Color.BLUE);
+            set1.setDrawFilled(true);
+            set1.setFillColor(Color.rgb(50, 205, 50));
 
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
             dataSets.add(set1);

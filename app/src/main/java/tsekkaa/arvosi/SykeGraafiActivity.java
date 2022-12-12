@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.LimitLine;
@@ -34,7 +35,7 @@ public class SykeGraafiActivity extends AppCompatActivity {
     private LineGraphSeries<DataPoint> lineSeries;
     private PointsGraphSeries<DataPoint> pointSeries;
     private MittausViewModel mittausViewModel;
-
+    private TextView yksikkoSykeTextView;
     private DataPoint[] dataPoints;
     private Button backButton;
 
@@ -49,7 +50,7 @@ public class SykeGraafiActivity extends AppCompatActivity {
 
         mChart = (LineChart) findViewById(R.id.linechart);
         this.backButton = findViewById(R.id.backButton);
-
+        this.yksikkoSykeTextView = findViewById(R.id.yksikkoSykeTextView);
         //mChart.setOnChartGestureListener(TestiActivity.this);
         //mChart.setOnChartValueSelectedListener(TestiActivity.this);
 
@@ -57,7 +58,7 @@ public class SykeGraafiActivity extends AppCompatActivity {
         mChart.setScaleEnabled(false);
 
         LimitLine upper_limit = new LimitLine(100, "Liian korkea");
-        upper_limit.setLineWidth(4f);
+        upper_limit.setLineWidth(3f);
         upper_limit.enableDashedLine(10f,10f,0f);
         upper_limit.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
         upper_limit.setTextSize(15f);
@@ -106,10 +107,13 @@ public class SykeGraafiActivity extends AppCompatActivity {
 
             LineDataSet set1 = new LineDataSet(yValues,"Syke");
             set1.setFillAlpha(110);
-            set1.setColor(Color.BLUE);
+            set1.setCircleColor(Color.WHITE);
+            set1.setColor(Color.rgb(50, 205, 50));
             set1.setLineWidth(3f);
-            set1.setValueTextSize(10f);
+            set1.setValueTextSize(15f);
             set1.setValueTextColor(Color.BLUE);
+            set1.setDrawFilled(true);
+            set1.setFillColor(Color.rgb(50, 205, 50));
 
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
             dataSets.add(set1);

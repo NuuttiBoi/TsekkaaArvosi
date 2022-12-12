@@ -59,7 +59,7 @@ public class YlapaineGraafiActivity extends AppCompatActivity {
         mChart.setScaleEnabled(false);
 
         LimitLine upper_limit = new LimitLine(135, "Liian korkea");
-        upper_limit.setLineWidth(4f);
+        upper_limit.setLineWidth(1f);
         upper_limit.enableDashedLine(10f,10f,0f);
         upper_limit.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
         upper_limit.setTextSize(10f);
@@ -108,10 +108,14 @@ public class YlapaineGraafiActivity extends AppCompatActivity {
 
             LineDataSet set1 = new LineDataSet(yValues,"Ylapaine");
             set1.setFillAlpha(110);
-            set1.setColor(Color.BLUE);
+            set1.setCircleColor(Color.WHITE);
+            set1.setColor(Color.rgb(50, 205, 50));
             set1.setLineWidth(3f);
-            set1.setValueTextSize(10f);
+            set1.setValueTextSize(15f);
             set1.setValueTextColor(Color.BLUE);
+            set1.setDrawFilled(true);
+            set1.setFillColor(Color.rgb(50, 205, 50));
+
 
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
             dataSets.add(set1);

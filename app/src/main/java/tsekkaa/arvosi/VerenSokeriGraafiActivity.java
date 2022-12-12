@@ -57,6 +57,7 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
     private PointsGraphSeries<DataPoint> pointSeries;
     private MittausViewModel mittausViewModel;
     private Button backButton;
+    private TextView yksikkoVsTextView;
 
     //Korjatkaa jos on väärää tietoa ^^'
     private final static double VERENSOKERIN_ALARAJA = 6.0;
@@ -68,6 +69,8 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_veren_sokeri_graafi);
 
         this.backButton = findViewById(R.id.backButton);
+        this.yksikkoVsTextView = findViewById(R.id.yksikkoVsTextView);
+
         mChart = (LineChart) findViewById(R.id.verensokeriLinechart);
 
         //mChart.setOnChartGestureListener(TestiActivity.this);
@@ -93,7 +96,7 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
         leftAxis.removeAllLimitLines();
         leftAxis.addLimitLine(upper_limit);
         leftAxis.addLimitLine(lower_limit);
-        leftAxis.setAxisMaximum(15f);
+        leftAxis.setAxisMaximum(17f);
         leftAxis.setAxisMinimum(0f);
         leftAxis.enableGridDashedLine(10f, 10f, 0);
         leftAxis.setDrawLimitLinesBehindData(true);
@@ -120,10 +123,13 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
 
             LineDataSet set1 = new LineDataSet(yValues, "Verensokeri");
             set1.setFillAlpha(110);
-            set1.setColor(Color.BLUE);
+            set1.setCircleColor(Color.WHITE);
+            set1.setColor(Color.rgb(50, 205, 50));
             set1.setLineWidth(3f);
-            set1.setValueTextSize(10f);
+            set1.setValueTextSize(15f);
             set1.setValueTextColor(Color.BLUE);
+            set1.setDrawFilled(true);
+            set1.setFillColor(Color.rgb(50, 205, 50));
 
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
             dataSets.add(set1);
