@@ -16,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -128,6 +129,16 @@ public class VerenSokeriKirjausActivity extends AppCompatActivity {
         startActivity(takaisin);
     }
     public void tallennaButtonPressed(View v){
+
+        if((pvmEditText.getText().toString().trim().length() < 1) ||
+                (verenSokeriTextEdit.getText().toString().trim().length() < 1) ||
+                (kuukausiEditText.getText().toString().trim().length() < 1) ||
+                (vuosiEditText.getText().toString().trim().length() < 1) ||
+                (tunnitEditText.getText().toString().trim().length() < 1) ||
+                (minuutitEditText.getText().toString().trim().length() < 1) ){
+            Toast.makeText(getApplicationContext(),"Tarkista, että et ole jättänyt tyhjiä kenttiä!",Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             LocalDate aika = LocalDate.now();

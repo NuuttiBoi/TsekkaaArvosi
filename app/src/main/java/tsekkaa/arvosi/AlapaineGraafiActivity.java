@@ -1,9 +1,12 @@
 package tsekkaa.arvosi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -39,6 +42,7 @@ public class AlapaineGraafiActivity extends AppCompatActivity {
     private DataPoint[] dataPoints;
     private Button backButton;
     private double mittauksetKaikki, mittauksetKeskiarvo;
+    private SharedPreferences sharedPref;
 
 
 
@@ -80,7 +84,7 @@ public class AlapaineGraafiActivity extends AppCompatActivity {
         leftAxis.addLimitLine(upper_limit);
         leftAxis.addLimitLine(lower_limit);
         leftAxis.setAxisMaximum(200f);
-        leftAxis.setAxisMinimum(0f);
+        leftAxis.setAxisMinimum(40f);
         leftAxis.enableGridDashedLine(10f, 10f, 0);
         leftAxis.setDrawLimitLinesBehindData(true);
 
@@ -132,6 +136,21 @@ public class AlapaineGraafiActivity extends AppCompatActivity {
             set1.setValueTextColor(Color.BLUE);
             set1.setDrawFilled(true);
             set1.setFillColor(Color.rgb(50, 205, 50));
+
+
+            sharedPref = getSharedPreferences("Asetukset", Context.MODE_PRIVATE);
+            if(sharedPref.getBoolean("Oletusteema", true)) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+            } else {
+                //If the user has unselected the default theme in the settings, use the theme that was last saved
+                if (sharedPref.getBoolean("Tummateema", sharedPref.getBoolean("Oletusteema", true))) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    mChart.getAxisLeft().setTextColor(Color.WHITE);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
+            }
+
 
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
             dataSets.add(set1);

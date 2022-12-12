@@ -16,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -126,6 +127,17 @@ public class VerenHappipitoisuusKirjausActivity extends AppCompatActivity {
         startActivity(takaisin);
     }
     public void tallennaButtonPressed(View v){
+
+        if((pvmEditText.getText().toString().trim().length() < 1) ||
+                (happisaturaatioEditText.getText().toString().trim().length() < 1) ||
+                (kuukausiEditText.getText().toString().trim().length() < 1) ||
+                (vuosiEditText.getText().toString().trim().length() < 1) ||
+                (tunnitEditText.getText().toString().trim().length() < 1) ||
+                (minuutitEditText.getText().toString().trim().length() < 1) ){
+            Toast.makeText(getApplicationContext(),"Tarkista, että et ole jättänyt tyhjiä kenttiä!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
 
         int vuosi = Integer.parseInt(vuosiEditText.getText().toString());
         int kuukausi = Integer.parseInt(kuukausiEditText.getText().toString());

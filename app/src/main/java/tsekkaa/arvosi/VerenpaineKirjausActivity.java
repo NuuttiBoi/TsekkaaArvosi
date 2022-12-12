@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,6 +17,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -137,9 +139,22 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
     }
 
     // Vie verenpaineen tarkkailu activityyn kun käyttäjä painaa nappia
-    public void vTallennaButton(View v){
+    public void vpTallennaButton(View v){
+
+        if((ylaPaineEditText.getText().toString().trim().length() < 1) ||
+                (alaPaineEditText.getText().toString().trim().length() < 1) ||
+                (sykeEditText.getText().toString().trim().length() < 1) ||
+                (pvmEditText.getText().toString().trim().length() < 1) ||
+                (kuukausiEditText.getText().toString().trim().length() < 1) ||
+                (vuosiEditText.getText().toString().trim().length() < 1) ||
+                (tunnitEditText.getText().toString().trim().length() < 1) ||
+                (minuutitEditText.getText().toString().trim().length() < 1) ){
+            Toast.makeText(getApplicationContext(),"Tarkista, että et ole jättänyt tyhjiä kenttiä!",Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         double ylaPaine = Double.parseDouble(ylaPaineEditText.getText().toString());
+
         double alaPaine = Double.parseDouble(alaPaineEditText.getText().toString());
         double syke = Double.parseDouble(sykeEditText.getText().toString());
         this.paiva = Integer.parseInt(pvmEditText.getText().toString());
@@ -153,10 +168,20 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
 
-        // Tallentaa mittauksen
-        mittausViewModel.lisaaMittaus(new Mittaus(ylaPaine,alaPaine, syke, null,
-                null, paiva, kuukausi, vuosi, tunnit,minuutit, calendar.getTimeInMillis()));
-        Log.d("", "tallenna");
+        if((ylaPaine > 40 && ylaPaine < 200) && (alaPaine > 40 && alaPaine > 200) && (syke > 20 && syke < 200) &&
+                (paiva > 0 && paiva <= 31) && (kuukausi > 0 && kuukausi <=12) && (vuosi > 2021 && vuosi < 2031) &&
+                (tunnit >= 0 && tunnit <= 23) && (minuutit >= 0 && minuutit < 60)){
+
+            // Tallentaa mittauksen
+            mittausViewModel.lisaaMittaus(new Mittaus(ylaPaine,alaPaine, syke, null,
+                    null, paiva, kuukausi, vuosi, tunnit,minuutit, calendar.getTimeInMillis()));
+            Log.d("", "tallenna");
+
+        } else {
+            Toast.makeText(getApplicationContext(),"Varmista, että syöttämäsi arvot ovat" +
+                    " viitearvojen mukaisia!",Toast.LENGTH_SHORT).show();
+
+        }
 
         mittausViewModel.haeMittaukset().observe(this, mittaukset -> {
             for (int i = 0; i < mittaukset.size(); i++) {
