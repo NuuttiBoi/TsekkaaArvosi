@@ -75,38 +75,30 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 }
+
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
-    public void testButtonPressed(View v){
-        Intent test = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            test = new Intent(this, KalenteriActivity.class);
-        }
-        startActivity(test);
-
-        //zoom in
-        //overridePendingTransition(R.anim.zoom_in, R.anim.static_anim);
-
-        //zoom out
-        //overridePendingTransition(R.anim.static_anim, R.anim.zoom_out);
-
-        //slide ylös
-        //overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
-
-        //slide alas
-        //overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_bottom);
-
-        //slide vasemmalle
-        //overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
-
-        //slide oikealle
-        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-    }
     public void KalenteriButtonPressed(View v) {
         Intent kalenteri = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             kalenteri = new Intent(this, KalenteriActivity.class);
         }
         startActivity(kalenteri);
+        //zoom in
+        //overridePendingTransition(R.anim.zoom_in, R.anim.static_anim);
+
+        //zoom out
+        //overridePendingTransition(R.anim.static_anim, R.anim.zoom_out);
+
+        //slide up
+        //overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
+
+        //slide down
+        //overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_bottom);
+
+        //slide to the left
+        //overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+
+        //slide to the right
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 }
