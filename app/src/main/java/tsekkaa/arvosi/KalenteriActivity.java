@@ -25,8 +25,11 @@ public class KalenteriActivity extends AppCompatActivity {
     private int paiva, kuukausi, vuosi;
     public static final String EXTRA_PVMLISTA = "KalenteriActivity.pvmLista";
     private static LocalDateTime now = LocalDateTime.now();
-    private ArrayList<Integer> pvmLista; //Intentissä lähetettävä lista, johon tulee vuosi, kk ja päivä
+
+    //A list containing the selected year, month and day, to be sent over to the next activity in the intent
+    private ArrayList<Integer> pvmLista;
     private Button lkmButton;
+    private long aikaNyt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +43,9 @@ public class KalenteriActivity extends AppCompatActivity {
         vuosi = now.getYear();
 
         pvmLista = new ArrayList<>();
-        CalendarView cal = (CalendarView) findViewById(R.id.calendarView);
+        CalendarView cal = findViewById(R.id.calendarView);
         lkmButton = findViewById(R.id.muistutuksetLkm);
+        aikaNyt = System.currentTimeMillis();
 
         cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -55,6 +59,23 @@ public class KalenteriActivity extends AppCompatActivity {
         });
 
         muistutusViewModel = new ViewModelProvider(this).get(MuistutusViewModel.class);
+
+        /**
+         * The red circle button shows only upcoming alarms. Once the alarm gone off, the
+         * popup message will remain on the user's screen until it's clicked off, but expired alarms
+         * are automatically deleted from the database to not take up storage
+         */
+        muistutusViewModel.haeMuistutukset().observe(this, muistutukset -> {
+            for (int i = 0; i < muistutukset.size(); i++) {
+                if (muistutukset.get(i).AikaMilliSek() < System.currentTimeMillis()) {
+                    muistutusViewModel.poistaMuistutus(muistutukset.get(i));
+                }
+            }
+        });
+
+        /**
+         * Display the current amount of upcoming alarms on the circle icon
+         */
         muistutusViewModel.haeMuistutukset().observe(this, new Observer<List<Muistutus>>() {
             @Override
             public void onChanged(List<Muistutus> muistutukset) {
@@ -62,6 +83,7 @@ public class KalenteriActivity extends AppCompatActivity {
             }
         });
     }
+
     //Checks if the selected button is pressed and sends the user to the selected page/ activity also sends values to the next activity
     public void setMuistutusPressed(View view) {
         Intent muistutus = new Intent(KalenteriActivity.this, LisaaMuistutusActivity.class);

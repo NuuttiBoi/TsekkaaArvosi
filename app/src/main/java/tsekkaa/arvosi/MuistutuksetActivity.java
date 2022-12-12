@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -44,11 +45,12 @@ public class MuistutuksetActivity extends AppCompatActivity {
         recView.setAdapter(adapter);
 
         muistutusViewModel = new ViewModelProvider(this).get(MuistutusViewModel.class);
-        muistutusViewModel.haeMuistutukset().observe(this, new Observer<List<Muistutus>>() {
+
+        muistutusViewModel.haeMuistutuksetKrono().observe(this, new Observer<List<Muistutus>>() {
             @Override
             public void onChanged(List<Muistutus> muistutukset) {
                 /**
-                 * Updates the view
+                 * Updates the view to the adapter
                  */
                 adapter.naytaMuistutukset(muistutukset);
             }
@@ -74,6 +76,8 @@ public class MuistutuksetActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 muistutusViewModel.poistaMuistutus(adapter.haePaikka(viewHolder.getAdapterPosition()));
+
+                Toast.makeText(MuistutuksetActivity.this, "Muistutus poistettu", Toast.LENGTH_SHORT).show();
 
                 muistutusViewModel.haeMuistutukset().observe(MuistutuksetActivity.this, muistutukset -> {
                     Log.d("", "muistutusten lkm: " + muistutukset.size());

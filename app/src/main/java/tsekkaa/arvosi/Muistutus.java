@@ -5,6 +5,16 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Calendar;
+
+/**
+ * A reminder object with a timestamp
+ *
+ * @author  Matleena Kankaanpää
+ * @version 1.0
+ * @since   2022-12-14
+ */
+
 @Entity
 public class Muistutus {
     @PrimaryKey(autoGenerate = true)
@@ -125,5 +135,14 @@ public class Muistutus {
             pvm += "0";
         }
         return pvm + this.minuutit;
+    }
+
+    /**
+     * @return The date in milliseconds
+     */
+    public long AikaMilliSek() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(this.vuosi, this.kuukausi-1, this.paiva, this.tunnit, this.minuutit, 0);
+        return cal.getTimeInMillis();
     }
 }
