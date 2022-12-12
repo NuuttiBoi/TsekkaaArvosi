@@ -46,7 +46,7 @@ public class YlapaineGraafiActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_testi);
+        setContentView(R.layout.activity_ylapaine_graafi);
 
         mChart = (LineChart) findViewById(R.id.linechart);
         this.backButton = findViewById(R.id.backButton);
