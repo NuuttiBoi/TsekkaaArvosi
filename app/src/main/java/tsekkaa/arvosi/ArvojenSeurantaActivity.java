@@ -28,4 +28,12 @@ public class ArvojenSeurantaActivity extends AppCompatActivity {
         Intent aLaheta = new Intent(this, SykeGraafiActivity.class);
         startActivity(aLaheta);
     }
+    public void ylapaineButton(View v){
+        Intent aLaheta = new Intent(this, YlapaineGraafiActivity.class);
+        startActivity(aLaheta);
+    }
+    public void alapaineButton(View v){
+        Intent aLaheta = new Intent(this, AlapaineGraafiActivity.class);
+        startActivity(aLaheta);
+    }
 }

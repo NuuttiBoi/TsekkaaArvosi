@@ -121,8 +121,9 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
             LineDataSet set1 = new LineDataSet(yValues, "Verensokeri");
             set1.setFillAlpha(110);
             set1.setColor(Color.BLUE);
-            set1.setLineWidth(2f);
-            set1.setValueTextColor(Color.RED);
+            set1.setLineWidth(3f);
+            set1.setValueTextSize(10f);
+            set1.setValueTextColor(Color.BLUE);
 
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
             dataSets.add(set1);

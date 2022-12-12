@@ -122,8 +122,9 @@ public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
             LineDataSet set1 = new LineDataSet(yValues, "Veren happipitoisuus");
             set1.setFillAlpha(110);
             set1.setColor(Color.BLUE);
-            set1.setLineWidth(2f);
-            set1.setValueTextColor(Color.RED);
+            set1.setLineWidth(3f);
+            set1.setValueTextSize(10f);
+            set1.setValueTextColor(Color.BLUE);
 
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
             dataSets.add(set1);
