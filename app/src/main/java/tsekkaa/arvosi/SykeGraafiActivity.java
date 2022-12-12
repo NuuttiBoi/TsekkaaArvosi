@@ -3,19 +3,13 @@ package tsekkaa.arvosi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -23,32 +17,16 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.listener.OnChartGestureListener;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.jjoe64.graphview.DefaultLabelFormatter;
-import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
-import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.PointsGraphSeries;
-import com.jjoe64.graphview.series.Series;
 
-import java.text.Format;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 
-public class VerenpaineGraafiActivity extends AppCompatActivity {
+public class SykeGraafiActivity extends AppCompatActivity {
 
     private static final String TAG = "TestiActivity";
 
@@ -56,10 +34,6 @@ public class VerenpaineGraafiActivity extends AppCompatActivity {
     private LineGraphSeries<DataPoint> lineSeries;
     private PointsGraphSeries<DataPoint> pointSeries;
     private MittausViewModel mittausViewModel;
-
-    //Korjatkaa jos on väärää tietoa ^^'
-    private final static double VERENSOKERIN_ALARAJA = 6.0;
-    private final static double VERENSOKERIN_YLARAJA = 7.0;
 
     private DataPoint[] dataPoints;
     private Button backButton;

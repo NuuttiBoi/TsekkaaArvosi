@@ -173,7 +173,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
 
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void aLahetaButton(View v){
-        Intent aLaheta = new Intent(this, VerenpaineGraafiActivity.class);
+        Intent aLaheta = new Intent(this, ArvojenSeurantaActivity.class);
         startActivity(aLaheta);
     }
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
