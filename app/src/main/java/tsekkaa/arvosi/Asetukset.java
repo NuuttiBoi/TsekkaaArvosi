@@ -50,8 +50,8 @@ public class Asetukset extends AppCompatActivity {
     }
     //Checks if one of the lists tag is clicked and after clicking one of them it takes you to the selected activity
     public void omatTiedotButtonPressed(View v){
-        Intent omatTiedot = new Intent(this, OmatTiedot.class);
-        startActivity(omatTiedot);
+        Intent omaTTiedot = new Intent(this, OmatTiedot.class);
+        startActivity(omaTTiedot);
     }
 
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
