@@ -38,7 +38,9 @@ import java.util.Calendar;
  * An activity for setting a new notification at a specified time, adding a custom message and details,
  * and saving the notification object to the database
  *
- * @author Matleena Kankaanpää
+ * @author  Matleena Kankaanpää
+ * @version 1.0
+ * @since   2022-12-14
  */
 
 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -68,6 +70,8 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
     private Calendar cal;
     private NotificationSetter notificationSetter;
     private long aikaMilliSek;
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +83,8 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         pvmLista = intent.getIntegerArrayListExtra(KalenteriActivity.EXTRA_PVMLISTA);
 
         notificationSetter = new NotificationSetter(this);
-
         muistutusViewModel = new ViewModelProvider(this).get(MuistutusViewModel.class);
+
         pvmContainer = findViewById(R.id.pvmContainer);
         kelloContainer = findViewById(R.id.kelloContainer);
         pvEdit = findViewById(R.id.pvEdit);
@@ -133,6 +137,18 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         happisaturaatioCheck = findViewById(R.id.happisaturaatioCheck);
         lisatiedot = findViewById(R.id.lisatiedotEdit);
         toistuvaCheck = findViewById(R.id.toistuvaCheck);
+
+        /**
+         * Get the running request code number from Shared Preferences. A unique request code is
+         * needed for distinguishing and managing alarms.
+         * The autoincrementing id (from the database) would have been a more intuitive identifier,
+         * but it created problems if all notifications had been deleted and the activity tried to
+         * reference the array while it was empty.
+         * That's why the running counter is stored in SharedPreferences.
+         */
+        sharedPref = getSharedPreferences("Muistutukset", Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+        requestCode = sharedPref.getInt("requestCode", 1);
 
         /**
          * OnClickListener set for the whole container which contains the date fields
@@ -218,6 +234,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
 
             /**
              * Make sure the selected time isn't in the past by comparing it to the current time
+             * Cannot proceed if the time is in the past and the user will be warned
              */
             if (aikaMilliSek < System.currentTimeMillis()) {
                 Toast.makeText(LisaaMuistutusActivity.this, "Ajankohta on mennyt", Toast.LENGTH_SHORT).show();
@@ -229,8 +246,19 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
                      * If the date is valid and no fields are empty, an alarm is set and saved to the database
                      * The date system uses 0-11 indexing for months, so months must be incremented again
                      */
-                    tallennaMuistutus(valittu_vv, (valittu_kk+1), valittu_pv, valittu_hh, valittu_min, mitattavatString, lisatiedotString);
-                    asetaMuistutus(aikaMilliSek);
+                    tallennaMuistutus(valittu_vv, (valittu_kk+1), valittu_pv, valittu_hh, valittu_min, mitattavatString, lisatiedotString, requestCode);
+                    asetaMuistutus(aikaMilliSek, requestCode);
+
+                    Log.d("", "last req id added: " + requestCode);
+
+                    /**
+                     * Increment the request code every time a new notification is created so it will be unique for the next notification
+                     */
+                    requestCode++;
+                    editor.putInt("requestCode", requestCode);
+                    editor.apply();
+
+                    Log.d("", "req code incremented: " + requestCode);
                 }
             }
         } else {
@@ -238,49 +266,20 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         }
     }
 
-    //A notification channel is created
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence kanava = "TsekkaaArvosiMuistutusKanava";
-            String kuvaus = "Tsekkaa Arvosi muistutukset";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel muistutusKanava = new NotificationChannel("tsekkaa_arvosi", kanava, importance);
-            muistutusKanava.setDescription(kuvaus);
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(muistutusKanava);
-        }
-    }
-
     /*The alarm time and contents are sent to the Alert Receiver in an intent
     After that the user is returned to the previous page */
-    private void asetaMuistutus(long aika) {
-        /*
-         * Get the running request code number from Shared Preferences. A unique request code is needed for
-         * distinguishing and managing alarms
-         */
-
-        SharedPreferences sharedPref = getSharedPreferences("Muistutukset", Context.MODE_PRIVATE);
-        requestCode = sharedPref.getInt("requestCode", 1);
-
+    private void asetaMuistutus(long aika, int requestCode) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
+        intent.putExtra(EXTRA_MITATTAVAT, mitattavatString);
+        intent.putExtra(EXTRA_LISATIEDOT, lisatiedotString);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, requestCode, intent, 0);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, aika, pendingIntent);
-
-        /*
-         * Increment the request code every time a new notification is created
-         */
-        requestCode++;
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("requestCode", requestCode);
-        editor.apply();
 
         /* toistuva
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
               AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
         */
-        Log.d("", "alarm req code: " + requestCode);
-
 
         Toast.makeText(this, "Muistutus asetettu", Toast.LENGTH_SHORT).show();
         Intent takaisin = new Intent(this, KalenteriActivity.class);
@@ -298,8 +297,8 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
     }
 
     //Saves the reminder into the database as a reminder object
-    private void tallennaMuistutus(int v, int kk, int pv, int h, int min, String mitattavat, String lisatiedot)  {
-        muistutusViewModel.lisaaMuistutus(new Muistutus(pv, kk, v, h, min, mitattavat, lisatiedot));
+    private void tallennaMuistutus(int v, int kk, int pv, int h, int min, String mitattavat, String lisatiedot, int reqCode)  {
+        muistutusViewModel.lisaaMuistutus(new Muistutus(pv, kk, v, h, min, mitattavat, lisatiedot, reqCode));
     }
 
     /* Returns a list of the selected items in string format
@@ -311,39 +310,39 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         boolean vs = verensokeriCheck.isChecked();
         boolean vh = happisaturaatioCheck.isChecked();
 
-        String str = "Mittaa ";
+        String str = "";
 
         // :--------)
         if (vp && s && vs && vh) {
-            str += "verenpaine, syke, verensokeri ja happisaturaatio";
+            str += "Mittaa verenpaine, syke, verensokeri ja happisaturaatio";
         } else if (vp && s && vs && !vh) {
-            str += "verenpaine, syke ja verensokeri";
+            str += "Mittaa verenpaine, syke ja verensokeri";
         } else if (vp && s && !vs && vh) {
-            str += "verenpaine, syke ja happisaturaatio";
+            str += "Mittaa verenpaine, syke ja happisaturaatio";
         } else if (vp && s && !vs && !vh) {
-            str += "verenpaine ja syke";
+            str += "Mittaa verenpaine ja syke";
         } else if (vp && !s && vs && vh) {
-            str += "verenpaine, verensokeri ja happisaturaatio";
+            str += "Mittaa verenpaine, verensokeri ja happisaturaatio";
         } else if (vp && !s && vs && !vh) {
-            str += "verenpaine ja verensokeri";
+            str += "Mittaa verenpaine ja verensokeri";
         } else if (vp && !s && !vs && vh) {
-            str += "verenpaine ja happisaturaatio";
+            str += "Mittaa verenpaine ja happisaturaatio";
         } else if (vp && !s && !vs && !vh) {
-            str += "verenpaine";
+            str += "Mittaa verenpaine";
         } else if (!vp && s && vs && vh) {
-            str += "syke, verensokeri ja happisaturaatio";
+            str += "Mittaa syke, verensokeri ja happisaturaatio";
         } else if (!vp && s && vs && !vh) {
-            str += "syke ja verensokeri";
+            str += "Mittaa syke ja verensokeri";
         } else if (!vp && s && !vs && vh) {
-            str += "syke ja happisaturaatio";
+            str += "Mittaa syke ja happisaturaatio";
         } else if (!vp && s && !vs && !vh) {
-            str += "syke";
+            str += "Mittaa syke";
         } else if (!vp && !s && vs && vh) {
-            str += "verensokeri ja happisaturaatio";
+            str += "Mittaa verensokeri ja happisaturaatio";
         } else if (!vp && !s && vs && !vh) {
-            str += "verensokeri";
+            str += "Mittaa verensokeri";
         } else if (!vp && !s && !vs && vh) {
-            str += "happisaturaatio";
+            str += "Mittaa happisaturaatio";
         }
         return str;
     }

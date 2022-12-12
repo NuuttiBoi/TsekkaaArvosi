@@ -44,6 +44,7 @@ public class NotificationSetter extends ContextWrapper {
         return new NotificationCompat.Builder(getApplicationContext(), kanavaID)
                 .setContentTitle(mitattavat)
                 .setContentText(lisatiedot)
+                .setAutoCancel(true)
                 .setSmallIcon(R.drawable.popup);
     }
 }

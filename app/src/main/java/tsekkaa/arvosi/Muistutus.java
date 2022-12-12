@@ -32,7 +32,10 @@ public class Muistutus {
     @ColumnInfo(name = "lisatiedot")
     private String lisatiedot;
 
-    public Muistutus(int paiva, int kuukausi, int vuosi, int tunnit, int minuutit, String mitattavat, String lisatiedot) {
+    @ColumnInfo(name = "requestCode")
+    private int requestCode;
+
+    public Muistutus(int paiva, int kuukausi, int vuosi, int tunnit, int minuutit, String mitattavat, String lisatiedot, int requestCode) {
         this.paiva = paiva;
         this.kuukausi = kuukausi;
         this.vuosi = vuosi;
@@ -40,6 +43,7 @@ public class Muistutus {
         this.minuutit = minuutit;
         this.mitattavat = mitattavat;
         this.lisatiedot = lisatiedot;
+        this.requestCode = requestCode;
     }
 
     public int getId() {
@@ -101,6 +105,8 @@ public class Muistutus {
     public String getLisatiedot() {
         return lisatiedot;
     }
+
+    public int getRequestCode() { return requestCode; }
 
     public void setLisatiedot(String lisatiedot) {
         this.lisatiedot = lisatiedot;

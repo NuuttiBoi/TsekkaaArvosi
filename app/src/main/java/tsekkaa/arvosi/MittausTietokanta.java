@@ -14,7 +14,7 @@ import androidx.room.RoomDatabase;
  * https://www.youtube.com/watch?v=ARpn-1FPNE4&list=PLrnPJCHvNZuDihTpkRs6SpZhqgBqPU118
  */
 
-@Database(entities = {Mittaus.class, Muistutus.class}, version = 6)
+@Database(entities = {Mittaus.class, Muistutus.class}, version = 7)
 public abstract class MittausTietokanta extends RoomDatabase {
 
     /**
