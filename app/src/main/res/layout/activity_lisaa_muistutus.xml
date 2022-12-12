@@ -50,6 +50,7 @@
             android:id="@+id/verenpaineCheck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
             android:text="Verenpaine"
             android:textAllCaps="false"
             android:textOff="Verenpaine"
@@ -64,11 +65,13 @@
             android:id="@+id/sykeCheck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
             android:text="Syke"
             android:textAllCaps="false"
             android:textOff="Syke"
             android:textOn="Syke"
             android:textSize="16sp"
+
             app:layout_constraintBottom_toTopOf="@+id/verensokeriCheck"
             app:layout_constraintTop_toBottomOf="@+id/verenpaineCheck"
             tools:layout_editor_absoluteX="127dp" />
@@ -77,9 +80,11 @@
             android:id="@+id/verensokeriCheck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
             android:text="Verensokeri"
             android:textAllCaps="false"
             android:textOff="Verensokeri"
+            android:textOn="Verensokeri"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/happisaturaatioCheck"
             app:layout_constraintTop_toBottomOf="@+id/sykeCheck"
@@ -89,6 +94,7 @@
             android:id="@+id/happisaturaatioCheck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
             android:text="Happisaturaatio"
             android:textAllCaps="false"
             android:textOff="Happisaturaatio"
@@ -106,15 +112,6 @@
             android:hint="Lisätietoja"
             android:inputType="none"
             android:minHeight="48dp" />
-
-        <CheckBox
-            android:id="@+id/toistuvaCheck"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:checked="false"
-            android:gravity="center"
-            android:text="Toistuva" />
     </LinearLayout>
 
     <Button
@@ -158,6 +155,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textAlignment="center"
             android:background="@drawable/rounded_corner"
             android:paddingLeft="@dimen/rounded_corner_padding"
             android:paddingRight="@dimen/rounded_corner_padding"
@@ -177,6 +175,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textAlignment="center"
             android:background="@drawable/rounded_corner"
             android:paddingLeft="@dimen/rounded_corner_padding"
             android:paddingRight="@dimen/rounded_corner_padding"
@@ -197,6 +196,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textAlignment="center"
             android:background="@drawable/rounded_corner"
             android:paddingLeft="@dimen/rounded_corner_padding"
             android:paddingRight="@dimen/rounded_corner_padding"
@@ -220,6 +220,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textAlignment="center"
             android:background="@drawable/rounded_corner"
             android:paddingLeft="@dimen/rounded_corner_padding"
             android:paddingRight="@dimen/rounded_corner_padding"
@@ -240,6 +241,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/rounded_corner"
+            android:textAlignment="center"
             android:paddingLeft="@dimen/rounded_corner_padding"
             android:paddingRight="@dimen/rounded_corner_padding"
             android:textColor="@color/tausta_dark"

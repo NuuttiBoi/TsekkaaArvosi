@@ -60,7 +60,6 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
     //Creates a list
     private ArrayList<String> kuukaudet;
     private ToggleButton verenpaineCheck, sykeCheck, verensokeriCheck, happisaturaatioCheck;
-    private CheckBox toistuvaCheck;
     //Creates edittext
     private EditText lisatiedot;
     private MuistutusViewModel muistutusViewModel;
@@ -136,7 +135,44 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         verensokeriCheck = findViewById(R.id.verensokeriCheck);
         happisaturaatioCheck = findViewById(R.id.happisaturaatioCheck);
         lisatiedot = findViewById(R.id.lisatiedotEdit);
-        toistuvaCheck = findViewById(R.id.toistuvaCheck);
+
+        verenpaineCheck.setBackgroundColor(Color.GRAY);
+        sykeCheck.setBackgroundColor(Color.GRAY);
+        verensokeriCheck.setBackgroundColor(Color.GRAY);
+        happisaturaatioCheck.setBackgroundColor(Color.GRAY);
+
+        verenpaineCheck.setOnClickListener(view -> {
+            if (verenpaineCheck.isChecked()) {
+                verenpaineCheck.setBackgroundColor(androidx.appcompat.R.attr.colorPrimary);
+            } else {
+                verenpaineCheck.setBackgroundColor(Color.GRAY);
+            }
+        });
+
+        sykeCheck.setOnClickListener(view -> {
+            if (sykeCheck.isChecked()) {
+                sykeCheck.setBackgroundColor(androidx.appcompat.R.attr.colorPrimary);
+            } else {
+                sykeCheck.setBackgroundColor(Color.GRAY);
+            }
+        });
+
+        verensokeriCheck.setOnClickListener(view -> {
+            if (verensokeriCheck.isChecked()) {
+                verensokeriCheck.setBackgroundColor(androidx.appcompat.R.attr.colorPrimary);
+            } else {
+                verensokeriCheck.setBackgroundColor(Color.GRAY);
+            }
+        });
+
+        happisaturaatioCheck.setOnClickListener(view -> {
+            if (happisaturaatioCheck.isChecked()) {
+                happisaturaatioCheck.setBackgroundColor(androidx.appcompat.R.attr.colorPrimary);
+            } else {
+                happisaturaatioCheck.setBackgroundColor(Color.GRAY);
+            }
+        });
+
 
         /**
          * Get the running request code number from Shared Preferences. A unique request code is
@@ -239,27 +275,19 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
             if (aikaMilliSek < System.currentTimeMillis()) {
                 Toast.makeText(LisaaMuistutusActivity.this, "Ajankohta on mennyt", Toast.LENGTH_SHORT).show();
             } else {
-                if (toistuvaCheck.isChecked()) {
-                    //intent
-                } else {
-                    /**
-                     * If the date is valid and no fields are empty, an alarm is set and saved to the database
-                     * The date system uses 0-11 indexing for months, so months must be incremented again
-                     */
-                    tallennaMuistutus(valittu_vv, (valittu_kk+1), valittu_pv, valittu_hh, valittu_min, mitattavatString, lisatiedotString, requestCode);
-                    asetaMuistutus(aikaMilliSek, requestCode);
+                /**
+                 * If the date is valid and no fields are empty, an alarm is set and saved to the database
+                 * The date system uses 0-11 indexing for months, so months must be incremented again
+                 */
+                tallennaMuistutus(valittu_vv, (valittu_kk+1), valittu_pv, valittu_hh, valittu_min, mitattavatString, lisatiedotString, requestCode);
+                asetaMuistutus(aikaMilliSek, requestCode);
 
-                    Log.d("", "last req id added: " + requestCode);
-
-                    /**
-                     * Increment the request code every time a new notification is created so it will be unique for the next notification
-                     */
-                    requestCode++;
-                    editor.putInt("requestCode", requestCode);
-                    editor.apply();
-
-                    Log.d("", "req code incremented: " + requestCode);
-                }
+                /**
+                 * Increment the request code every time a new notification is created so it will be unique for the next notification
+                 */
+                requestCode++;
+                editor.putInt("requestCode", requestCode);
+                editor.apply();
             }
         } else {
             Toast.makeText(LisaaMuistutusActivity.this, "Kenttä ei voi olla tyhjä", Toast.LENGTH_SHORT).show();
@@ -274,16 +302,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_MITATTAVAT, mitattavatString);
         intent.putExtra(EXTRA_LISATIEDOT, lisatiedotString);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, requestCode, intent, 0);
-        //alarmManager.setExact(AlarmManager.RTC_WAKEUP, aika, pendingIntent);
-
-        long min_ms = 1000*60;
-
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, aika, 2*min_ms, pendingIntent);
-
-        /* toistuva
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
-              AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
-        */
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, aika, pendingIntent);
 
         Toast.makeText(this, "Muistutus asetettu", Toast.LENGTH_SHORT).show();
         Intent takaisin = new Intent(this, KalenteriActivity.class);
