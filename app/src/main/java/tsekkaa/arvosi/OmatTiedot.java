@@ -8,6 +8,10 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * In this activity you can write your name and age here
+ * @author Tia Eränen
+ */
 public class OmatTiedot extends AppCompatActivity {
     private EditText nimi, ika;
     private Button tallenna;
@@ -20,10 +24,13 @@ public class OmatTiedot extends AppCompatActivity {
         this.nimi = findViewById(R.id.nimiEditText);
         this.ika = findViewById(R.id.ikaEditText);
         this.tallenna = findViewById(R.id.otTallennaButton);
-
         }
 
-        public void otTallennaButtonPressed(View v){
+    /**
+     * Returns user to the settings activity
+     * @param v Button that is pressed
+     */
+    public void otTallennaButtonPressed(View v){
             Intent tallenna = new Intent(this, Asetukset.class);
             String message = "Käyttäjä: " + nimi;
             tallenna.putExtra(tallenna.EXTRA_TEXT, message);

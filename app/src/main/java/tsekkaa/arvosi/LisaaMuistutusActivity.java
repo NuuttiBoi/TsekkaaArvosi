@@ -371,6 +371,11 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
     }
 
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
+
+    /**
+     * Takes you to calender
+     * @param v Button that is pressed
+     */
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, KalenteriActivity.class);
         startActivity(takaisin);

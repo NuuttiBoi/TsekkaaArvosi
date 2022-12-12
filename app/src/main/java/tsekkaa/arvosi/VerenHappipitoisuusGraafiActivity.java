@@ -49,7 +49,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-
+/**
+ * Creates a graph for oxygen saturation
+ * @author Nuutti Turunen
+ */
 public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
 
     private static final String TAG = "TestiActivity";
@@ -187,7 +190,10 @@ public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
 
         });
     }
-
+    /**
+     * Takes you back to mainactivity
+     * @param v Button that is pressed
+     */
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, MainActivity.class);
         startActivity(takaisin);

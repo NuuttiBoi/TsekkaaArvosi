@@ -10,6 +10,10 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+/**
+ *
+ * @author
+ */
 public class NotificationSetter extends ContextWrapper {
     public static final String kanavaID = "TsekkaaArvosi";
     public static final String kanavaNimi = "MuistutusKanava";

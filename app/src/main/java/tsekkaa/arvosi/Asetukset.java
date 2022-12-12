@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Settings activity
+ * @author Tia Eränen
+ */
 public class Asetukset extends AppCompatActivity {
     //Creates buttons
     private Button ilmoitukset;
@@ -38,22 +42,38 @@ public class Asetukset extends AppCompatActivity {
         String message = tallenna.getStringExtra(tallenna.EXTRA_TEXT);
         kayttaja.setText(message);
     }
+
+    /**
+     * Takes you to muistutuksetactivity
+     * @param v Button that is pressed
+     */
     //Checks if one of the lists tag is clicked and after clicking one of them it takes you to the selected activity
     public void ilmoituksetButtonPressed(View v){
         Intent ilmoitukset = new Intent(this, MuistutuksetActivity.class);
         startActivity(ilmoitukset);
     }
+    /**
+     * Takes you to teemaactivity
+     * @param v Button that is pressed
+     */
     //Checks if one of the lists tag is clicked and after clicking one of them it takes you to the selected activity
     public void teemaButtonPressed(View v){
         Intent teema = new Intent(this, TeemaActivity.class);
         startActivity(teema);
     }
+    /**
+     * Takes you to omattiedotactivity
+     * @param v Button that is pressed
+     */
     //Checks if one of the lists tag is clicked and after clicking one of them it takes you to the selected activity
     public void omatTiedotButtonPressed(View v){
         Intent omaTTiedot = new Intent(this, OmatTiedot.class);
         startActivity(omaTTiedot);
     }
-
+    /**
+     * Takes you back to mainactivity
+     * @param v Button that is pressed
+     */
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, MainActivity.class);

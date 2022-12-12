@@ -49,7 +49,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-
+/**
+ * Creates a graph for blood sugar
+ * @author Nuutti Turunen
+ */
 public class VerenSokeriGraafiActivity extends AppCompatActivity {
 
     private static final String TAG = "TestiActivity";
@@ -191,6 +194,10 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Takes you back to mainactivity
+     * @param v Button that is pressed
+     */
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, MainActivity.class);
         startActivity(takaisin);

@@ -8,6 +8,10 @@ import androidx.loader.content.AsyncTaskLoader;
 
 import java.util.List;
 
+/**
+ *
+ * @author
+ */
 public class MuistutusRepository {
 
     private MuistutusDao muistutusDao;

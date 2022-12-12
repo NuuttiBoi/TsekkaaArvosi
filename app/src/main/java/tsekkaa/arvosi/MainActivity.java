@@ -15,8 +15,11 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import java.text.*;
-//Riku Nokelainen
-//Frontpage
+
+/**
+ * Tsekkaa Arvosi apps frontpage
+ * @author Riku Nokelainen
+ */
 public class MainActivity extends AppCompatActivity {
 
     //Creates buttons
@@ -39,7 +42,10 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 ActivitySelectionSingleton.getInstance().getActivity()) //array of data
         );
-        //Checks if one of the lists tag is clicked and after clicking one of them it takes you to the selected activity
+
+        /**
+         * Checks if one of the lists tag is clicked and after clicking one of them it takes you to the selected activity
+         */
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -76,6 +82,10 @@ public class MainActivity extends AppCompatActivity {
         }
 }
 
+    /**
+     * Takes you to calender view
+     * @param v Button that is pressed
+     */
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void KalenteriButtonPressed(View v) {
         Intent kalenteri = null;

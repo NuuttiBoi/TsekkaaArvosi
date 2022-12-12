@@ -29,7 +29,10 @@ import com.jjoe64.graphview.series.PointsGraphSeries;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
+/**
+ * Creates a graph for diastolic blood pressure
+ * @author Nuutti Turunen
+ */
 public class AlapaineGraafiActivity extends AppCompatActivity {
 
     private static final String TAG = "TestiActivity";
@@ -182,6 +185,11 @@ public class AlapaineGraafiActivity extends AppCompatActivity {
         });
 
     }
+
+    /**
+     * Takes you back to mainactivity
+     * @param v Button that is pressed
+     */
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, MainActivity.class);

@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+/**
+ *
+ * @author
+ */
 public class ToistuvaMuistutusActivity extends AppCompatActivity {
 
     @Override
@@ -14,6 +18,10 @@ public class ToistuvaMuistutusActivity extends AppCompatActivity {
         setContentView(R.layout.activity_toistuva_muistutus);
     }
 
+    /**
+     *
+     * @param v
+     */
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v){
         Intent takaisin = null;

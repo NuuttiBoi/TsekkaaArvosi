@@ -23,6 +23,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 
+/**
+ *
+ * @author Nuutti Turunen
+ */
 public class VerenpaineKirjausActivity extends AppCompatActivity {
 
     private static final String TAG = "VerenPaineKirjausActivity";
@@ -197,11 +201,19 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Takes you back to arvojenseurantaactivity
+     * @param v Button that is pressed
+     */
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void aLahetaButton(View v){
         Intent aLaheta = new Intent(this, ArvojenSeurantaActivity.class);
         startActivity(aLaheta);
     }
+    /**
+     * Takes you back to mainactivity
+     * @param v Button that is pressed
+     */
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, MainActivity.class);

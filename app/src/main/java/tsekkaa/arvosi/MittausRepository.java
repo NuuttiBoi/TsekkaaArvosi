@@ -20,7 +20,7 @@ public class MittausRepository {
 
     MittausDao mittausDao;
 
-    //Säilyttää kontekstin koko sovelluksessa
+    //Maintains context in the whole application
     MittausRepository(Application application) {
         MittausTietokanta mittausTietokanta = MittausTietokanta.getInstance(application);
         mittausDao = mittausTietokanta.mittausDao();

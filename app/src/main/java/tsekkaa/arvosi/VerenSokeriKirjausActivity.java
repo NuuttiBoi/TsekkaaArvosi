@@ -21,6 +21,10 @@ import android.widget.Toast;
 import java.time.LocalDate;
 import java.util.Calendar;
 
+/**
+ *
+ * @author Nuutti Turunen
+ */
 public class VerenSokeriKirjausActivity extends AppCompatActivity {
     private Button backButton, tallennaButton, kalenteriButton, seurantaButton;
     private TextView kirjausTextView, verenSokeriTextView, aikaOhjeTextView;
@@ -123,6 +127,10 @@ public class VerenSokeriKirjausActivity extends AppCompatActivity {
         mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
     }
 
+    /**
+     * Takes you back to mainactivity
+     * @param v Button that is pressed
+     */
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, MainActivity.class);
@@ -172,6 +180,10 @@ public class VerenSokeriKirjausActivity extends AppCompatActivity {
         });
 
     }
+    /**
+     * Takes you to verensokerigraafiactivity
+     * @param v Button that is pressed
+     */
     public void seurantaButtonPressed(View v){
         Intent seuranta = new Intent(this, VerenSokeriGraafiActivity.class);
         startActivity(seuranta);

@@ -21,6 +21,10 @@ import android.widget.Toast;
 import java.time.LocalDate;
 import java.util.Calendar;
 
+/**
+ *
+ * @author Nuutti Turunen
+ */
 public class VerenHappipitoisuusKirjausActivity extends AppCompatActivity {
     private Button backbutton, tallennaButton, lahetaButton, seurantaButton, kalenteriButton;
     private TextView kirjausTextView, arvoOhjeTextView, happisaturaatioTextView,aikaOhjeTextView,
@@ -121,11 +125,19 @@ public class VerenHappipitoisuusKirjausActivity extends AppCompatActivity {
 
 
 
-
+    /**
+     * Takes you back to mainactivity
+     * @param v Button that is pressed
+     */
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, MainActivity.class);
         startActivity(takaisin);
     }
+
+    /**
+     *
+     * @param v Button that is pressed
+     */
     public void tallennaButtonPressed(View v){
 
         if((pvmEditText.getText().toString().trim().length() < 1) ||
@@ -169,6 +181,10 @@ public class VerenHappipitoisuusKirjausActivity extends AppCompatActivity {
         });
 
     }
+    /**
+     * Takes you back to verenhappipitoisuusgraafiactivity
+     * @param v Button that is pressed
+     */
     public void seurantaButtonPressed(View v){
         Intent seuranta = new Intent(this, VerenHappipitoisuusGraafiActivity.class);
         startActivity(seuranta);
