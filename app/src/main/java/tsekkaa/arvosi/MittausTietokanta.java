@@ -7,7 +7,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 /**
- * A database which stores measurement and reminder objects
+ * A Room database which stores measurement and reminder objects.
+ * The version number is incremented each time the database is updated
  * Done with the help of tutorials by Coding in Flow on YouTube
  *
  * https://www.youtube.com/watch?v=ARpn-1FPNE4&list=PLrnPJCHvNZuDihTpkRs6SpZhqgBqPU118

@@ -34,11 +34,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/**
+ * An activity for setting a new notification at a specified time, adding a custom message and details,
+ * and saving the notification object to the database
+ *
+ * @author Matleena Kankaanpää
+ */
+
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class LisaaMuistutusActivity extends AppCompatActivity {
     public static final String EXTRA_MITATTAVAT = "LisaaMuistutusActivity.mitattavatLista";
     public static final String EXTRA_LISATIEDOT = "LisaaMuistutusActivity.lisatiedot";
-    public static final String EXTRA_ID = "LisaaMuistutusActivity.id";
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private TimePickerDialog.OnTimeSetListener timeSetListener;
     private static LocalDateTime now = LocalDateTime.now();
@@ -48,8 +54,6 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
     private TextView pvEdit, kkEdit, vvEdit, hhEdit, minEdit;
     //Creates integer variable
     private int paiva, kuukausi, vuosi, tunnit, min, valittu_pv, valittu_kk, valittu_vv, valittu_hh, valittu_min;
-    private AlarmManager alarmManager;
-    private PendingIntent pendingIntent;
     private LinearLayout pvmContainer, kelloContainer;
     //Creates a list
     private ArrayList<String> kuukaudet;
@@ -57,15 +61,13 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
     private CheckBox toistuvaCheck;
     //Creates edittext
     private EditText lisatiedot;
-    private long aikaMilliSek;
-    private Instant muistutusAika, nyt;
-    private Duration kesto;
-    //Creates a string
-    private String aikaString;
     private MuistutusViewModel muistutusViewModel;
     //Creates strings
     private String mitattavatString, lisatiedotString;
-    private int id;
+    private int requestCode;
+    private Calendar cal;
+    private NotificationSetter notificationSetter;
+    private long aikaMilliSek;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,21 +75,20 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lisaa_muistutus);
         getSupportActionBar().hide();
 
-        createNotificationChannel();
-
         Intent intent = getIntent();
         pvmLista = intent.getIntegerArrayListExtra(KalenteriActivity.EXTRA_PVMLISTA);
 
-        muistutusViewModel = new ViewModelProvider(this).get(MuistutusViewModel.class);
-        pvmContainer = (LinearLayout) findViewById(R.id.pvmContainer);
-        kelloContainer = (LinearLayout) findViewById(R.id.kelloContainer);
-        pvEdit = (TextView) findViewById(R.id.pvEdit);
-        kkEdit = (TextView) findViewById(R.id.kkEdit);
-        vvEdit = (TextView) findViewById(R.id.vvEdit);
-        hhEdit = (TextView) findViewById(R.id.hhEdit);
-        minEdit = (TextView) findViewById(R.id.minEdit);
+        notificationSetter = new NotificationSetter(this);
 
-        //Numerokenttien alkuarvoiksi intentistä saatu päivämäärä ja tämänhetkinen aika
+        muistutusViewModel = new ViewModelProvider(this).get(MuistutusViewModel.class);
+        pvmContainer = findViewById(R.id.pvmContainer);
+        kelloContainer = findViewById(R.id.kelloContainer);
+        pvEdit = findViewById(R.id.pvEdit);
+        kkEdit = findViewById(R.id.kkEdit);
+        vvEdit = findViewById(R.id.vvEdit);
+        hhEdit = findViewById(R.id.hhEdit);
+        minEdit = findViewById(R.id.minEdit);
+
         //The initial value for number fields comes from the intent that has date and current time
         paiva = pvmLista.get(0);
         kuukausi = pvmLista.get(1); //int 1-12
@@ -109,7 +110,10 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         kuukaudet.add("marras");
         kuukaudet.add("joulu");
 
+        //Months were indexed 1-12 in the previous activity, so subtract 1 to adjust to the Date Picker
         kuukausi--;
+
+        cal = Calendar.getInstance();
 
         pvEdit.setText(Integer.toString(paiva));
         kkEdit.setText(kuukaudet.get(kuukausi));
@@ -130,8 +134,11 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         lisatiedot = findViewById(R.id.lisatiedotEdit);
         toistuvaCheck = findViewById(R.id.toistuvaCheck);
 
-        //OnClickListener set for the whole container which contains the date fields
-        //Clicking anywhere within the container opens the date picker
+        /**
+         * OnClickListener set for the whole container which contains the date fields
+         * Clicking anywhere within the container opens the date picker, not just clicking on
+         * the tiny text boxes
+         */
         pvmContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -145,7 +152,9 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
             }
         });
 
-        //OnClickListener set for the container which contains the time fields
+        /**
+         * Same as above but for the time fields
+         */
         kelloContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -175,60 +184,54 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
                 minEdit.setText(Integer.toString(i1));
             }
         };
-
-        Log.d("", "kuukausi: " + kuukausi);
     }
 
+    /**
+     * Called when the "Add reminder" button is clicked. Checks if the input is valid -
+     * if so, calls the functions for creating and saving a new notification object and setting an
+     * alarm at the specified time. If the user input is invalid, a warning will appear on the screen.
+     */
     public void lisaaMuistutus(View v) {
 
-        //Gets the current values from the text fields at the time when the button is pressed
+        /**
+         * Gets the current values from the text fields at the time when the button is pressed.
+         */
         valittu_pv = Integer.parseInt((String) pvEdit.getText());
         valittu_kk = kuukaudet.indexOf(kkEdit.getText());
         valittu_vv = Integer.parseInt((String) vvEdit.getText());
         valittu_hh = Integer.parseInt((String) hhEdit.getText());
         valittu_min = Integer.parseInt((String) minEdit.getText());
-        valittu_kk++;
 
+        /**
+         * Check for blank fields
+         */
         if (tarkistaKentat()) {
             mitattavatString = haeMitattavat();
             lisatiedotString = lisatiedot.getText().toString().trim();
-            aikaString = haeAikaString(valittu_vv, valittu_kk, valittu_pv, valittu_hh, valittu_min);
-            muistutusAika = Instant.parse(aikaString);
-            nyt = Instant.now();
-            kesto = Duration.between(nyt, muistutusAika);
-            aikaMilliSek = kesto.toMillis();
 
-            Log.d("", "" + aikaMilliSek + " ms");
-            Log.d("", "" + (aikaMilliSek/1000) + " s");
-            Log.d("", "" + (aikaMilliSek/1000)/60 + " min");
-            Log.d("", "" + ((aikaMilliSek/1000)/60)/60 + " h");
+            /**
+             * Set calendar values
+             * Convert the date to milliseconds and store it in a variable
+             */
+            cal.set(valittu_vv, valittu_kk, valittu_pv, valittu_hh, valittu_min, 0);
+            aikaMilliSek = cal.getTimeInMillis();
 
-            if (aikaMilliSek < 0) {
+            /**
+             * Make sure the selected time isn't in the past by comparing it to the current time
+             */
+            if (aikaMilliSek < System.currentTimeMillis()) {
                 Toast.makeText(LisaaMuistutusActivity.this, "Ajankohta on mennyt", Toast.LENGTH_SHORT).show();
             } else {
-                /**
-                 * Get the running id number from memory
-                 */
-
-                SharedPreferences sharedPref = getSharedPreferences("MuistutusID", Context.MODE_PRIVATE);
-                id = sharedPref.getInt("id", 1);
-
                 if (toistuvaCheck.isChecked()) {
                     //intent
                 } else {
-                    //If the date is valid and no fields are empty, an alarm is set and saved to the database
-                    tallennaMuistutus(valittu_vv, valittu_kk, valittu_pv, valittu_hh, valittu_min, mitattavatString, lisatiedotString);
+                    /**
+                     * If the date is valid and no fields are empty, an alarm is set and saved to the database
+                     * The date system uses 0-11 indexing for months, so months must be incremented again
+                     */
+                    tallennaMuistutus(valittu_vv, (valittu_kk+1), valittu_pv, valittu_hh, valittu_min, mitattavatString, lisatiedotString);
                     asetaMuistutus(aikaMilliSek);
                 }
-
-                /**
-                 * Increment id every time a new notification is set to it will be unique for each one
-                 */
-
-                id++;
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putInt("id", id);
-                editor.apply();
             }
         } else {
             Toast.makeText(LisaaMuistutusActivity.this, "Kenttä ei voi olla tyhjä", Toast.LENGTH_SHORT).show();
@@ -248,23 +251,35 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         }
     }
 
-    //The alarm time and contents are sent to the Broadcast Receiver in an intent
-    //After that the user is returned to the previous page
+    /*The alarm time and contents are sent to the Alert Receiver in an intent
+    After that the user is returned to the previous page */
     private void asetaMuistutus(long aika) {
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent muistutus = new Intent(this, MuistutusBroadcastReceiver.class);
-        muistutus.putExtra(EXTRA_MITATTAVAT, mitattavatString);
-        muistutus.putExtra(EXTRA_LISATIEDOT, lisatiedotString);
-        pendingIntent = PendingIntent.getBroadcast(this, 0, muistutus, 0);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, 1000, pendingIntent);
+        /*
+         * Get the running request code number from Shared Preferences. A unique request code is needed for
+         * distinguishing and managing alarms
+         */
 
-        //alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+aikaMilliSek, pendingIntent);
+        SharedPreferences sharedPref = getSharedPreferences("Muistutukset", Context.MODE_PRIVATE);
+        requestCode = sharedPref.getInt("requestCode", 1);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, requestCode, intent, 0);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, aika, pendingIntent);
+
+        /*
+         * Increment the request code every time a new notification is created
+         */
+        requestCode++;
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("requestCode", requestCode);
+        editor.apply();
 
         /* toistuva
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
               AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
         */
-        Log.d("", "alarm id: " + id);
+        Log.d("", "alarm req code: " + requestCode);
 
 
         Toast.makeText(this, "Muistutus asetettu", Toast.LENGTH_SHORT).show();
@@ -273,39 +288,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
-    //Returns the selected date in a string format parseable by the Instant
-    private String haeAikaString(int v, int kk, int pv, int h, int min) {
-        String teksti = "" + v + "-";
-
-        if (kk < 10) {
-            teksti += "0" + kk + "-";
-        } else {
-            teksti += kk + "-";
-        }
-
-        if (pv < 10) {
-            teksti += "0" + pv+ "T";
-        } else {
-            teksti += pv+ "T";
-        }
-
-        if (h < 10) {
-            teksti += "0" + h+ ":";
-        } else {
-            teksti += h+ ":";
-        }
-
-        if (min < 10) {
-            teksti += "0" + min;
-        } else {
-            teksti += min;
-        }
-
-        teksti += ":00.00Z";
-        return teksti;
-    }
-
-    //Checks if any fields are empty
+    //Returns true if at least one field isn't empty
     private boolean tarkistaKentat() {
         if (!verenpaineCheck.isChecked() && !sykeCheck.isChecked() &&
                 !verensokeriCheck.isChecked() && !happisaturaatioCheck.isChecked() && lisatiedot.getText().toString().trim().isEmpty()) {
@@ -314,12 +297,14 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         return true;
     }
 
-    //Saves the reminder to the database
+    //Saves the reminder into the database as a reminder object
     private void tallennaMuistutus(int v, int kk, int pv, int h, int min, String mitattavat, String lisatiedot)  {
         muistutusViewModel.lisaaMuistutus(new Muistutus(pv, kk, v, h, min, mitattavat, lisatiedot));
     }
 
-    //Returns a list of the selected things in string format
+    /* Returns a list of the selected items in string format
+    This string will be passed to the Broadcast Receiver and displayed on the alarm message on the
+    user's screen. */
     private String haeMitattavat() {
         boolean vp = verenpaineCheck.isChecked();
         boolean s = sykeCheck.isChecked();
@@ -362,7 +347,6 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         }
         return str;
     }
-
 
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v){
