@@ -26,9 +26,9 @@ public class TeemaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teema);
         getSupportActionBar().hide();
-
+        //Finds a button from layout with findViewById(R.id.(name of the button)) command and sets the found value to the created button
         backButton = findViewById(R.id.teemaBackButton);
-
+        //Finds a Switch from layout with findViewById(R.id.(name of the button)) command and sets the found value to the created switch
         oletusTSwitch = findViewById(R.id.oletusTSwitch);
         tummaTSwitch = findViewById(R.id.tummaTSwitch);
         SharedPreferences sharedPref = getSharedPreferences("Asetukset", Context.MODE_PRIVATE);
@@ -57,24 +57,24 @@ public class TeemaActivity extends AppCompatActivity {
 
         updateUI();
     }
-
+    //updates the set information to the places where the method is called
     private void updateUI() {
         if (oletusTSwitch.isChecked()) {
-            //Asettaa teeman automaattisesti puhelimen asetuksista
+            //Sets the theme automaticly from phones settings
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
             tummaTSwitch.setClickable(false);
             tummaTSwitch.setAlpha(.5f);
             Log.d("", "Oletusteema päällä");
 
         } else {
-            //Teeman pääsee vaihtamaan itse vain jos oletusteema ei ole valittuna
+            //Theme can be changed if the default theme is not selected
             tummaTSwitch.setClickable(true);
             tummaTSwitch.setAlpha(1f);
 
             Log.d("", "sharedpreferences: " + tummaTeema);
 
             vaihdaTeema(tummaTeema);
-
+            //Checks if the switch is clicked and changes between switches settings
             tummaTSwitch.setOnClickListener(view -> {
                 tummaTeema = !tummaTeema;
 
@@ -92,10 +92,10 @@ public class TeemaActivity extends AppCompatActivity {
 
     private void vaihdaTeema(boolean teema) {
         if (teema) {
-            //Jos käyttäjällä on valittuna tumma teema
+            //If user has dark theme selected
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
-            //Jos käyttäjällä on valittuna vaalea teema
+            //If user has light theme selected
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
     }
@@ -105,21 +105,4 @@ public class TeemaActivity extends AppCompatActivity {
         startActivity(takaisin);
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-
-        super.onSaveInstanceState(outState);
-    /*
-                NightMode = AppCompatDelegate.getDefaultNightMode();
-
-                sharedPreferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-
-                editor.putInt("NightModeInt", NightMode);
-                editor.apply();
-                */
-
-    }
-
 }

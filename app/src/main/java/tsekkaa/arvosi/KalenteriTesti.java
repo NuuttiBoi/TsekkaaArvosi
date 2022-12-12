@@ -33,7 +33,8 @@ public class KalenteriTesti extends AppCompatActivity {
         setContentView(R.layout.activity_kalenteri_testi);
 
 
-        // Kysyy permissionit manifestista, jos ne löytyvät niin kalenteri näkyy.
+
+        //Asks permission from manifest and if they are found then shows the calender
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}

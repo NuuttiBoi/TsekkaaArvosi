@@ -11,16 +11,21 @@ import java.util.List;
 public class MuistutusRepository {
 
     private MuistutusDao muistutusDao;
-    private LiveData<List<Muistutus>> muistutukset;
+    private LiveData<List<Muistutus>> muistutukset, muistutuksetKrono;
 
     public MuistutusRepository(Application application) {
         MittausTietokanta mittausTietokanta = MittausTietokanta.getInstance(application);
         muistutusDao = mittausTietokanta.muistutusDao();
         muistutukset = muistutusDao.haeMuistutukset();
+        muistutuksetKrono = muistutusDao.haeMuistutuksetKrono();
     }
 
     public LiveData<List<Muistutus>> haeMuistutukset() {
         return muistutukset;
+    }
+
+    public LiveData<List<Muistutus>> haeMuistutuksetKrono() {
+        return muistutuksetKrono;
     }
 
     public void lisaaMuistutus(Muistutus muistutus) {

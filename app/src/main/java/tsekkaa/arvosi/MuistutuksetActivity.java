@@ -13,9 +13,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.List;
+
+/**
+ * An activity which displays notifications set by the user in the style of a dropdown menu
+ * The notification items are arranged in a RecyclerView. Swiping left deletes a notification
+ *
+ * Done with the help of a tutorial by Coding in Flow on YouTube
+ *
+ * https://www.youtube.com/watch?v=QJUCD32dzHE
+ *
+ * @author Matleena Kankaanpää
+ */
 
 public class MuistutuksetActivity extends AppCompatActivity {
     private MuistutusViewModel muistutusViewModel;
@@ -37,17 +47,30 @@ public class MuistutuksetActivity extends AppCompatActivity {
         muistutusViewModel.haeMuistutukset().observe(this, new Observer<List<Muistutus>>() {
             @Override
             public void onChanged(List<Muistutus> muistutukset) {
-                //päivittää näkymän
+                /**
+                 * Updates the view
+                 */
                 adapter.naytaMuistutukset(muistutukset);
             }
         });
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+            /**
+             * The ItemTouchHelper detects movement and acts accordingly
+             * The OnMove function is for drag-and-dropping, but since only swiping is implemented,
+             * it is left empty
+             */
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
             }
 
+            /**
+             * Deletes a notification when the user swipes on it
+             * @param viewHolder A notification item in the Recycler View
+             * @param direction
+             */
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 muistutusViewModel.poistaMuistutus(adapter.haePaikka(viewHolder.getAdapterPosition()));

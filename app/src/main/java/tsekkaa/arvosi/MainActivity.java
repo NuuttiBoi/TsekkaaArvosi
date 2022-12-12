@@ -1,8 +1,11 @@
 package tsekkaa.arvosi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +20,9 @@ import java.text.*;
 public class MainActivity extends AppCompatActivity {
 
     //Creates buttons
-    private Button testButton;
+    private Button kalenteriButton;
+    //Creates SharedPreferences
+    private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Finds a button from layout with findViewById(R.id.(name of the button)) command and sets the found value to the created button
-        this.testButton = findViewById(R.id.testiButton);
+        this.kalenteriButton = findViewById(R.id.kalenteriButton);
         //Finds listview component from layout with findViewById(R.id.(name of the listview)
         ListView lv = findViewById(R.id.activitySelection);
         //Uses Singleton and NextActivity classes to create the list to the listview component
@@ -56,33 +61,44 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //Use the device's default theme if no other theme is selected or the app is started for the first time
+        sharedPref = getSharedPreferences("Asetukset", Context.MODE_PRIVATE);
+        if(sharedPref.getBoolean("Oletusteema", true)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        } else {
+            //If the user has unselected the default theme in the settings, use the theme that was last saved
+            if (sharedPref.getBoolean("Tummateema", sharedPref.getBoolean("Oletusteema", true))) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        }
 }
 
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
-    //muistakaa laittaa class tohon alle huutomerkin tilalle. Menee samallalailla ku noissa muissa
-    public void testButtonPressed(View v){
-        Intent test = null;
+    public void KalenteriButtonPressed(View v) {
+        Intent kalenteri = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            test = new Intent(this, TestiActivity.class);
+            kalenteri = new Intent(this, KalenteriActivity.class);
         }
-        startActivity(test);
-
+        startActivity(kalenteri);
         //zoom in
         //overridePendingTransition(R.anim.zoom_in, R.anim.static_anim);
 
         //zoom out
         //overridePendingTransition(R.anim.static_anim, R.anim.zoom_out);
 
-        //slide ylös
+        //slide up
         //overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
 
-        //slide alas
+        //slide down
         //overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_bottom);
 
-        //slide vasemmalle
+        //slide to the left
         //overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
 
-        //slide oikealle
-        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+        //slide to the right
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 }

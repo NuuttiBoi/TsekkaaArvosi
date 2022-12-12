@@ -17,7 +17,9 @@ public class KirjausTesti extends AppCompatActivity {
     public final static String EXTRA_SYKE = "com.example.excercise41.SYKE";
     public final static String EXTRA_PVM = "com.example.excercise41.PVM";
     public final static String EXTRA_AIKA = "com.example.excercise41.AIKA";
+    //Creates edittext
     EditText vsEditText;
+    //Creates a button
     Button tallennaButton;
     private MittausViewModel mittausViewModel;
 
@@ -25,11 +27,13 @@ public class KirjausTesti extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kirjaus_testi);
+        //Finds the edittext from layout and sets it as the created edittext
         this.vsEditText = findViewById(R.id.vsEditText);
         mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
-
+        //Finds the button from layout and sets it as the created button
         this.tallennaButton = findViewById(R.id.tallennaVerenPaineButton);
     }
+
     public void vTallennaButton(View v){
 
         Calendar calendar = Calendar.getInstance();

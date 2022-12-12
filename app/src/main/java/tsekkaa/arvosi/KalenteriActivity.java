@@ -47,9 +47,9 @@ public class KalenteriActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 
-                //Pitää kirjaa siitä, mikä päivä on valittuna
+                //Keeps track of what day is selected
                 paiva = dayOfMonth;
-                kuukausi = month + 1; //Metodi aloittaa kuukausien laskemisen 0:sta, joten lisätään 1
+                kuukausi = month + 1; //Method starts the counting of months from 0 so lets add 1
                 vuosi = year;
             }
         });

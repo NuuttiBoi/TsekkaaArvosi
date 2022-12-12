@@ -12,6 +12,8 @@ import java.util.List;
  * The database isn't referenced directly from the activity
  * Instead, a data access object serves as a handle to access it
  * The DAO contains methods for querying, inserting and deleting entries from/into the database
+ *
+ * @author Matleena Kankaanpää
  */
 
 @Dao
@@ -71,7 +73,8 @@ public interface MittausDao {
     LiveData<List<Mittaus>> haeHappipitoisuusMittaukset();
 
     /**
-     * Deletes the selected entry
+     * Delete an entry
+     * @param mittaus Selected entry to be deleted
      */
     @Delete
     void poistaMittaus(Mittaus mittaus);

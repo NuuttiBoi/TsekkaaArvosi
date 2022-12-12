@@ -13,7 +13,6 @@ import java.util.Date;
 @Entity
 public class Mittaus {
 
-
     @PrimaryKey(autoGenerate = true)
     @NonNull
     public int id;
