@@ -17,7 +17,7 @@ import java.text.*;
 public class MainActivity extends AppCompatActivity {
 
     //Creates buttons
-    private Button testButton;
+    private Button kalenteriButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Finds a button from layout with findViewById(R.id.(name of the button)) command and sets the found value to the created button
-        this.testButton = findViewById(R.id.testiButton);
+        this.kalenteriButton = findViewById(R.id.kalenteriButton);
         //Finds listview component from layout with findViewById(R.id.(name of the listview)
         ListView lv = findViewById(R.id.activitySelection);
         //Uses Singleton and NextActivity classes to create the list to the listview component
@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 }
-
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void testButtonPressed(View v){
         Intent test = null;
@@ -83,5 +82,13 @@ public class MainActivity extends AppCompatActivity {
 
         //slide oikealle
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+    }
+    public void KalenteriButtonPressed(View v) {
+        Intent kalenteri = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            kalenteri = new Intent(this, KalenteriActivity.class);
+        }
+        startActivity(kalenteri);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 }

@@ -10,7 +10,7 @@
         android:id="@+id/kalenteriButton"
         android:layout_width="200dp"
         android:layout_height="48dp"
-        android:onClick="kalenteriButtonPressed"
+        android:onClick="KalenteriButtonPressed"
         android:text="kalenteri"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
