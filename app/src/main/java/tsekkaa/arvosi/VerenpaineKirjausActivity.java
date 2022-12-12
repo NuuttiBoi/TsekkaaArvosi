@@ -144,6 +144,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         double syke = Double.parseDouble(sykeEditText.getText().toString());
         this.paiva = Integer.parseInt(pvmEditText.getText().toString());
         int kuukausi = Integer.parseInt(kuukausiEditText.getText().toString());
+        int vuosi = Integer.parseInt(vuosiEditText.getText().toString());
         int tunnit = Integer.parseInt(tunnitEditText.getText().toString());
         int minuutit = Integer.parseInt(minuutitEditText.getText().toString());
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -154,7 +155,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
 
         // Tallentaa mittauksen
         mittausViewModel.lisaaMittaus(new Mittaus(ylaPaine,alaPaine, syke, null,
-                null, paiva, kuukausi, 2022, tunnit,minuutit, calendar.getTimeInMillis()));
+                null, paiva, kuukausi, vuosi, tunnit,minuutit, calendar.getTimeInMillis()));
         Log.d("", "tallenna");
 
         mittausViewModel.haeMittaukset().observe(this, mittaukset -> {
