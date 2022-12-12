@@ -274,7 +274,11 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_MITATTAVAT, mitattavatString);
         intent.putExtra(EXTRA_LISATIEDOT, lisatiedotString);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, requestCode, intent, 0);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, aika, pendingIntent);
+        //alarmManager.setExact(AlarmManager.RTC_WAKEUP, aika, pendingIntent);
+
+        long min_ms = 1000*60;
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, aika, 2*min_ms, pendingIntent);
 
         /* toistuva
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),

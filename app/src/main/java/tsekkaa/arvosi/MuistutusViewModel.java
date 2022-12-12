@@ -19,16 +19,29 @@ import kotlin.annotation.MustBeDocumented;
 public class MuistutusViewModel extends AndroidViewModel {
     private MuistutusRepository muistutusRepository;
     private LiveData<List<Muistutus>> muistutukset;
+    private LiveData<List<Muistutus>> muistutuksetKrono;
 
     public MuistutusViewModel(Application application) {
         super(application);
         muistutusRepository = new MuistutusRepository(application);
         muistutukset = muistutusRepository.haeMuistutukset();
+        muistutuksetKrono = muistutusRepository.haeMuistutuksetKrono();
     }
 
+    /**
+     * @return A list of saved reminders in the order of creation
+     */
     public LiveData<List<Muistutus>> haeMuistutukset() {
         return muistutukset;
     }
+
+    /**
+     * @return A list of saved reminders in chronological order
+     */
+    public LiveData<List<Muistutus>> haeMuistutuksetKrono() {
+        return muistutuksetKrono;
+    }
+
     //Method that adds a reminder to the repository
     public void lisaaMuistutus(Muistutus muistutus) {
         muistutusRepository.lisaaMuistutus(muistutus);

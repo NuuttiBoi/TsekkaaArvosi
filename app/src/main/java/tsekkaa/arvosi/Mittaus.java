@@ -10,6 +10,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * A measurement object with a timestamp
+ *
+ * @author  Matleena Kankaanpää
+ * @version 1.0
+ * @since   2022-12-14
+ */
+
 @Entity
 public class Mittaus {
 

@@ -1,5 +1,6 @@
 package tsekkaa.arvosi;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,13 +43,13 @@ public class MuistutusAdapter extends RecyclerView.Adapter<MuistutusAdapter.Muis
         Muistutus valittuMuistutus = muistutukset.get(position);
         holder.pvmTextView.setText(valittuMuistutus.getPvm());
 
-        if (valittuMuistutus.getMitattavat().isEmpty()) {
+        if (valittuMuistutus.getMitattavat().length() == 0) {
             holder.mitattavatTextView.setVisibility(View.GONE);
         } else {
             holder.mitattavatTextView.setText(valittuMuistutus.getMitattavat());
         }
 
-        if (valittuMuistutus.getLisatiedot().isEmpty()) {
+        if (valittuMuistutus.getLisatiedot().length() == 0) {
             holder.lisatiedotTextView.setVisibility(View.GONE);
         } else {
             holder.lisatiedotTextView.setText(valittuMuistutus.getLisatiedot());
