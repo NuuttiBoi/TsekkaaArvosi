@@ -179,7 +179,8 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
 
         } else {
             Toast.makeText(getApplicationContext(),"Varmista, että syöttämäsi arvot ovat" +
-                    " viitearvojen mukaisia!",Toast.LENGTH_SHORT).show();
+                    " oikeita!",Toast.LENGTH_SHORT).show(); /* If the user inputs unrealistic values, they will be prompted
+                                                               to check that they are correct. */
 
         }
 
