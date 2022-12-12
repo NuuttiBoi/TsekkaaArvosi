@@ -58,6 +58,8 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
     private MittausViewModel mittausViewModel;
     private Button backButton;
     private TextView yksikkoVsTextView;
+    private double mittauksetKaikki, mittauksetKeskiarvo;
+
 
     //Korjatkaa jos on väärää tietoa ^^'
     private final static double VERENSOKERIN_ALARAJA = 6.0;
@@ -80,23 +82,25 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
         mChart.setScaleEnabled(false);
 
         LimitLine upper_limit = new LimitLine(7, "Liian korkea");
-        upper_limit.setLineWidth(4f);
-        upper_limit.enableDashedLine(10f, 10f, 0f);
+        upper_limit.setLineWidth(3f);
+        upper_limit.enableDashedLine(10f,10f,0f);
         upper_limit.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
         upper_limit.setTextSize(15f);
+        upper_limit.setTextColor(Color.RED);
 
 
         LimitLine lower_limit = new LimitLine(6, "Liian matala");
-        upper_limit.setLineWidth(4f);
-        upper_limit.enableDashedLine(10f, 10f, 0f);
-        upper_limit.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
-        upper_limit.setTextSize(15f);
+        lower_limit.setLineWidth(4f);
+        lower_limit.enableDashedLine(10f,10f,0f);
+        lower_limit.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
+        lower_limit.setTextSize(15f);
+        lower_limit.setTextColor(Color.RED);
 
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.removeAllLimitLines();
         leftAxis.addLimitLine(upper_limit);
         leftAxis.addLimitLine(lower_limit);
-        leftAxis.setAxisMaximum(17f);
+        leftAxis.setAxisMaximum(13f);
         leftAxis.setAxisMinimum(0f);
         leftAxis.enableGridDashedLine(10f, 10f, 0);
         leftAxis.setDrawLimitLinesBehindData(true);
@@ -118,8 +122,19 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
             for (int i = 0; i < mittaukset.size(); i++) {
 
                 yValues.add(new Entry(i, mittaukset.get(i).getVerensokeri().floatValue()));
-
+                mittauksetKaikki = mittauksetKaikki + mittaukset.get(i).getVerensokeri();
             }
+
+            mittauksetKeskiarvo = (mittauksetKaikki / mittaukset.size());
+
+            LimitLine average_limit = new LimitLine(11f, "     Keskiarvo:  " +
+                    Math.round(mittauksetKeskiarvo*100.0)/100.0 + " mmol/l");
+            average_limit.setLineWidth(0f);
+            average_limit.setLineColor(Color.BLUE);
+            average_limit.setTextSize(15f);
+            average_limit.setLabelPosition(LimitLine.LimitLabelPosition.LEFT_TOP);
+            average_limit.setTextColor(Color.BLUE);
+            leftAxis.addLimitLine(average_limit);
 
             LineDataSet set1 = new LineDataSet(yValues, "Verensokeri");
             set1.setFillAlpha(110);

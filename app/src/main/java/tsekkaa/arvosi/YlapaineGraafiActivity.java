@@ -38,6 +38,8 @@ public class YlapaineGraafiActivity extends AppCompatActivity {
     private TextView yksikkoVpTextView;
     private DataPoint[] dataPoints;
     private Button backButton;
+    private double mittauksetKaikki, mittauksetKeskiarvo;
+
 
 
 
@@ -104,7 +106,19 @@ public class YlapaineGraafiActivity extends AppCompatActivity {
                 Arrays.sort(aikaArray);
 
                 yValues.add(new Entry(i, mittaukset.get(i).getYlapaine().floatValue()));
+                mittauksetKaikki = mittauksetKaikki + mittaukset.get(i).getYlapaine();
             }
+
+            mittauksetKeskiarvo = (mittauksetKaikki / mittaukset.size());
+
+            LimitLine average_limit = new LimitLine(170f, "     Keskiarvo:  "+
+                    Math.round(mittauksetKeskiarvo*100.0)/100.0 + " mmHg");
+            average_limit.setLineWidth(0f);
+            average_limit.setLineColor(Color.BLUE);
+            average_limit.setTextSize(15f);
+            average_limit.setLabelPosition(LimitLine.LimitLabelPosition.LEFT_TOP);
+            average_limit.setTextColor(Color.BLUE);
+            leftAxis.addLimitLine(average_limit);
 
             LineDataSet set1 = new LineDataSet(yValues,"Ylapaine");
             set1.setFillAlpha(110);

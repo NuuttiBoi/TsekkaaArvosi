@@ -58,10 +58,7 @@ public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
     private MittausViewModel mittausViewModel;
     private Button backButton;
     private TextView yksikkoHsTextView;
-
-    //Korjatkaa jos on väärää tietoa ^^'
-    private final static double VERENSOKERIN_ALARAJA = 6.0;
-    private final static double VERENSOKERIN_YLARAJA = 7.0;
+    private double mittauksetKaikki, mittauksetKeskiarvo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,20 +80,22 @@ public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
         upper_limit.enableDashedLine(10f, 10f, 0f);
         upper_limit.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
         upper_limit.setTextSize(15f);
+        upper_limit.setTextColor(Color.RED);
 
 
         LimitLine lower_limit = new LimitLine(95, "Liian matala");
-        upper_limit.setLineWidth(4f);
-        upper_limit.enableDashedLine(10f, 10f, 0f);
-        upper_limit.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
-        upper_limit.setTextSize(15f);
+        lower_limit.setLineWidth(4f);
+        lower_limit.enableDashedLine(10f,10f,0f);
+        lower_limit.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
+        lower_limit.setTextSize(15f);
+        lower_limit.setTextColor(Color.RED);
 
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.removeAllLimitLines();
         leftAxis.addLimitLine(upper_limit);
         leftAxis.addLimitLine(lower_limit);
-        leftAxis.setAxisMaximum(105f);
-        leftAxis.setAxisMinimum(60f);
+        leftAxis.setAxisMaximum(109f);
+        leftAxis.setAxisMinimum(65f);
         leftAxis.enableGridDashedLine(10f, 10f, 0);
         leftAxis.setDrawLimitLinesBehindData(true);
         leftAxis.setYOffset(7f);
@@ -118,8 +117,19 @@ public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
             for (int i = 0; i < mittaukset.size(); i++) {
 
                 yValues.add(new Entry(i, mittaukset.get(i).getHappipitoisuus().floatValue()));
-
+                mittauksetKaikki = mittauksetKaikki + mittaukset.get(i).getHappipitoisuus();
             }
+
+            mittauksetKeskiarvo = (mittauksetKaikki / mittaukset.size());
+
+            LimitLine average_limit = new LimitLine(101f, "     Keskiarvo:  "
+                    + Math.round(mittauksetKeskiarvo*100.0)/100.0 + " %");
+            average_limit.setLineWidth(0f);
+            average_limit.setLineColor(Color.BLUE);
+            average_limit.setTextSize(15f);
+            average_limit.setLabelPosition(LimitLine.LimitLabelPosition.LEFT_TOP);
+            average_limit.setTextColor(Color.BLUE);
+            leftAxis.addLimitLine(average_limit);
 
             LineDataSet set1 = new LineDataSet(yValues, "Veren happipitoisuus");
             set1.setFillAlpha(110);
