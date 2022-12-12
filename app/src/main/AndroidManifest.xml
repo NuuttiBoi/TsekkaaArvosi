@@ -73,13 +73,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".TestiActivity4"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".KalenteriTesti"
             android:exported="false">
             <meta-data
@@ -94,28 +87,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".TestiActivity3"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".TestiActivity2"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".KirjausTesti"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".TestiActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

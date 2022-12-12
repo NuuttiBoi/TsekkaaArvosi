@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent verenhappipitoisuus = new Intent(MainActivity.this, VerenHappipitoisuusKirjausActivity.class);
                 Intent verensokeri = new Intent(MainActivity.this, VerenSokeriKirjausActivity.class);
                 Intent asetukset = new Intent(MainActivity.this, Asetukset.class);
-                Intent testi = new Intent(MainActivity.this, TestiActivity.class);
+                //Intent testi = new Intent(MainActivity.this, TestiActivity.class);
                 if(i == 0){
                     startActivity(verenpaine);
                 } else if(i == 1){
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if(i == 3){
                     startActivity(asetukset);
                 } else{
-                    startActivity(testi);
+                    //startActivity(testi);
                 }
             }
         });
