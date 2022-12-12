@@ -105,21 +105,4 @@ public class TeemaActivity extends AppCompatActivity {
         startActivity(takaisin);
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-
-        super.onSaveInstanceState(outState);
-    /*
-                NightMode = AppCompatDelegate.getDefaultNightMode();
-
-                sharedPreferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-
-                editor.putInt("NightModeInt", NightMode);
-                editor.apply();
-                */
-
-    }
-
 }

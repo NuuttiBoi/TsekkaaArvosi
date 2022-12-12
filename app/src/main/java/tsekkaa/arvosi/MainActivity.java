@@ -1,8 +1,11 @@
 package tsekkaa.arvosi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
     //Creates buttons
     private Button kalenteriButton;
+    //Creates SharedPreferences
+    private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //Use the device's default theme if no other theme is selected or the app is started for the first time
+        sharedPref = getSharedPreferences("Asetukset", Context.MODE_PRIVATE);
+        if(sharedPref.getBoolean("Oletusteema", true)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        } else {
+            //If the user has unselected the default theme in the settings, use the theme that was last saved
+            if (sharedPref.getBoolean("Tummateema", sharedPref.getBoolean("Oletusteema", true))) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        }
 }
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void testButtonPressed(View v){
