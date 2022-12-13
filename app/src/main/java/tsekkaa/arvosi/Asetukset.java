@@ -25,8 +25,6 @@ public class Asetukset extends AppCompatActivity {
     private Button backbutton;
     //Creates textview
     private TextView kayttaja;
-    private SharedPreferences sharedPreferences = getSharedPreferences("sharedPref", MODE_PRIVATE);
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +38,7 @@ public class Asetukset extends AppCompatActivity {
         //Finds textview from layout with findViewById(R.id.(name of the textview)) command and sets the found value to the created textview
         this.kayttaja = findViewById(R.id.kayttajaTextView);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedPref", MODE_PRIVATE);
         String nimi = sharedPreferences.getString("nimi", "");
         kayttaja.setText(nimi);
 
@@ -48,8 +47,8 @@ public class Asetukset extends AppCompatActivity {
 
          */
         Intent tallenna = getIntent();
-        String message = tallenna.getStringExtra(tallenna.EXTRA_TEXT);
-        kayttaja.setText(message);
+        //String message = tallenna.getStringExtra(tallenna.EXTRA_TEXT);
+        //kayttaja.setText(message);
     }
 
     /**

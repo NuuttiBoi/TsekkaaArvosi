@@ -17,7 +17,6 @@ public class OmatTiedot extends AppCompatActivity {
     private EditText nimi, ika;
     private Button tallenna;
     public final static String EXTRA_TEXT = "message";
-    private SharedPreferences sharedPreferences =getSharedPreferences("sharedPrefs", MODE_PRIVATE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +28,10 @@ public class OmatTiedot extends AppCompatActivity {
         this.ika = findViewById(R.id.ikaEditText);
         this.tallenna = findViewById(R.id.otTallennaButton);
 
+        SharedPreferences sharedPreferences =getSharedPreferences("sharedPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("nimi", nimi.getText().toString());
         editor.apply();
-
 
         }
         /*  intentin pitäisi viedä omat tiedot sivulle tallennettu nimi asetusten sivulle niin,
@@ -44,8 +43,9 @@ public class OmatTiedot extends AppCompatActivity {
      */
     public void otTallennaButtonPressed(View v){
             Intent tallenna = new Intent(this, Asetukset.class);
-            String message = "Käyttäjä: " + nimi;
-            tallenna.putExtra(tallenna.EXTRA_TEXT, message);
+            //String message = "Käyttäjä: " + nimi;
+
+            //tallenna.putExtra(tallenna.EXTRA_TEXT, message);
             startActivity(tallenna);
     }
 }
