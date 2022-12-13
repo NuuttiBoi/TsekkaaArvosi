@@ -61,9 +61,6 @@ public class YlapaineGraafiActivity extends AppCompatActivity {
         this.backButton = findViewById(R.id.backButton);
         this.yksikkoVpTextView = findViewById(R.id.yksikkoVpTextView);
 
-        //mChart.setOnChartGestureListener(TestiActivity.this);
-        //mChart.setOnChartValueSelectedListener(TestiActivity.this);
-
         mChart.setDragEnabled(true);
         mChart.setScaleEnabled(false);
 
@@ -91,7 +88,6 @@ public class YlapaineGraafiActivity extends AppCompatActivity {
 
         mChart.getAxisRight().setEnabled(false);
 
-
         mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
         mittausViewModel.haeYpApSykeMittaukset().observe(this, mittaukset -> {
 
@@ -108,7 +104,6 @@ public class YlapaineGraafiActivity extends AppCompatActivity {
             for (int i = 0; i < mittaukset.size(); i++) {
                 for (int j = 0; j < mittaukset.size(); j++) {
                     aikaArray[j] = mittaukset.get(j).getAika();
-
                 }
                 Arrays.sort(aikaArray);
 
