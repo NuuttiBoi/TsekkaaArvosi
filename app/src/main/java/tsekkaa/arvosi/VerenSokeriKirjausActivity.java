@@ -195,5 +195,6 @@ public class VerenSokeriKirjausActivity extends AppCompatActivity {
     public void seurantaButtonPressed(View v){
         Intent seuranta = new Intent(this, VerenSokeriGraafiActivity.class);
         startActivity(seuranta);
+        overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
     }
 }

@@ -22,9 +22,9 @@ public class ActivitySelectionSingleton {
 
     private ActivitySelectionSingleton() {
         activity = new ArrayList<NextActivity>();
-        activity.add(new NextActivity("VERENPAINEEN MITTAUS"));
-        activity.add(new NextActivity("VEREN HAPPIPITOISUUS"));
-        activity.add(new NextActivity("VERENSOKERI"));
+        activity.add(new NextActivity("VERENPAINEEN KIRJAUS"));
+        activity.add(new NextActivity("VEREN HAPPIPITOISUUDEN KIRJAUS"));
+        activity.add(new NextActivity("VERENSOKERIN KIRJAUS"));
         activity.add(new NextActivity("ASETUKSET"));
         activity.add(new NextActivity("c(o_oc("));
 

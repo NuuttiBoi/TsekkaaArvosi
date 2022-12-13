@@ -200,6 +200,7 @@ public class VerenHappipitoisuusKirjausActivity extends AppCompatActivity {
     public void seurantaButtonPressed(View v){
         Intent seuranta = new Intent(this, VerenHappipitoisuusGraafiActivity.class);
         startActivity(seuranta);
+        overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
     }
 
 }

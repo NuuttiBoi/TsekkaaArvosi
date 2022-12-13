@@ -17,12 +17,17 @@ public class OmatTiedot extends AppCompatActivity {
     private EditText nimi, ika;
     private Button tallenna;
     public final static String EXTRA_TEXT = "message";
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_omat_tiedot);
         getSupportActionBar().hide();
+        sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
 
         this.nimi = findViewById(R.id.nimiEditText);
         this.ika = findViewById(R.id.ikaEditText);
@@ -37,12 +42,11 @@ public class OmatTiedot extends AppCompatActivity {
      */
     public void otTallennaButtonPressed(View v){
             Intent tallenna = new Intent(this, Asetukset.class);
-            SharedPreferences sharedPreferences =getSharedPreferences("sharedPrefs", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("nimi", nimi.getText().toString());
             editor.apply();
             //String message = "Käyttäjä: " + nimi;
             //tallenna.putExtra(tallenna.EXTRA_TEXT, message);
             startActivity(tallenna);
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 }

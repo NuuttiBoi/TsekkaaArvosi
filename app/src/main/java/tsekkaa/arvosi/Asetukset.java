@@ -30,6 +30,7 @@ public class Asetukset extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asetukset);
+        getSupportActionBar().hide();
         //Finds a button from layout with findViewById(R.id.(name of the button)) command and sets the found value to the created button
         this.ilmoitukset = findViewById(R.id.ilmoituksetButton);
         this.teema = findViewById(R.id.teemaButton);
@@ -58,7 +59,10 @@ public class Asetukset extends AppCompatActivity {
      */
     //Checks if one of the lists tag is clicked and after clicking one of them it takes you to the selected activity
     public void ilmoituksetButtonPressed(View v){
-        Intent ilmoitukset = new Intent(this, MuistutuksetActivity.class);
+        Intent ilmoitukset = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            ilmoitukset = new Intent(this, KalenteriActivity.class);
+        }
         startActivity(ilmoitukset);
     }
     /**
@@ -87,6 +91,7 @@ public class Asetukset extends AppCompatActivity {
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, MainActivity.class);
         startActivity(takaisin);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 }
 

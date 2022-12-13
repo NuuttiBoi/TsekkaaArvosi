@@ -11,7 +11,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * A measurement object with a timestamp
+ * A class that defines a measurement object with blood values and a timestamp
+ * The @Entity annotation turns the class into a table in the Room database where each attribute represents a column
  *
  * @author  Matleena Kankaanpää
  * @version 1.0
@@ -58,6 +59,20 @@ public class Mittaus {
     @ColumnInfo(name = "aika")
     private Long aika;
 
+    /**
+     * Class constructor
+     * @param ylapaine Systolic blood pressure
+     * @param alapaine Diastolic blood pressure
+     * @param syke Heartbeats per minute
+     * @param verensokeri Blood sugar level
+     * @param happipitoisuus Blood oxygen level
+     * @param paiva The day the measurement was taken
+     * @param kuukausi Month
+     * @param vuosi Year
+     * @param tunnit Hour
+     * @param minuutit Minutes
+     * @param aika
+     */
     public Mittaus(Double ylapaine, Double alapaine, Double syke, Double verensokeri, Double happipitoisuus, int paiva, int kuukausi,
                    int vuosi, int tunnit, int minuutit, Long aika) {
         this.ylapaine = ylapaine;

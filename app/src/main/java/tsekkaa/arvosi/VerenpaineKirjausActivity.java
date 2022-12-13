@@ -208,6 +208,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
     public void aLahetaButton(View v){
         Intent aLaheta = new Intent(this, ArvojenSeurantaActivity.class);
         startActivity(aLaheta);
+        overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
     }
     /**
      * Takes you back to mainactivity

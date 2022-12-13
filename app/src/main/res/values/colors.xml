@@ -10,12 +10,12 @@
 
 
     <!-- Light mode -->
-    <color name="tausta_light">#e8f1f7</color> <!-- taustaväri -->
+    <color name="tausta_light">#CCC8C4</color> <!-- taustaväri -->
     <color name="teksti_light">#2c2c2c</color> <!-- tekstin väri -->
     <color name="ylapalkki_light">#000000</color> <!-- puhelimen yläpalkki -->
 
     <!-- Buttonit -->
-    <color name="buttonien_tausta_light">#28d48d</color>
+    <color name="buttonien_tausta_light">#B6534A</color>
     <color name="buttonien_teksti_light">#ffffff</color>
 
     <!-- Switchit -->

@@ -79,3 +79,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
+    //zoom in
+    //overridePendingTransition(R.anim.zoom_in, R.anim.static_anim);
+
+    //zoom out
+    //overridePendingTransition(R.anim.static_anim, R.anim.zoom_out);
+
+    //slide up
+    //overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
+
+    //slide down
+    //overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_bottom);
+
+    //slide to the left
+    //overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+
+    //slide to the right
+    //overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
