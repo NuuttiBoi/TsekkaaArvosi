@@ -9,37 +9,38 @@ import androidx.room.Query;
 import java.util.List;
 
 /**
- * The database isn't referenced directly from the activity
- * Instead, a data access object serves as a handle to access it
+ * A data access object that serves as a handle to access the database.
  * The DAO contains methods for querying, inserting and deleting entries from/into the database
  *
- * @author Matleena Kankaanpää
+ * @author  Matleena Kankaanpää
  */
 
 @Dao
 public interface MuistutusDao {
 
     /**
-     * Insert a new entry
+     * A method for inserting a new entry
      * @param muistutus A notification object to be inserted
      */
     @Insert
     void lisaaMuistutus(Muistutus muistutus);
 
     /**
-     * @return all entries in the order of creation
+     * A method for returning all entries
+     * @return all entries in order of creation
      */
     @Query("SELECT * FROM muistutus")
     LiveData<List<Muistutus>> haeMuistutukset();
 
     /**
+     * A method for returning all entries in chronological order
      * @return all entries sorted by date and time
      */
     @Query("SELECT * FROM muistutus ORDER BY vuosi, kuukausi, paiva, tunnit, minuutit")
     LiveData<List<Muistutus>> haeMuistutuksetKrono();
 
     /**
-     * Delete an entry
+     * A method for deleting an entry
      * @param muistutus Selected entry to be deleted
      */
     @Delete

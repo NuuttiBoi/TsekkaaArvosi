@@ -39,8 +39,6 @@ import java.util.Calendar;
  * details and saving the notification to the database
  *
  * @author  Matleena Kankaanpää
- * @version 1.0
- * @since   2022-12-14
  */
 
 @RequiresApi(api = Build.VERSION_CODES.O)

@@ -15,8 +15,6 @@ import kotlin.annotation.MustBeDocumented;
  * The ViewModel creates an abstraction layer between the activity and the database.
  *
  * @author  Matleena Kankaanpää
- * @version 1.0
- * @since   2022-12-14
  */
 
 public class MuistutusViewModel extends AndroidViewModel {

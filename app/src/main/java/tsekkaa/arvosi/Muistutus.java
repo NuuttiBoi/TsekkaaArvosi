@@ -74,7 +74,7 @@ public class Muistutus {
 
     /**
      * Returns the id
-     * @return The id of the
+     * @return The id of the reminder object
      */
     public int getId() {
         return id;

@@ -15,8 +15,6 @@ import java.util.Date;
  * The @Entity annotation turns the class into a table in the Room database where each attribute represents a column
  *
  * @author  Matleena Kankaanpää
- * @version 1.0
- * @since   2022-12-14
  */
 
 @Entity
@@ -70,11 +68,11 @@ public class Mittaus {
      * @param verensokeri Blood sugar level
      * @param happipitoisuus Blood oxygen level
      * @param paiva The day the measurement was taken
-     * @param kuukausi Month
-     * @param vuosi Year
-     * @param tunnit Hour
-     * @param minuutit Minutes
-     * @param aika
+     * @param kuukausi The month the measurement was taken
+     * @param vuosi The year the measurement was taken
+     * @param tunnit The hour the measurement was taken
+     * @param minuutit The minutes when the measurement was taken
+     * @param aika The time of the measurement as a long value
      */
     public Mittaus(Double ylapaine, Double alapaine, Double syke, Double verensokeri, Double happipitoisuus, int paiva, int kuukausi,
                    int vuosi, int tunnit, int minuutit, Long aika) {
@@ -91,17 +89,16 @@ public class Mittaus {
         this.aika = aika;
     }
 
+    /**
+     * Returns the time the measurement was taken
+     * @return The time as a long value
+     */
     public Long getAika(){
         return aika;
     }
 
     /**
-     *
-     * @param paiva The day the measurement was taken
-     * @param kuukausi Month
-     * @param vuosi Year
-     * @param tunnit Hour
-     * @param minuutit Minutes
+     * Returns the day and month of the measurement as a string
      * @return the date of the measurement
      */
     public String getAjankohta(){
@@ -115,49 +112,102 @@ public class Mittaus {
 
     }
 
+    /**
+     * Returns the id
+     * @return The id of the measurement object
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Returns a measured systolic blood pressure value
+     * @return The systolic blood pressure value
+     */
     public Double getYlapaine() {
         return ylapaine;
     }
 
+
+    /**
+     * Returns a measured diastolic blood pressure value
+     * @return The diastolic blood pressure value
+     */
     public Double getAlapaine() {
         return alapaine;
     }
 
+
+    /**
+     * Returns a measured heart rate
+     * @return The heart rate value
+     */
     public Double getSyke() {
         return syke;
     }
 
+
+    /**
+     * Returns a measured blood sugar value
+     * @return The blood sugar value
+     */
     public Double getVerensokeri() {
         return verensokeri;
     }
 
+
+    /**
+     * Returns a measured blood oxygen value
+     * @return The blood oxygen value
+     */
     public Double getHappipitoisuus() {
         return happipitoisuus;
     }
 
+    /**
+     * Returns the day the measurement was taken
+     * @return The day of the measurement
+     */
     public int getPaiva() {
         return paiva;
     }
 
+    /**
+     * Returns the month the measurement was taken
+     * @return The month of the measurement
+     */
     public int getKuukausi() {
         return kuukausi;
     }
 
+    /**
+     * Returns the year the measurement was taken
+     * @return The year of the measurement
+     */
     public int getVuosi() {
         return vuosi;
     }
 
+    /**
+     * Returns the hours the measurement was taken
+     * @return The hours of the measurement
+     */
     public int getTunnit() {
         return tunnit;
     }
 
+    /**
+     * Returns the minutes when the measurement was taken
+     * @return The minutes of the measurement
+     */
     public int getMinuutit() {
         return minuutit;
     }
+
+    /**
+     * Converts the date into a Date object
+     * @return The date of the measurement as a Date object
+     */
     public Date getDate() throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         String dateInString = "" + paiva + "-" + kuukausi + "-" + vuosi + " " + tunnit + ":" + minuutit;

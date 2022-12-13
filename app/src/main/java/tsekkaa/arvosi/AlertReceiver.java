@@ -23,7 +23,7 @@ public class AlertReceiver extends BroadcastReceiver {
 
     /**
      * Gets called once the pending notification goes off (not when it's set)
-     * @param context
+     * @param context The state of the application
      * @param intent Includes the text that will appear on the user's screen in a popup.
      * This will change depending on which toggle boxes were checked and if the user wrote a custom
      * note in the text edit field
