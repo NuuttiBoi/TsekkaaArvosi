@@ -28,9 +28,9 @@ public class MuistutusAdapter extends RecyclerView.Adapter<MuistutusAdapter.Muis
 
     /**
      * Defines the layout for each notification item
-     * @param parent
-     * @param viewType
-     * @return
+     * @param parent The ViewGroup the notification item belongs to
+     * @param viewType The type of the view
+     * @return A ViewHolder for the notification item to be added with the specified layout
      */
     @NonNull
     @Override
@@ -40,10 +40,12 @@ public class MuistutusAdapter extends RecyclerView.Adapter<MuistutusAdapter.Muis
     }
 
     /**
-     * If either text view is empty, it's hidden to not take up space
+     *
+     * If either text view is empty, it's hidden to not take up space.
      * @param holder An item in the recycler view
      * @param position A counter variable
      */
+
     @Override
     public void onBindViewHolder(@NonNull MuistutusHolder holder, int position) {
         Muistutus valittuMuistutus = muistutukset.get(position);
