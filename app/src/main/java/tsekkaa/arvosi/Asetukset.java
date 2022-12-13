@@ -41,7 +41,7 @@ public class Asetukset extends AppCompatActivity {
         this.kayttaja = findViewById(R.id.kayttajaTextView);
 
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
-        final String nimi = sharedPreferences.getString("nimi", "NULL");
+        final String nimi = sharedPreferences.getString("nimi", "");
 
         Log.d("", "nimi: " + nimi);
         kayttaja.setText(" Käyttäjä: " + nimi);
