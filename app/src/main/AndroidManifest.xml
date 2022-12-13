@@ -31,13 +31,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ToistuvaMuistutusActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".MuistutuksetActivity"
             android:exported="false">
             <meta-data
@@ -87,21 +80,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".KalenteriTesti"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".TeemaActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".KirjausTesti"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
