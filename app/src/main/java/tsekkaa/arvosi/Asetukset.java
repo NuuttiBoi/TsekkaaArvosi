@@ -40,13 +40,14 @@ public class Asetukset extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPref", MODE_PRIVATE);
         String nimi = sharedPreferences.getString("nimi", "");
+
         kayttaja.setText(nimi);
 
         /*  Omat tiedot sivulta on tuotu teksti Käyttäjä: + nimi
             ja tämä halutaan näkyviin käyttäjaTextViewiin.
 
          */
-        Intent tallenna = getIntent();
+        //Intent tallenna = getIntent();
         //String message = tallenna.getStringExtra(tallenna.EXTRA_TEXT);
         //kayttaja.setText(message);
     }
