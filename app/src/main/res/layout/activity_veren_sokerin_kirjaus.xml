@@ -93,7 +93,7 @@
     <TextView
         android:id="@+id/kelloOhjeTextView"
         android:layout_width="120dp"
-        android:layout_height="37dp"
+        android:layout_height="40dp"
         android:background="#28D38C"
         android:text="Kellonaika"
         android:textAlignment="center"
@@ -155,7 +155,7 @@
 
     <TextView
         android:id="@+id/aikaOhjeTextView"
-        android:layout_width="131dp"
+        android:layout_width="120dp"
         android:layout_height="40dp"
         android:background="#28D28B"
         android:text="Päivämäärä"
