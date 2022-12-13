@@ -42,6 +42,7 @@ public class VerenSokeriKirjausActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_veren_sokerin_kirjaus);
+        getSupportActionBar().hide();
 
         this.pvmEditText = findViewById(R.id.pvmEditTextDate);
         this.kuukausiEditText = findViewById(R.id.kuukausiEditTextDate);

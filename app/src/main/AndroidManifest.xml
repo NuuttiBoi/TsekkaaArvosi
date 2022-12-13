@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -25,13 +26,6 @@
         </activity>
         <activity
             android:name=".AlapaineGraafiActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ToistuvaMuistutusActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -87,21 +81,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".KalenteriTesti"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".TeemaActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".KirjausTesti"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

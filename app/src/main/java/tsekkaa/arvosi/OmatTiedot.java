@@ -20,6 +20,7 @@ public class OmatTiedot extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_omat_tiedot);
+        getSupportActionBar().hide();
 
         this.nimi = findViewById(R.id.nimiEditText);
         this.ika = findViewById(R.id.ikaEditText);

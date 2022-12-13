@@ -40,6 +40,7 @@ public class VerenHappipitoisuusKirjausActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_veren_happipitoisuus);
+        getSupportActionBar().hide();
 
         this.pvmEditText = findViewById(R.id.pvmEditTextDate);
         this.kuukausiEditText = findViewById(R.id.kuukausiEditTextDate);
