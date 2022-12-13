@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +43,7 @@ public class Asetukset extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPref", MODE_PRIVATE);
         String nimi = sharedPreferences.getString("nimi", "");
 
+        Log.d("", "nimi: " + nimi);
         kayttaja.setText(" Käyttäjä: " + nimi);
 
         /*  Omat tiedot sivulta on tuotu teksti Käyttäjä: + nimi

@@ -8,7 +8,8 @@ import androidx.room.PrimaryKey;
 import java.util.Calendar;
 
 /**
- * A reminder object with a timestamp
+ * A class that defines a reminder object with      and a timestamp
+ * The @Entity annotation turns the class into a table in the Room database where each attribute represents a column
  *
  * @author  Matleena Kankaanpää
  * @version 1.0

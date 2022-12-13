@@ -7,8 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 /**
- * A Room database which stores measurement and reminder objects.
- * The version number is incremented each time the database is updated
+ * A Room database which stores measurement and reminder objects. Caches data on the device locally
  *
  * @author  Matleena Kankaanpää
  * @version 1.0
@@ -16,30 +15,32 @@ import androidx.room.RoomDatabase;
  * @see     <a href="https://www.youtube.com/watch?v=ARpn-1FPNE4&list=PLrnPJCHvNZuDihTpkRs6SpZhqgBqPU118>Tutorial by Coding in Flow on YouTube</a>
  */
 
+/*
+A database is created with the @Database annotation
+ */
 @Database(entities = {Mittaus.class, Muistutus.class}, version = 7)
 public abstract class MittausTietokanta extends RoomDatabase {
 
     /**
-     * Separate data access objects for both kinds of records
+     * Different data access objects for both kinds of records for code separation
      */
     public abstract MittausDao mittausDao();
     public abstract MuistutusDao muistutusDao();
 
     /**
-     * The Singleton pattern is used to create a single instance of the database
+     * Initialize the database object
      */
     public static MittausTietokanta INSTANCE;
 
-    /**
-     * Synchronization prevents multiple threads from creating the singleton object simultaneously
+     /** Returns the single instance of the database or creates it if it hasn't been created yet
+     * @param context
+     * @return The database singleton
      */
     public static MittausTietokanta getInstance(final Context context) {
         if (INSTANCE == null) {
-            /**
-             * Only one thread can access this line at a time
-             */
             synchronized (MittausTietokanta.class) {
                 /**
+                 * Only one thread can access this line at a time
                  * Check again if the database has been created. If not, create it
                  * FallbackToDestructiveMigration prevents the loss of data if the database is migrated
                  */

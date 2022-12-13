@@ -24,13 +24,13 @@
 
 
     <!-- Dark mode -->
-    <color name="tausta_dark">#0c101b</color> <!-- taustaväri -->
+    <color name="tausta_dark">#08090C</color> <!-- taustaväri -->
     <color name="teksti_dark">#f4f7f9</color> <!-- tekstin väri -->
     <color name="ylapalkki_dark">#000000</color>  <!-- puhelimen yläpalkki -->
 
     <!-- Buttonit -->
-    <color name="buttonien_tausta_dark">#112268</color>
-    <color name="buttonien_teksti_dark">#e5d280</color>
+    <color name="buttonien_tausta_dark">#514F85</color>
+    <color name="buttonien_teksti_dark">#FBF0BF</color>
 
     <!-- Switchit -->
     <color name="switchien_tausta_dark">#9eb4ef</color>

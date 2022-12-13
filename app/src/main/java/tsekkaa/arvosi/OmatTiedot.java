@@ -17,21 +17,16 @@ public class OmatTiedot extends AppCompatActivity {
     private EditText nimi, ika;
     private Button tallenna;
     public final static String EXTRA_TEXT = "message";
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_omat_tiedot);
         getSupportActionBar().hide();
-        sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
 
-
-        this.nimi = findViewById(R.id.nimiEditText);
-        this.ika = findViewById(R.id.ikaEditText);
-        this.tallenna = findViewById(R.id.otTallennaButton);
+        nimi = findViewById(R.id.nimiEditText);
+        ika = findViewById(R.id.ikaEditText);
+        tallenna = findViewById(R.id.otTallennaButton);
         }
         /*  intentin pitäisi viedä omat tiedot sivulle tallennettu nimi asetusten sivulle niin,
             että sinne saadaan käyttöön teksti Käyttäjä: + nimi
@@ -41,11 +36,15 @@ public class OmatTiedot extends AppCompatActivity {
      * @param v Button that is pressed
      */
     public void otTallennaButtonPressed(View v){
-            Intent tallenna = new Intent(this, Asetukset.class);
-            editor.putString("nimi", nimi.getText().toString());
+            SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            String kayttajanNimi = nimi.getText().toString();
+            editor.putString("nimi", kayttajanNimi);
             editor.apply();
             //String message = "Käyttäjä: " + nimi;
             //tallenna.putExtra(tallenna.EXTRA_TEXT, message);
+            Intent tallenna = new Intent(this, Asetukset.class);
             startActivity(tallenna);
             overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }

@@ -20,7 +20,6 @@ public class MittausRepository {
 
     MittausDao mittausDao;
 
-    //Maintains context in the whole application
     public MittausRepository(Application application) {
         MittausTietokanta mittausTietokanta = MittausTietokanta.getInstance(application);
         mittausDao = mittausTietokanta.mittausDao();
