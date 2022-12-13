@@ -95,6 +95,15 @@ public class Mittaus {
         return aika;
     }
 
+    /**
+     *
+     * @param paiva The day the measurement was taken
+     * @param kuukausi Month
+     * @param vuosi Year
+     * @param tunnit Hour
+     * @param minuutit Minutes
+     * @return the date of the measurement
+     */
     public String getAjankohta(){
 
         String vuosi = String.valueOf(this.vuosi);
