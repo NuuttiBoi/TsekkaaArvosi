@@ -22,8 +22,6 @@ import java.text.*;
  */
 public class MainActivity extends AppCompatActivity {
 
-    //Creates buttons
-    private Button kalenteriButton;
     //Creates SharedPreferences
     private SharedPreferences sharedPref;
 
@@ -33,9 +31,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-
-        //Finds a button from layout with findViewById(R.id.(name of the button)) command and sets the found value to the created button
-        this.kalenteriButton = findViewById(R.id.kalenteriButton);
         //Finds listview component from layout with findViewById(R.id.(name of the listview)
         ListView lv = findViewById(R.id.activitySelection);
         //Uses Singleton and NextActivity classes to create the list to the listview component
