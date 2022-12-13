@@ -136,7 +136,7 @@ public class VerenSokeriKirjausActivity extends AppCompatActivity {
         Intent takaisin = new Intent(this, MainActivity.class);
         startActivity(takaisin);
     }
-    public void tallennaButtonPressed(View v){
+    public void vrtallennaButtonPressed(View v){
 
         if((pvmEditText.getText().toString().trim().length() < 1) ||
                 (verenSokeriTextEdit.getText().toString().trim().length() < 1) ||
