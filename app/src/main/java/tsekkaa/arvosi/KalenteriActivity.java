@@ -37,7 +37,7 @@ public class KalenteriActivity extends AppCompatActivity {
         setContentView(R.layout.activity_kalenteri);
         getSupportActionBar().hide();
 
-        //Alustetaan päivämäärä nykyhetkeen - jos käyttäjä ei valitse kalenterista toista päivää, tämä päivä lähetetään intentiin
+        //Initialize date to the present - if user doesn't select different date from calender then today will be sent to intent
         paiva = now.getDayOfMonth();
         kuukausi = now.getMonthValue();
         vuosi = now.getYear();
