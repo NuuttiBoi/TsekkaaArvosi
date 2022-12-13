@@ -162,10 +162,22 @@ public class VerenHappipitoisuusKirjausActivity extends AppCompatActivity {
         }
         Calendar calendar = Calendar.getInstance();
 
-        // Tallentaa mittauksen
-        mittausViewModel.lisaaMittaus(new Mittaus(null,null, null, null,
-                happipitoisuus, paiva, kuukausi, vuosi, tunnit,minuutit, calendar.getTimeInMillis()));
-        Log.d("", "tallenna");
+        if(happipitoisuus > 65 && happipitoisuus <= 100){
+
+            // Tallentaa mittauksen
+            // Tallentaa mittauksen
+            mittausViewModel.lisaaMittaus(new Mittaus(null,null, null, null,
+                    happipitoisuus, paiva, kuukausi, vuosi, tunnit,minuutit, calendar.getTimeInMillis()));
+            Log.d("", "tallenna");
+
+        } else {
+            Toast.makeText(getApplicationContext(),"Varmista, että syöttämäsi arvot ovat" +
+                    " oikeita!",Toast.LENGTH_SHORT).show(); /* If the user inputs unrealistic values, they will be prompted
+                                                               to check that they are correct. */
+        }
+
+
+
 
 
         mittausViewModel.haeMittaukset().observe(this, mittaukset -> {

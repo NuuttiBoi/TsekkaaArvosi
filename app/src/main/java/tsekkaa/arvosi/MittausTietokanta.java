@@ -16,7 +16,8 @@ import androidx.room.RoomDatabase;
  */
 
 /*
-A database is created with the @Database annotation
+A database is created with the @Database annotation. Contains Mittaus and Muistutus tables.
+The version number is incremented every time the structure of the database is modified.
  */
 @Database(entities = {Mittaus.class, Muistutus.class}, version = 7)
 public abstract class MittausTietokanta extends RoomDatabase {
@@ -33,7 +34,7 @@ public abstract class MittausTietokanta extends RoomDatabase {
     public static MittausTietokanta INSTANCE;
 
      /** Returns the single instance of the database or creates it if it hasn't been created yet
-     * @param context
+     * @param context The state of the application
      * @return The database singleton
      */
     public static MittausTietokanta getInstance(final Context context) {

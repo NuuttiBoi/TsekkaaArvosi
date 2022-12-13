@@ -9,8 +9,8 @@ import java.util.List;
 
 /**
  * The ViewModel interacts with the repository and holds data for the UI to display.
- * The ViewModel creates an abstraction layer between the activity and the database, ensuring the UI won't get disrupted if
- * changes occur in the database
+ * Database transactions aren't carried out in the main thread as to not disrupt the UI.
+ * The ViewModel creates an abstraction layer between the activity and the database.
  *
  * @author  Matleena Kankaanpää
  * @version 1.0
@@ -47,7 +47,7 @@ public class MittausViewModel extends AndroidViewModel {
     }
 
     /**
-     * Returns a data holder which lists all measurements from the database
+     * Retrieves a list of measurements from the repository relevant to tracking blood pressure and heart rate
      * @return A Live Data object containing a list of all measurements, may contain null values
      */
     public LiveData<List<Mittaus>> haeMittaukset() {

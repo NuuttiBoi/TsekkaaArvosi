@@ -13,18 +13,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The adapter generates notifications with a specified layout and populates the Recycler View with them
+ * The adapter generates notifications with a specified layout and populates the Recycler View
  *
- * @author Matleena Kankaanpää
+ *@author   Matleena Kankaanpää
+ * @version 1.0
+ * @since   2022-12-14
  */
 
 public class MuistutusAdapter extends RecyclerView.Adapter<MuistutusAdapter.MuistutusHolder> {
-    /* An empty array list must be created here, otherwise if the array is referenced and it returns
+    /* An empty array list must be created, otherwise if the array is referenced and it returns
     null, it will cause an error */
     private List<Muistutus> muistutukset = new ArrayList<>();
 
+
     /**
      * Defines the layout for each notification item
+     * @param parent
+     * @param viewType
+     * @return
      */
     @NonNull
     @Override
