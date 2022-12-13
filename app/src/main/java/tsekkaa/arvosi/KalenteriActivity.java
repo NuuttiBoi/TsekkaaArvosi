@@ -19,14 +19,26 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An activity which displays a calendar. The user can pick a date to set a reminder.
+ *
+ * @author  Matleena Kankaanpää
+ * @version 1.0
+ * @since   2022-12-14
+ */
+
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class KalenteriActivity extends AppCompatActivity {
+    /**
+     * A key for intent extras
+     */
+    public static final String EXTRA_PVMLISTA = "KalenteriActivity.pvmLista";
+
     private MuistutusViewModel muistutusViewModel;
     private int paiva, kuukausi, vuosi;
-    public static final String EXTRA_PVMLISTA = "KalenteriActivity.pvmLista";
     private static LocalDateTime now = LocalDateTime.now();
 
-    //A list containing the selected year, month and day, to be sent over to the next activity in the intent
+    //A list containing the selected year, month and day, to be sent to the next activity in an intent
     private ArrayList<Integer> pvmLista;
     private Button lkmButton;
     private long aikaNyt;
@@ -37,7 +49,10 @@ public class KalenteriActivity extends AppCompatActivity {
         setContentView(R.layout.activity_kalenteri);
         getSupportActionBar().hide();
 
-        //Initialize date to the present - if user doesn't select different date from calender then today will be sent to intent
+        /*
+        Gets the current date, which will be sent to the next activity as default if the user
+        doesn't select another date from the calendar
+         */
         paiva = now.getDayOfMonth();
         kuukausi = now.getMonthValue();
         vuosi = now.getYear();
@@ -60,9 +75,9 @@ public class KalenteriActivity extends AppCompatActivity {
 
         muistutusViewModel = new ViewModelProvider(this).get(MuistutusViewModel.class);
 
-        /**
-         * The red circle button shows only upcoming alarms. Once the alarm gone off, the
-         * popup message will remain on the user's screen until it's clicked off, but expired alarms
+        /*
+         * The red circle button shows only upcoming alarms. Once the alarm gone off, the popup
+         * message will remain on the user's screen until it's clicked off, but expired alarms
          * are automatically deleted from the database to not take up storage
          */
         muistutusViewModel.haeMuistutukset().observe(this, muistutukset -> {
@@ -73,8 +88,8 @@ public class KalenteriActivity extends AppCompatActivity {
             }
         });
 
-        /**
-         * Display the current amount of upcoming alarms on the circle icon
+        /*
+         * Displays the current amount of upcoming alarms on the circle icon
          */
         muistutusViewModel.haeMuistutukset().observe(this, new Observer<List<Muistutus>>() {
             @Override
@@ -84,10 +99,13 @@ public class KalenteriActivity extends AppCompatActivity {
         });
     }
 
-    //Checks if the selected button is pressed and sends the user to the selected page/ activity also sends values to the next activity
+    /**
+     * Sends the user to the activity where the reminder can be created, along with the date
+     * selected from the calendar (current date by default)
+     * @param view The button that was pressed
+     */
     public void setMuistutusPressed(View view) {
         Intent muistutus = new Intent(KalenteriActivity.this, LisaaMuistutusActivity.class);
-        //adds values to pvmLista
         pvmLista.add(paiva);
         pvmLista.add(kuukausi);
         pvmLista.add(vuosi);
@@ -95,14 +113,22 @@ public class KalenteriActivity extends AppCompatActivity {
         startActivity(muistutus);
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
-    //Checks if the selected button is pressed and sends the user to the selected page/ activity
+
+    /**
+     * Opens the activity which displays current upcoming alarms
+     * @param view The button that was pressed
+     */
     public void muistutuksetPressed(View view) {
         Intent lkm = new Intent(KalenteriActivity.this, MuistutuksetActivity.class);
         startActivity(lkm);
         overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_bottom);
     }
-    //Checks if the selected button is pressed and sends the user to the selected page/ activity
-    public void backButtonPressed(View v) {
+
+    /**
+     * Returns the user to Main Activity
+     * @param view The button that was pressed
+     */
+    public void backButtonPressed(View view) {
         Intent takaisin = new Intent(this, MainActivity.class);
         startActivity(takaisin);
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);

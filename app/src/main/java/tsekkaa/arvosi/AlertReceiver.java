@@ -8,20 +8,25 @@ import androidx.core.app.NotificationCompat;
 
 
 /**
- * The Alert Receiver defines how the alarm is displayed when it's received from the timed pending intent
+ * The Alert Receiver defines how the alarm is displayed on the user's screen when it's received
+ * from the timed pending intent
  *
  * @author Matleena Kankaanpää
  */
 
 public class AlertReceiver extends BroadcastReceiver {
+    /**
+     * The ID used for all reminders in the app
+     */
     public static final int ID = 1;
     private NotificationSetter notificationSetter;
 
     /**
-     * Gets called once the notification goes off
+     * Gets called once the pending notification goes off (not when it's set)
+     * @param context
      * @param intent Includes the text that will appear on the user's screen in a popup.
-     * This will change depending which toggle boxes were checked or if the user wrote a custom
-     * message in the text edit field
+     * This will change depending on which toggle boxes were checked and if the user wrote a custom
+     * note in the text edit field
      */
     @Override
     public void onReceive(Context context, Intent intent) {

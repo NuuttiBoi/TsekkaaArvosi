@@ -9,8 +9,7 @@ import androidx.room.Query;
 import java.util.List;
 
 /**
- * The database isn't referenced directly from the activity
- * Instead, a data access object serves as a handle to access it
+ * A data access object that serves as a handle to access the database.
  * The DAO contains methods for querying, inserting and deleting entries from/into the database
  *
  * @author Matleena Kankaanpää
