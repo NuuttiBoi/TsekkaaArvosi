@@ -62,8 +62,6 @@ public class SykeGraafiActivity extends AppCompatActivity {
         mChart = (LineChart) findViewById(R.id.linechart);
         this.backButton = findViewById(R.id.backButton);
         this.yksikkoSykeTextView = findViewById(R.id.yksikkoSykeTextView);
-        //mChart.setOnChartGestureListener(TestiActivity.this);
-        //mChart.setOnChartValueSelectedListener(TestiActivity.this);
 
         mChart.setDragEnabled(true);
         mChart.setScaleEnabled(false);
@@ -177,7 +175,6 @@ public class SykeGraafiActivity extends AppCompatActivity {
             xAxis.setCenterAxisLabels(true);
             xAxis.setEnabled(true);
             xAxis.setDrawGridLines(false);
-            //xAxis.setLabelCount(xValues.size(),true);
             xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
             xAxis.setAxisMaximum(xValues.size()+0.1f);
 

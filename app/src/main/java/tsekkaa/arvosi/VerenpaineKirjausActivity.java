@@ -176,10 +176,8 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         if((ylaPaine > 40 && ylaPaine < 200) && (alaPaine > 40 && alaPaine < 200) && (syke > 20 && syke < 200) &&
                 (paiva > 0 && paiva <= 31) && (kuukausi > 0 && kuukausi <=12)){
 
-            // Tallentaa mittauksen
             mittausViewModel.lisaaMittaus(new Mittaus(ylaPaine,alaPaine, syke, null,
                     null, paiva, kuukausi, vuosi, tunnit,minuutit, calendar.getTimeInMillis()));
-            Log.d("", "tallenna");
 
         } else {
             Toast.makeText(getApplicationContext(),"Varmista, että syöttämäsi arvot ovat" +
@@ -211,12 +209,12 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
     }
     /**
-     * Takes you back to mainactivity
+     * Takes you back to VerenpaineKirjausActivity
      * @param v Button that is pressed
      */
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v){
-        Intent takaisin = new Intent(this, MainActivity.class);
+        Intent takaisin = new Intent(this, VerenpaineKirjausActivity.class);
         startActivity(takaisin);
     }
 }

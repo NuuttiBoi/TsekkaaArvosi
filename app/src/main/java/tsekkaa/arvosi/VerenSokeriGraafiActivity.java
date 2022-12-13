@@ -81,9 +81,6 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
 
         mChart = (LineChart) findViewById(R.id.verensokeriLinechart);
 
-        //mChart.setOnChartGestureListener(TestiActivity.this);
-        //mChart.setOnChartValueSelectedListener(TestiActivity.this);
-
         mChart.setDragEnabled(true);
         mChart.setScaleEnabled(false);
 
@@ -182,7 +179,6 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
             xAxis.setCenterAxisLabels(true);
             xAxis.setEnabled(true);
             xAxis.setDrawGridLines(false);
-            //xAxis.setLabelCount(xValues.size(),true);
             xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
             xAxis.setAxisMaximum(xValues.size() + 0.1f);
 

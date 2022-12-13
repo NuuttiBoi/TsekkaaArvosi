@@ -28,9 +28,7 @@ public class OmatTiedot extends AppCompatActivity {
         ika = findViewById(R.id.ikaEditText);
         tallenna = findViewById(R.id.otTallennaButton);
         }
-        /*  intentin pitäisi viedä omat tiedot sivulle tallennettu nimi asetusten sivulle niin,
-            että sinne saadaan käyttöön teksti Käyttäjä: + nimi
-         */
+
     /**
      * Returns user to the settings activity
      * @param v Button that is pressed
@@ -43,8 +41,6 @@ public class OmatTiedot extends AppCompatActivity {
             String kayttajanNimi = nimi.getText().toString();
             editor.putString("nimi", kayttajanNimi);
             editor.apply();
-            //String message = "Käyttäjä: " + nimi;
-            //tallenna.putExtra(tallenna.EXTRA_TEXT, message);
 
             startActivity(tallenna);
             overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);

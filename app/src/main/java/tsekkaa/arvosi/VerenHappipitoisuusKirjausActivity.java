@@ -194,7 +194,7 @@ public class VerenHappipitoisuusKirjausActivity extends AppCompatActivity {
 
     }
     /**
-     * Takes you back to verenhappipitoisuusgraafiactivity
+     * Takes you to verenhappipitoisuusgraafiactivity
      * @param v Button that is pressed
      */
     public void seurantaButtonPressed(View v){

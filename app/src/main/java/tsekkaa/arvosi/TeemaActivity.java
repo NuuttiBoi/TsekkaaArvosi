@@ -15,7 +15,7 @@ import android.widget.Switch;
 
 /**
  *
- * @author
+ * @author Matleena
  */
 public class TeemaActivity extends AppCompatActivity {
     //Creates switches
