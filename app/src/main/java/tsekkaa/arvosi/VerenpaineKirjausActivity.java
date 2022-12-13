@@ -24,7 +24,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 
 /**
- *
+ * Takers user input blood pressure and hearbeat measurement values and saves them in to the database.
  * @author Nuutti Turunen
  */
 public class VerenpaineKirjausActivity extends AppCompatActivity {

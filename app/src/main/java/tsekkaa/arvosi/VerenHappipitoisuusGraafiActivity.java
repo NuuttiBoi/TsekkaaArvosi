@@ -50,7 +50,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Creates a graph for oxygen saturation
+ * Creates a graph for oxygen saturation measurement values
  * @author Nuutti Turunen
  */
 public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {

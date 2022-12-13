@@ -50,7 +50,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Creates a graph for blood sugar
+ * Creates a graph for blood sugar measurement values
  * @author Nuutti Turunen
  */
 public class VerenSokeriGraafiActivity extends AppCompatActivity {

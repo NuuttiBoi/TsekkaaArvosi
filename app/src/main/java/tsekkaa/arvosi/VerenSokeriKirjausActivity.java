@@ -22,7 +22,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 
 /**
- *
+ * Takes user input blood sugar values and saves them in to the database.
  * @author Nuutti Turunen
  */
 public class VerenSokeriKirjausActivity extends AppCompatActivity {

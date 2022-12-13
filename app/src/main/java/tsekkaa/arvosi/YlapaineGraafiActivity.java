@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Creates a graph for systolic blood pressure
+ * Creates a graph for systolic blood pressure measurement values
  * @author Nuutti Turunen
  */
 public class YlapaineGraafiActivity extends AppCompatActivity {
