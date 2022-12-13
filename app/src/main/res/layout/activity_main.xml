@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Tsekkaa Arvosi"
         android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/activitySelection"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
