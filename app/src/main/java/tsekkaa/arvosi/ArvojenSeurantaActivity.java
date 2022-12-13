@@ -21,6 +21,7 @@ public class ArvojenSeurantaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arvojen_seuranta);
+        getSupportActionBar().hide();
 
         this.sykeButton = findViewById(R.id.sykeButton);
         this.alapaineButton = findViewById(R.id.alapaineButton);
@@ -36,6 +37,7 @@ public class ArvojenSeurantaActivity extends AppCompatActivity {
     public void sykeButton(View v){
         Intent aLaheta = new Intent(this, SykeGraafiActivity.class);
         startActivity(aLaheta);
+        overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
     }
     /**
      * Sends the user to ylapainegraafiactivity
@@ -44,6 +46,7 @@ public class ArvojenSeurantaActivity extends AppCompatActivity {
     public void ylapaineButton(View v){
         Intent aLaheta = new Intent(this, YlapaineGraafiActivity.class);
         startActivity(aLaheta);
+        overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
     }
     /**
      * Sends the user to alapainengraafiactivity
@@ -52,5 +55,6 @@ public class ArvojenSeurantaActivity extends AppCompatActivity {
     public void alapaineButton(View v){
         Intent aLaheta = new Intent(this, AlapaineGraafiActivity.class);
         startActivity(aLaheta);
+        overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
     }
 }

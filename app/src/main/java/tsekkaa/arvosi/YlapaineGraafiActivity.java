@@ -184,6 +184,7 @@ public class YlapaineGraafiActivity extends AppCompatActivity {
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, MainActivity.class);
         startActivity(takaisin);
+        overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_bottom);
     }
 
 

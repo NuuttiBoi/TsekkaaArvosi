@@ -22,6 +22,9 @@ import java.util.Date;
 @Entity
 public class Mittaus {
 
+    /**
+     * The primary key column, a running number starting from 1
+     */
     @PrimaryKey(autoGenerate = true)
     @NonNull
     public int id;
@@ -139,7 +142,6 @@ public class Mittaus {
     public int getPaiva() {
         return paiva;
     }
-
 
     public int getKuukausi() {
         return kuukausi;
