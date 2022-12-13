@@ -143,7 +143,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
         mittausViewModel = new ViewModelProvider(this).get(MittausViewModel.class);
     }
 
-    // Vie verenpaineen tarkkailu activityyn kun käyttäjä painaa nappia
+    // Takes you to blood pressure monitoring activity when user presses the button
     public void vpTallennaButton(View v){
 
         if((ylaPaineEditText.getText().toString().trim().length() < 1) ||
