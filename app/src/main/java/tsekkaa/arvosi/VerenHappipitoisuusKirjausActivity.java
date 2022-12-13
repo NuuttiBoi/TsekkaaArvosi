@@ -26,7 +26,7 @@ import java.util.Calendar;
  * @author Nuutti Turunen
  */
 public class VerenHappipitoisuusKirjausActivity extends AppCompatActivity {
-    private Button backbutton, tallennaButton, lahetaButton, seurantaButton, kalenteriButton;
+    private Button backbutton, tallennaButton, lahetaButton, seurantaButton;
     private TextView kirjausTextView, arvoOhjeTextView, happisaturaatioTextView,aikaOhjeTextView,
             kelloOhjeTextView, pisteTextView;;
     private EditText happisaturaatioEditText, pvmEditText, kuukausiEditText, vuosiEditText,
@@ -52,7 +52,6 @@ public class VerenHappipitoisuusKirjausActivity extends AppCompatActivity {
         this.backbutton = findViewById(R.id.backButton);
         this.tallennaButton = findViewById(R.id.tallennaVerenSaturaatioButton);
         this.seurantaButton = findViewById(R.id.happiSeurantaButton);
-        this.kalenteriButton = findViewById(R.id.kalenteriButton);
 
         this.kirjausTextView = findViewById(R.id.kirjausTextView);
         this.arvoOhjeTextView = findViewById(R.id.arvoOhjeTextView);

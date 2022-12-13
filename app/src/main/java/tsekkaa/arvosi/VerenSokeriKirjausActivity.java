@@ -26,7 +26,7 @@ import java.util.Calendar;
  * @author Nuutti Turunen
  */
 public class VerenSokeriKirjausActivity extends AppCompatActivity {
-    private Button backButton, tallennaButton, kalenteriButton, seurantaButton;
+    private Button backButton, tallennaButton, seurantaButton;
     private TextView kirjausTextView, verenSokeriTextView, aikaOhjeTextView;
     private EditText verenSokeriTextEdit,  pvmEditText, kuukausiEditText, vuosiEditText,
     tunnitEditText, minuutitEditText;;
@@ -55,7 +55,6 @@ public class VerenSokeriKirjausActivity extends AppCompatActivity {
         this.backButton = findViewById(R.id.backButton);
         this.tallennaButton = findViewById(R.id.tallennaVerenSokeriButton);
         this.seurantaButton = findViewById(R.id.seurantaButton);
-        this.kalenteriButton = findViewById(R.id.kalenteriButton);
 
         this.verenSokeriTextView = findViewById(R.id.verenSokeriTextView);
         //Finds TextEdit from layout with findViewById(R.id.(name of the textedit)) command and sets the found value to the created textedit
