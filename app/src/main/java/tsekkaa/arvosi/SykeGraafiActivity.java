@@ -56,6 +56,7 @@ public class SykeGraafiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_syke_graafi);
+        getSupportActionBar().hide();
 
         mChart = (LineChart) findViewById(R.id.linechart);
         this.backButton = findViewById(R.id.backButton);

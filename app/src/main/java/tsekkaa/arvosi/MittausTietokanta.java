@@ -9,9 +9,11 @@ import androidx.room.RoomDatabase;
 /**
  * A Room database which stores measurement and reminder objects.
  * The version number is incremented each time the database is updated
- * Done with the help of tutorials by Coding in Flow on YouTube
  *
- * https://www.youtube.com/watch?v=ARpn-1FPNE4&list=PLrnPJCHvNZuDihTpkRs6SpZhqgBqPU118
+ * @author  Matleena Kankaanpää
+ * @version 1.0
+ * @since   2022-12-14
+ * @see     <a href="https://www.youtube.com/watch?v=ARpn-1FPNE4&list=PLrnPJCHvNZuDihTpkRs6SpZhqgBqPU118>Tutorial by Coding in Flow on YouTube</a>
  */
 
 @Database(entities = {Mittaus.class, Muistutus.class}, version = 7)

@@ -122,6 +122,10 @@ public class Muistutus {
         this.lisatiedot = lisatiedot;
     }
 
+    /**
+     * A method to format the date
+     * @return The date in string format with leading zeros if necessary
+     */
     public String getPvm() {
         String pvm = "" + this.paiva + "/";
 
@@ -138,6 +142,7 @@ public class Muistutus {
     }
 
     /**
+     * Returns the date in milliseconds since the Epoch
      * @return The date in milliseconds
      */
     public long AikaMilliSek() {

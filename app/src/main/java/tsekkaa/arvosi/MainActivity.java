@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
+
 
         //Finds a button from layout with findViewById(R.id.(name of the button)) command and sets the found value to the created button
         this.kalenteriButton = findViewById(R.id.kalenteriButton);

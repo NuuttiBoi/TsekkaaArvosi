@@ -108,7 +108,7 @@ public class MuistutuksetActivity extends AppCompatActivity {
     /**
      * "Recreates" an exact copy of alarm to be deleted, then deletes it. The request code
      * becomes important here because the newly created alarm will override the pending alarm with
-     * the same code. The new alarm is then canceled, thus no alarm will go off
+     * the same request code. The new alarm is then canceled, thus no alarm will go off
      */
     private void peruMuistutus(int requestCode, String mitattavat, String lisatiedot) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);

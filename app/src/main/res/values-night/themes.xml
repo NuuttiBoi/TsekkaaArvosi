@@ -13,7 +13,7 @@
         <item name="colorOnSecondary">@color/switchien_teksti_dark</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/ylapalkki_dark</item>
-
         <!-- Customize your theme here. -->
+        <item name="android:windowContentTransitions">true</item>
     </style>
 </resources>
