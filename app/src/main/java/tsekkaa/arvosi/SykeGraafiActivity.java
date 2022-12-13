@@ -32,6 +32,7 @@ import java.util.Arrays;
 /**
  * Creates a graph for heartbeat measurement values
  * @author Nuutti Turunen
+ * @see <a href="https://www.youtube.com/watch?v=sXo2SkX7rGk>Tutorial Android Hands on YouTube</a>
  */
 public class SykeGraafiActivity extends AppCompatActivity {
 
@@ -81,8 +82,6 @@ public class SykeGraafiActivity extends AppCompatActivity {
         lower_limit.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
         lower_limit.setTextSize(15f);
         lower_limit.setTextColor(Color.RED);
-
-
 
 
         YAxis leftAxis = mChart.getAxisLeft();

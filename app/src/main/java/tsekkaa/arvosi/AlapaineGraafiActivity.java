@@ -32,6 +32,7 @@ import java.util.Arrays;
 /**
  * Creates a graph for diastolic blood pressure
  * @author Nuutti Turunen
+ * @see <a href="https://www.youtube.com/watch?v=sXo2SkX7rGk>Tutorial Android Hands on YouTube</a>
  */
 public class AlapaineGraafiActivity extends AppCompatActivity {
 
