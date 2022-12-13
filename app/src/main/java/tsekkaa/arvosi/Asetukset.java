@@ -3,6 +3,7 @@ package tsekkaa.arvosi;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,7 @@ public class Asetukset extends AppCompatActivity {
     private Button backbutton;
     //Creates textview
     private TextView kayttaja;
+    private SharedPreferences sharedPreferences = getSharedPreferences("sharedPref", MODE_PRIVATE);
 
 
     @Override
@@ -37,6 +39,9 @@ public class Asetukset extends AppCompatActivity {
         this.backbutton = findViewById(R.id.BackButton);
         //Finds textview from layout with findViewById(R.id.(name of the textview)) command and sets the found value to the created textview
         this.kayttaja = findViewById(R.id.kayttajaTextView);
+
+        String nimi = sharedPreferences.getString("nimi", "");
+        kayttaja.setText(nimi);
 
         /*  Omat tiedot sivulta on tuotu teksti Käyttäjä: + nimi
             ja tämä halutaan näkyviin käyttäjaTextViewiin.
