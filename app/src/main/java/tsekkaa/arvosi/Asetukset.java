@@ -24,7 +24,7 @@ public class Asetukset extends AppCompatActivity {
     private Button backbutton;
     //Creates textview
     private TextView kayttaja;
-    public final static String EXTRA_TEXT = "message";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,10 @@ public class Asetukset extends AppCompatActivity {
         //Finds textview from layout with findViewById(R.id.(name of the textview)) command and sets the found value to the created textview
         this.kayttaja = findViewById(R.id.kayttajaTextView);
 
+        /*  Omat tiedot sivulta on tuotu teksti Käyttäjä: + nimi
+            ja tämä halutaan näkyviin käyttäjaTextViewiin.
+
+         */
         Intent tallenna = getIntent();
         String message = tallenna.getStringExtra(tallenna.EXTRA_TEXT);
         kayttaja.setText(message);

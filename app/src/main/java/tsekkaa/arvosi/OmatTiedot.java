@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class OmatTiedot extends AppCompatActivity {
     private EditText nimi, ika;
     private Button tallenna;
+    public final static String EXTRA_TEXT = "message";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,9 @@ public class OmatTiedot extends AppCompatActivity {
         this.ika = findViewById(R.id.ikaEditText);
         this.tallenna = findViewById(R.id.otTallennaButton);
         }
-
+        /*  intentin pitäisi viedä omat tiedot sivulle tallennettu nimi asetusten sivulle niin,
+            että sinne saadaan käyttöön teksti Käyttäjä: + nimi
+         */
     /**
      * Returns user to the settings activity
      * @param v Button that is pressed
