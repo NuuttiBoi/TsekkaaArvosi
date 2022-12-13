@@ -10,7 +10,10 @@ import java.util.List;
 /**
  * Database transactions aren't carried out in the main thread as to not disrupt the UI
  * The ViewModel creates an abstraction layer between the activity and the database
- * @author Matleena Kankaanpää
+ *
+ * @author  Matleena Kankaanpää
+ * @version 1.0
+ * @since   2022-12-14
  */
 
 public class MittausViewModel extends AndroidViewModel {

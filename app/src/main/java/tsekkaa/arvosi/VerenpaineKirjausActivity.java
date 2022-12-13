@@ -53,6 +53,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verenpaine_kirjaus);
+        getSupportActionBar().hide();
 
         mDisplayDate = (TextView) findViewById(R.id.aikaOhjeTextView);
         mDisplayTime = (TextView) findViewById(R.id.kelloOhjeTextView);

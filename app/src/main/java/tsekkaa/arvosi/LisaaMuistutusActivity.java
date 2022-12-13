@@ -179,7 +179,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
          * needed for distinguishing and managing alarms.
          * The autoincrementing id (from the database) would have been a more intuitive identifier,
          * but it created problems if all notifications had been deleted and the activity tried to
-         * reference the array while it was empty.
+         * reference an empty array
          * That's why the running counter is stored in SharedPreferences.
          */
         sharedPref = getSharedPreferences("Muistutukset", Context.MODE_PRIVATE);
@@ -294,8 +294,10 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         }
     }
 
-    /*The alarm time and contents are sent to the Alert Receiver in an intent
-    After that the user is returned to the previous page */
+    /*
+    The alarm time and contents are sent to the Alert Receiver in an intent
+    After that the user is returned to the previous page
+    */
     private void asetaMuistutus(long aika, int requestCode) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);

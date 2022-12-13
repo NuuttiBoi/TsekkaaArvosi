@@ -66,8 +66,6 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
     private double mittauksetKaikki, mittauksetKeskiarvo;
     private SharedPreferences sharedPref;
 
-
-    //Korjatkaa jos on väärää tietoa ^^'
     private final static double VERENSOKERIN_ALARAJA = 6.0;
     private final static double VERENSOKERIN_YLARAJA = 7.0;
 
@@ -75,6 +73,7 @@ public class VerenSokeriGraafiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_veren_sokeri_graafi);
+        getSupportActionBar().hide();
 
         this.backButton = findViewById(R.id.backButton);
         this.yksikkoVsTextView = findViewById(R.id.yksikkoVsTextView);

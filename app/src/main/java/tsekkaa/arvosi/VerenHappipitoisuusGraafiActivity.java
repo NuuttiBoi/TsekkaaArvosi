@@ -70,6 +70,7 @@ public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_veren_happipitoisuus_graafi);
+        getSupportActionBar().hide();
 
         this.backButton = findViewById(R.id.backButton);
         this.yksikkoHsTextView = findViewById(R.id.yksikkoHsTextView);
