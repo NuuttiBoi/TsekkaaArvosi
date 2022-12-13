@@ -40,8 +40,8 @@ public class Asetukset extends AppCompatActivity {
         //Finds textview from layout with findViewById(R.id.(name of the textview)) command and sets the found value to the created textview
         this.kayttaja = findViewById(R.id.kayttajaTextView);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("sharedPref", MODE_PRIVATE);
-        String nimi = sharedPreferences.getString("nimi", "");
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+        final String nimi = sharedPreferences.getString("nimi", "NULL");
 
         Log.d("", "nimi: " + nimi);
         kayttaja.setText(" Käyttäjä: " + nimi);

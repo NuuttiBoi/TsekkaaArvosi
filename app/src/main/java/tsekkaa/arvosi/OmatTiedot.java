@@ -36,7 +36,8 @@ public class OmatTiedot extends AppCompatActivity {
      * @param v Button that is pressed
      */
     public void otTallennaButtonPressed(View v){
-            SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
+        Intent tallenna = new Intent(this, Asetukset.class);
+            SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
             String kayttajanNimi = nimi.getText().toString();
@@ -44,7 +45,7 @@ public class OmatTiedot extends AppCompatActivity {
             editor.apply();
             //String message = "Käyttäjä: " + nimi;
             //tallenna.putExtra(tallenna.EXTRA_TEXT, message);
-            Intent tallenna = new Intent(this, Asetukset.class);
+
             startActivity(tallenna);
             overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
