@@ -22,7 +22,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 
 /**
- *
+ * Takes user input blood sugar values and saves them in to the database.
  * @author Nuutti Turunen
  */
 public class VerenSokeriKirjausActivity extends AppCompatActivity {
@@ -136,7 +136,7 @@ public class VerenSokeriKirjausActivity extends AppCompatActivity {
         Intent takaisin = new Intent(this, MainActivity.class);
         startActivity(takaisin);
     }
-    public void tallennaButtonPressed(View v){
+    public void vrtallennaButtonPressed(View v){
 
         if((pvmEditText.getText().toString().trim().length() < 1) ||
                 (verenSokeriTextEdit.getText().toString().trim().length() < 1) ||
@@ -161,10 +161,18 @@ public class VerenSokeriKirjausActivity extends AppCompatActivity {
         int vuosi = Integer.parseInt(vuosiEditText.getText().toString());
 
 
-        // Tallentaa mittauksen
-        mittausViewModel.lisaaMittaus(new Mittaus(null,null, null,verensokeri ,
-                null, paiva, kuukausi, vuosi, tunnit,minuutit, calendar.getTimeInMillis()));
-        Log.d("", "tallenna");
+        if(verensokeri > 1 && verensokeri < 12){
+
+            // Tallentaa mittauksen
+            mittausViewModel.lisaaMittaus(new Mittaus(null,null, null,verensokeri ,
+                    null, paiva, kuukausi, vuosi, tunnit,minuutit, calendar.getTimeInMillis()));
+            Log.d("", "tallenna");
+
+        } else {
+            Toast.makeText(getApplicationContext(),"Varmista, että syöttämäsi arvot ovat" +
+                    " oikeita!",Toast.LENGTH_SHORT).show(); /* If the user inputs unrealistic values, they will be prompted
+                                                               to check that they are correct. */
+        }
 
 
         mittausViewModel.haeMittaukset().observe(this, mittaukset -> {

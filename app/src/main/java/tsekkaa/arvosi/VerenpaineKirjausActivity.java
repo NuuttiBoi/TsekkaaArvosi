@@ -24,7 +24,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 
 /**
- *
+ * Takers user input blood pressure and hearbeat measurement values and saves them in to the database.
  * @author Nuutti Turunen
  */
 public class VerenpaineKirjausActivity extends AppCompatActivity {
@@ -173,9 +173,8 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
 
-        if((ylaPaine > 40 && ylaPaine < 200) && (alaPaine > 40 && alaPaine > 200) && (syke > 20 && syke < 200) &&
-                (paiva > 0 && paiva <= 31) && (kuukausi > 0 && kuukausi <=12) && (vuosi > 2021 && vuosi < 2031) &&
-                (tunnit >= 0 && tunnit <= 23) && (minuutit >= 0 && minuutit < 60)){
+        if((ylaPaine > 40 && ylaPaine < 200) && (alaPaine > 40 && alaPaine < 200) && (syke > 20 && syke < 200) &&
+                (paiva > 0 && paiva <= 31) && (kuukausi > 0 && kuukausi <=12)){
 
             // Tallentaa mittauksen
             mittausViewModel.lisaaMittaus(new Mittaus(ylaPaine,alaPaine, syke, null,
@@ -186,7 +185,6 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Varmista, että syöttämäsi arvot ovat" +
                     " oikeita!",Toast.LENGTH_SHORT).show(); /* If the user inputs unrealistic values, they will be prompted
                                                                to check that they are correct. */
-
         }
 
         mittausViewModel.haeMittaukset().observe(this, mittaukset -> {

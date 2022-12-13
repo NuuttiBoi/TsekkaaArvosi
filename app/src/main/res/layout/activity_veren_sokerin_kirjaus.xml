@@ -25,7 +25,7 @@
         android:id="@+id/tallennaVerenSokeriButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="tallennaButtonPressed"
+        android:onClick="vrtallennaButtonPressed"
         android:text="Tallenna"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

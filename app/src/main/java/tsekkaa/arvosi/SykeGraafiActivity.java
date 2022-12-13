@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Creates a graph for heartbeat
+ * Creates a graph for heartbeat measurement values
  * @author Nuutti Turunen
  */
 public class SykeGraafiActivity extends AppCompatActivity {
