@@ -193,7 +193,7 @@ public class VerenHappipitoisuusGraafiActivity extends AppCompatActivity {
      * @param v Button that is pressed
      */
     public void backButtonPressed(View v){
-        Intent takaisin = new Intent(this, MainActivity.class);
+        Intent takaisin = new Intent(this, VerenHappipitoisuusKirjausActivity.class);
         startActivity(takaisin);
         overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_bottom);
     }

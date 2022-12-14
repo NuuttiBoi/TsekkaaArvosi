@@ -206,7 +206,7 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
     public void aLahetaButton(View v){
         Intent aLaheta = new Intent(this, ArvojenSeurantaActivity.class);
         startActivity(aLaheta);
-        overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
     /**
      * Takes you back to VerenpaineKirjausActivity
@@ -214,7 +214,8 @@ public class VerenpaineKirjausActivity extends AppCompatActivity {
      */
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v){
-        Intent takaisin = new Intent(this, VerenpaineKirjausActivity.class);
+        Intent takaisin = new Intent(this, MainActivity.class);
         startActivity(takaisin);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 }

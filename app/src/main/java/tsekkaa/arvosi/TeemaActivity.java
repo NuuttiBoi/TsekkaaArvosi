@@ -1,12 +1,12 @@
 package tsekkaa.arvosi;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,15 +14,13 @@ import android.widget.Button;
 import android.widget.Switch;
 
 /**
+ * Switches between light and dark mode
  *
  * @author Matleena
  */
 public class TeemaActivity extends AppCompatActivity {
-    //Creates switches
     private Switch oletusTSwitch, tummaTSwitch;
-    //Creates booleans
     private boolean oletusTeema, tummaTeema;
-    //Creates a button
     private Button backButton;
 
     @Override
@@ -30,26 +28,38 @@ public class TeemaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teema);
         getSupportActionBar().hide();
-        //Finds a button from layout with findViewById(R.id.(name of the button)) command and sets the found value to the created button
+
         backButton = findViewById(R.id.teemaBackButton);
-        //Finds a Switch from layout with findViewById(R.id.(name of the button)) command and sets the found value to the created switch
         oletusTSwitch = findViewById(R.id.oletusTSwitch);
         tummaTSwitch = findViewById(R.id.tummaTSwitch);
+
         SharedPreferences sharedPref = getSharedPreferences("Asetukset", Context.MODE_PRIVATE);
         oletusTeema = sharedPref.getBoolean("Oletusteema", true);
         tummaTeema = sharedPref.getBoolean("Tummateema", oletusTeema);
         SharedPreferences.Editor editor = sharedPref.edit();
 
+        /*
+        Set both switches to their previously saved states (retrieved from shared preferences)
+        By default the system theme is on
+         */
         oletusTSwitch.setChecked(oletusTeema);
         tummaTSwitch.setChecked(tummaTeema);
 
+
+        //Whenever the system theme is on, the other button becomes unclickable and semi-transparent
         if (oletusTSwitch.isChecked()) {
             tummaTSwitch.setClickable(false);
             tummaTSwitch.setAlpha(.5f);
         }
 
+        //The state of the switch is changed on click
         oletusTSwitch.setOnClickListener(view -> {
             oletusTeema = !oletusTeema;
+
+            /*
+            Save the current state of the switch every time it's checked, so the exact state of both
+            switches can be restored the next time the activity is opened (not just whether dark mode is on or not)
+            */
             editor.putBoolean("Oletusteema", oletusTeema);
             editor.apply();
             updateUI();
@@ -61,39 +71,35 @@ public class TeemaActivity extends AppCompatActivity {
 
         updateUI();
     }
-    //updates the set information to the places where the method is called
+
+    //Updates the color theme and the switches' settings on the UI
     private void updateUI() {
         if (oletusTSwitch.isChecked()) {
-            //Sets the theme automaticly from phones settings
+            //If the system theme is checked
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
             tummaTSwitch.setClickable(false);
             tummaTSwitch.setAlpha(.5f);
-            Log.d("", "Oletusteema päällä");
-
         } else {
-            //Theme can be changed if the default theme is not selected
+            //If the system theme is not checked
             tummaTSwitch.setClickable(true);
             tummaTSwitch.setAlpha(1f);
-
-            Log.d("", "sharedpreferences: " + tummaTeema);
-
             vaihdaTeema(tummaTeema);
-            //Checks if the switch is clicked and changes between switches settings
+
+            //The onClickListener for the other button only becomes active when the system theme is not on
             tummaTSwitch.setOnClickListener(view -> {
+                //The state of the switch changes on click
                 tummaTeema = !tummaTeema;
 
                 SharedPreferences sharedPref = getSharedPreferences("Asetukset", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean("Tummateema", tummaTeema);
                 editor.apply();
-                Log.d("", "sharedpreferences: " + tummaTeema);
-
                 vaihdaTeema(tummaTeema);
             });
-            Log.d("", "Oletusteema pois");
         }
     }
 
+    //Receives the currently selected theme and changes the UI accordingly
     private void vaihdaTeema(boolean teema) {
         if (teema) {
             //If user has dark theme selected
@@ -108,7 +114,6 @@ public class TeemaActivity extends AppCompatActivity {
      * Takes you back to settings activity
      * @param view Button that is pressed
      */
-    //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void siirryTakaisin(View view) {
         Intent takaisin = new Intent(this, Asetukset.class);
         startActivity(takaisin);

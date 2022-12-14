@@ -10,12 +10,12 @@
 
 
     <!-- Light mode -->
-    <color name="tausta_light">#CCC8C4</color> <!-- taustaväri -->
+    <color name="tausta_light">#E4E0DC</color> <!-- taustaväri -->
     <color name="teksti_light">#2c2c2c</color> <!-- tekstin väri -->
     <color name="ylapalkki_light">#000000</color> <!-- puhelimen yläpalkki -->
 
     <!-- Buttonit -->
-    <color name="buttonien_tausta_light">#B6534A</color>
+    <color name="buttonien_tausta_light">#D4AF37</color>
     <color name="buttonien_teksti_light">#ffffff</color>
 
     <!-- Switchit -->
@@ -24,12 +24,12 @@
 
 
     <!-- Dark mode -->
-    <color name="tausta_dark">#08090C</color> <!-- taustaväri -->
+    <color name="tausta_dark">#0E0E15</color> <!-- taustaväri -->
     <color name="teksti_dark">#f4f7f9</color> <!-- tekstin väri -->
     <color name="ylapalkki_dark">#000000</color>  <!-- puhelimen yläpalkki -->
 
     <!-- Buttonit -->
-    <color name="buttonien_tausta_dark">#514F85</color>
+    <color name="buttonien_tausta_dark">#332F51</color>
     <color name="buttonien_teksti_dark">#FBF0BF</color>
 
     <!-- Switchit -->

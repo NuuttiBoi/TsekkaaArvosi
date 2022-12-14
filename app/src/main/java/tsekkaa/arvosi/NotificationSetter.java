@@ -17,13 +17,18 @@ import androidx.core.app.NotificationCompat;
  */
 
 public class NotificationSetter extends ContextWrapper {
+    private NotificationManager mManager;
+
     /**
      * Notification channel ID and name
      */
     public static final String kanavaID = "TsekkaaArvosi";
     public static final String kanavaNimi = "MuistutusKanava";
-    private NotificationManager mManager;
 
+    /**
+     * Class constructor
+     * @param base Activity context
+     */
     public NotificationSetter(Context base) {
         super(base);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

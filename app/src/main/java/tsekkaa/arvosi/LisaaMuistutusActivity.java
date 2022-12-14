@@ -156,7 +156,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         //Changes the background color of the toggle button if it's checked
         verenpaineCheck.setOnClickListener(view -> {
             if (verenpaineCheck.isChecked()) {
-                verenpaineCheck.setBackgroundColor(androidx.appcompat.R.attr.colorPrimary);
+                verenpaineCheck.setBackgroundColor(Color.parseColor("#D4AF37"));
             } else {
                 verenpaineCheck.setBackgroundColor(Color.GRAY);
             }
@@ -165,7 +165,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         //Changes the background color of the toggle button if it's checked
         sykeCheck.setOnClickListener(view -> {
             if (sykeCheck.isChecked()) {
-                sykeCheck.setBackgroundColor(androidx.appcompat.R.attr.colorPrimary);
+                sykeCheck.setBackgroundColor(Color.parseColor("#D4AF37"));
             } else {
                 sykeCheck.setBackgroundColor(Color.GRAY);
             }
@@ -174,7 +174,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         //Changes the background color of the toggle button if it's checked
         verensokeriCheck.setOnClickListener(view -> {
             if (verensokeriCheck.isChecked()) {
-                verensokeriCheck.setBackgroundColor(androidx.appcompat.R.attr.colorPrimary);
+                verensokeriCheck.setBackgroundColor(Color.parseColor("#D4AF37"));
             } else {
                 verensokeriCheck.setBackgroundColor(Color.GRAY);
             }
@@ -183,7 +183,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         //Changes the background color of the toggle button if it's checked
         happisaturaatioCheck.setOnClickListener(view -> {
             if (happisaturaatioCheck.isChecked()) {
-                happisaturaatioCheck.setBackgroundColor(androidx.appcompat.R.attr.colorPrimary);
+                happisaturaatioCheck.setBackgroundColor(Color.parseColor("#D4AF37"));
             } else {
                 happisaturaatioCheck.setBackgroundColor(Color.GRAY);
             }
@@ -200,7 +200,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
         editor = sharedPref.edit();
         requestCode = sharedPref.getInt("requestCode", 1);
 
-        /*
+        /**
          * OnClickListener set for the whole container which contains the date fields.
          * Clicking anywhere within the container opens the date picker, not just clicking on
          * the tiny text boxes
@@ -218,7 +218,9 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
             }
         });
 
-        //OnClickListener set for the time fields container, as above
+        /**
+         * OnClickListener set for the time fields container, as above
+         */
         kelloContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -232,6 +234,9 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Updates the date picker to the selected date
+         */
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
@@ -241,11 +246,20 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
             }
         };
 
+
+        /**
+         * Updates the time picker to the selected time
+         */
         timeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int i, int i1) {
                 hhEdit.setText(Integer.toString(i));
-                minEdit.setText(Integer.toString(i1));
+
+                if (i1 < 10) {
+                    minEdit.setText("0" + Integer.toString(i1));
+                } else {
+                    minEdit.setText(Integer.toString(i1));
+                }
             }
         };
     }

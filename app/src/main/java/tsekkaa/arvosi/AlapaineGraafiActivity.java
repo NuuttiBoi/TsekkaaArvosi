@@ -53,6 +53,7 @@ public class AlapaineGraafiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alapaine_graafi);
+        getSupportActionBar().hide();
 
         mChart = (LineChart) findViewById(R.id.linechart);
         this.backButton = findViewById(R.id.backButton);
@@ -185,7 +186,7 @@ public class AlapaineGraafiActivity extends AppCompatActivity {
      */
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v){
-        Intent takaisin = new Intent(this, MainActivity.class);
+        Intent takaisin = new Intent(this, ArvojenSeurantaActivity.class);
         startActivity(takaisin);
         overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_bottom);
     }

@@ -26,8 +26,6 @@ public class ActivitySelectionSingleton {
         activity.add(new NextActivity("VEREN HAPPIPITOISUUDEN KIRJAUS"));
         activity.add(new NextActivity("VERENSOKERIN KIRJAUS"));
         activity.add(new NextActivity("ASETUKSET"));
-        activity.add(new NextActivity("c(o_oc("));
-
     }
 
     /**

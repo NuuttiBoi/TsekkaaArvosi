@@ -28,26 +28,26 @@
         android:id="@+id/activitySelection"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#FFDD43"
-        android:cacheColorHint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.471" />
+        app:layout_constraintVertical_bias="0.471"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10sp"/>
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="200dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="220dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/activitySelection"
-        app:layout_constraintVertical_bias="0.70"
+        app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/round_icon_" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

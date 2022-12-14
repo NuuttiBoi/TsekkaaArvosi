@@ -182,7 +182,7 @@ public class YlapaineGraafiActivity extends AppCompatActivity {
      */
     //Checks if the selected button is pressed and sends the user to the selected page/ activity
     public void backButtonPressed(View v){
-        Intent takaisin = new Intent(this, MainActivity.class);
+        Intent takaisin = new Intent(this, ArvojenSeurantaActivity.class);
         startActivity(takaisin);
         overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_bottom);
     }

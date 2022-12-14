@@ -132,6 +132,7 @@ public class VerenHappipitoisuusKirjausActivity extends AppCompatActivity {
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, MainActivity.class);
         startActivity(takaisin);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     /**

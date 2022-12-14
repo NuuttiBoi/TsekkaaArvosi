@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         //Uses Singleton and NextActivity classes to create the list to the listview component
         lv.setAdapter(new ArrayAdapter<NextActivity>(
                 this,  //context (activity instance)
-                android.R.layout.simple_list_item_1,
+                R.layout.listview,
                 ActivitySelectionSingleton.getInstance().getActivity()) //array of data
         );
 
@@ -96,4 +96,4 @@ public class MainActivity extends AppCompatActivity {
     //overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
 
     //slide to the right
-    //overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+    //overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);

@@ -135,6 +135,7 @@ public class VerenSokeriKirjausActivity extends AppCompatActivity {
     public void backButtonPressed(View v){
         Intent takaisin = new Intent(this, MainActivity.class);
         startActivity(takaisin);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
     public void vrtallennaButtonPressed(View v){
 
