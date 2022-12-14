@@ -4,7 +4,7 @@
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <color name="teal_700">#D4AF37</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
@@ -19,7 +19,7 @@
     <color name="buttonien_teksti_light">#ffffff</color>
 
     <!-- Switchit -->
-    <color name="switchien_tausta_light">#7c7c7c</color>
+    <color name="switchien_tausta_light">#D4AF37</color>
     <color name="switchien_teksti_light">#000000</color>
 
 
@@ -33,7 +33,7 @@
     <color name="buttonien_teksti_dark">#FBF0BF</color>
 
     <!-- Switchit -->
-    <color name="switchien_tausta_dark">#9eb4ef</color>
+    <color name="switchien_tausta_dark">#D4AF37</color>
     <color name="switchien_teksti_dark">#ffffff</color>
 
     <color name="custom_red">#AF000F</color>
