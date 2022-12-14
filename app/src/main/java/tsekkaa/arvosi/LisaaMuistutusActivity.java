@@ -399,7 +399,7 @@ public class LisaaMuistutusActivity extends AppCompatActivity {
     }
 
     /**
-     * Takes you to calendar
+     * Returns the user to the calendar activity
      * @param v Button that is pressed
      */
     public void backButtonPressed(View v){

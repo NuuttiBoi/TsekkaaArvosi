@@ -120,7 +120,7 @@ public class MuistutuksetActivity extends AppCompatActivity {
     }
 
     /**
-     * A function to exit the activity
+     * Returns the user to the calendar activity with a slide up animation
      * @param v The "close" button which was clicked
      */
     public void suljeButtonPressed(View v){

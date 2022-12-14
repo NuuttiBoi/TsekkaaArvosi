@@ -115,7 +115,7 @@ public class KalenteriActivity extends AppCompatActivity {
     }
 
     /**
-     * Opens the activity which displays current upcoming alarms
+     * Opens the activity which displays current upcoming alarms, with a slide down animation
      * @param view The button that was pressed
      */
     public void muistutuksetPressed(View view) {
