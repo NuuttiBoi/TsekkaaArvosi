@@ -4,7 +4,7 @@
 
 1. Etusivu:
 Käyttäjän avatessa sovelluksen hän näkee ensimmäisenä etusivun, joka on esitetty oheisessa kuvassa. 
--kuva1
+![Kuva 1](https://github.com/NuuttiBoi/TsekkaaArvosi/blob/main/TsekkaaArvosi/images/TsekkaaArvosi_kuva1.png)
 
 Etusivulla on eri painikkeita, joista pääsee kirjaamaan verensokeri, verenpaine ja
 veren happipitoisuus mittausarvoja sovelluksen muistiin, joita voi seurata graafisesti. Sivulta löytyy myös asetukset painike, joka vie asetuksiin.
